@@ -1,0 +1,36 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+
+<ion-content padding class="commentwrapper ytvdolist" >
+
+  <div class="youtubeVideo">
+    <div class="youtubeVideoBtn">
+      <a href="javascript:void(0)" *ngIf="videoindex > 0" (click)="videoindex = videoindex-1" class="vidAddBtn" style="margin: 15px auto 5px;">Prev</a>
+      <a href="javascript:void(0)" *ngIf="videoindex < (noofvideo-1)" (click)="videoindex = videoindex+1" class="vidAddBtn" style="margin-top:0">Next</a>
+    </div>
+
+    <div *ngFor="let item of videolist; let i = index" >
+      <div *ngIf="i==videoindex">
+        <div style="margin-bottom:10px; position: relative;" (click)="launchVideo1(item.id.videoId)">
+          <img src="https://i.ytimg.com/vi/{{item.id.videoId}}/mqdefault.jpg" width="100%">
+          <img src="images/youtube-playbtn.png" class="paly_video" ng-click="playYvideo(c.id.videoId)" style="cursor:pointer;">
+        </div>
+        <h1 id="ngdialog6-aria-labelledby">{{item.snippet.title}}</h1>
+        <a href="javascript:void(0)" (click)="addYtVideo(item.id.videoId)" class="vidAddBtn">ADD</a>
+      </div>
+    </div>
+  </div>
+
+
+</ion-content>
+
+
+

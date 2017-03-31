@@ -1,0 +1,163 @@
+<ion-content padding>
+
+  <div class="register-body ng-scope">
+    <div class="register_wrapper">
+      <div class="logo"> <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"> </a> </div>
+      <div class="menupart1"></div>
+      <div class="register_form">
+        <form novalidate [formGroup]="signUpForm" (ngSubmit)="formsubmit(signUpForm.value)">
+          <h1><img alt="#" src="images/getstarted.jpg"></h1>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <span style="float: right; display:block; width: 10px; color:#fb992c; margin-top:15px;">*</span>
+              <input [formControl]="signUpForm.controls['fname']" type="text" placeholder="FIRST NAME" class="form-control register_input">
+              <div *ngIf ="signUpForm.controls['fname'].touched">
+                <div *ngIf ="!signUpForm.controls['fname'].valid">
+                  <label class="control-label has-error validationMessage">First Name cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <span style="float: right; display:block; width: 10px; color:#fb992c; margin-top:15px;">*</span>
+              <input [formControl]="signUpForm.controls['lname']" type="text" placeholder="LAST NAME" class="form-control register_input">
+              <div *ngIf ="signUpForm.controls['lname'].touched">
+                <div *ngIf ="!signUpForm.controls['lname'].valid">
+                  <label class="control-label has-error validationMessage">Last Name cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10 email_div" style="width:100%; padding:0;">
+              <span style="float: right; display:block; width: 10px; color:#fb992c; margin-top:15px;">*</span>
+              <input [formControl]="signUpForm.controls['email']" type="email" placeholder="YOUR EMAIL" class="form-control register_input">
+              <div *ngIf ="signUpForm.controls['email'].touched">
+                <div *ngIf ="!signUpForm.controls['email'].valid">
+                  <label class="control-label has-error validationMessage">Email cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<!--          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <input [formControl]="signUpForm.controls['email2']" type="email" placeholder="CONFIRM YOUR EMAIL" class="form-control register_input">
+              <div *ngIf ="!emailmatch" class = "alert alert-danger">
+                <label class="control-label has-error validationMessage">Emails do not match!</label>
+              </div>
+            </div>
+          </div>-->
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <span style="float: right; display:block; width: 10px; color:#fb992c; margin-top:15px;">*</span>
+              <input [formControl]="signUpForm.controls['password']" type="password" placeholder="PASSWORD" class="form-control register_input">
+              <div *ngIf ="signUpForm.controls['password'].touched">
+                <div *ngIf ="!signUpForm.controls['password'].valid">
+                  <label class="control-label has-error validationMessage">Password cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <input [formControl]="signUpForm.controls['password2']" type="password" placeholder="PASSWORD" class="form-control register_input">
+              <div *ngIf ="signUpForm.hasError('mismatchedPasswords')" class = "alert alert-danger">
+                <label class="control-label has-error validationMessage">Passwords do not match!</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <span style="float: right; display:block; width: 10px; color:#fb992c; margin-top:15px;">*</span>
+              <input [formControl]="signUpForm.controls['city']" type="text" placeholder="CITY" class="form-control register_input">
+              <div *ngIf ="signUpForm.controls['city'].touched">
+                <div *ngIf ="!signUpForm.controls['city'].valid">
+                  <label class="control-label has-error validationMessage">City cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group select-area">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <span style="float: right; display:block; width: 10px; color:#fb992c; margin-top:15px;">*</span>
+
+              <select class="register_select form-control" [formControl]="signUpForm.controls['country']" (change)="changecountry($event.target.value)">
+                <option value="" class="">SELECT YOUR COUNTRY</option>
+                <option *ngFor="let item of countrylist; let i = index" value="{{item.id}}">{{item.name}}</option>
+              </select>
+              <div *ngIf ="signUpForm.controls['country'].touched">
+                <div *ngIf ="!signUpForm.controls['country'].valid">
+                  <label class="control-label has-error validationMessage">Country cannot be blank.</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group select-area">
+            <div class="col-sm-10 ng-hide" *ngIf="stateLoad" style="text-align: center;">
+              <img src="images/loading_list.gif">
+            </div>
+            <div class="col-sm-10" *ngIf="!stateLoad" style="width:100%; padding:0;">
+              <span style="float: right; display:block; width: 10px; color:#fb992c; margin-top:15px;">*</span>
+
+              <select class="register_select form-control" [formControl]="signUpForm.controls['state']">
+                <option value="" class="">SELECT YOUR STATE</option>
+                <option *ngFor="let item of statelist; let i = index" value="{{item.id}}">{{item.name}}</option>
+              </select>
+
+              <div *ngIf ="signUpForm.controls['state'].touched">
+                <div *ngIf ="!signUpForm.controls['state'].valid">
+                  <label class="control-label has-error validationMessage">State cannot be blank.</label>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+          <div class="form-group">
+
+            <input type="radio" value="0" [formControl]="signUpForm.controls['gender']">
+            <strong class="ng-binding">Male</strong>
+            <input type="radio" value="1" [formControl]="signUpForm.controls['gender']">
+            <strong class="ng-binding">Female</strong>
+
+
+          </div>
+
+
+          <p style="font-size: 11px;">
+            By proceeding to the next step, you agree to our
+            <a style="color: #ff0000;" href="javascript:void(0)" (click)="showtermsploicy('terms')"> terms of service </a>
+            as well as our
+            <a style="color: #ff0000;" href="javascript:void(0)" (click)="showtermsploicy('policy')"> privacy </a>
+            .
+          </p>
+
+
+          <button class="NextStep_btn" type="submit">NEXT</button>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="footer-menu2">
+      <span>&copy;TORKQ</span>
+      <span>|</span>
+      <span> <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a> </span>
+      <span>|</span>
+      <span> <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a> </span>
+    </div>
+  </div>
+
+</ion-content>

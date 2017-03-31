@@ -1,0 +1,6 @@
+examples
+node_modules
+src
+.idea
+karma.conf.js
+karma-test-shim.js

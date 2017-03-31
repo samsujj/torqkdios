@@ -1,0 +1,280 @@
+<ion-header class="login-header">
+    <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+            <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <div class="commonheader" *ngIf="isInternet == 0 && isOfflineData == 1">ROUTE WILL BE SYNCED ONCE YOU HAVE SERVICE</div>
+  <div style="position:relative;" class="experience-wrapper experince-page">
+
+    <div class="spSlider">
+        <ion-slides [options]="mySlideOptions">
+            <ion-slide *ngFor="let spitem of sportslist; let i = index">
+
+                    <div style="background-color: #dfe2e2; background-repeat: no-repeat; background-size: 100%; width: 100%; height: 100%;" [style.background-image]="getsanitizerstyle(spitem.additional_image)">&nbsp;</div>
+                    <div class="h2text">{{spitem.sport_name}}</div>
+                    <span>
+                        <div class="text-div">{{spitem.tag}}</div>
+                        <div class="more"><a href="javascript:void(0)" [navPush]="sportspage" [navParams]="{id:spitem.id}">MORE »</a> </div>
+                        <div class="clear"></div>
+                    </span>
+
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+      <div class="video-contain expgallery" style="text-align:center;">
+          <a href="javascript:void(0)" (click)="openDefault()"> <img alt="#" src="images/howitworks_3.jpg" style="width:100%;"> </a>
+      </div>
+
+
+      <div id="tabs">
+          <div class="btntablist">
+              <button class="btntab active">Social</button>
+              <button class="btntab" [navPush]="expeventlistpage">Events</button>
+              <button class="btntab" [navPush]="expgrouplistpage">Groups</button>
+              <button class="btntab" [navPush]="expstatlistpage">stats</button>
+          </div>
+          <div id="mainView">
+              <div class="blog1" *ngFor="let item of statusdata; let i = index" >
+                  <div class="left-img">
+                      <img width="50" height="50" alt="" src="{{item.user_image}}?v={{index}}">
+                      <div class="mobile-name-view">
+                          <strong>{{item.user_name}}</strong>
+                          <a style="color: #333333 !important;" *ngIf="item.tagpeople.length"> - with </a>
+                          <a  *ngIf="item.tagpeople.length" href="javascript:void(0);" style="font-weight: bold; color: #333333 !important;">{{item.tagpeople1}}</a>
+                          <a style="color: #333333 !important;" *ngIf="item.tagpeople.length > 1"> and </a>
+                          <a *ngIf="item.tagpeople.length == 2" href="javascript:void(0)" style="font-weight: bold; color: #333333 !important;">{{item.tagpeople2}}</a>
+                          <a *ngIf="item.tagpeople.length > 2" href="javascript:void(0)" style="font-weight: bold; color: #333333 !important;" (click)="showtagPeople1(item)">{{item.tagpeople.length-1}} others</a>
+                          <br>
+                          <span>{{item.timespan}}</span>
+                      </div>
+                      <div class="clear"></div>
+                      <img class="closeBtn" src="images/deletebutton.png" width="11" height="11" style="display: block; cursor: pointer;" *ngIf="item.user_id == item.c_user" (click)="delstatus(item)">
+                  </div>
+                  <div class="text-contain1" *ngIf="item.msg" innerHTML="{{item.msg}}">
+
+
+                  </div>
+                  <div class="text-contain" *ngIf=" item.type=='image' ">
+                      <div class="blogimg">
+                          <img style="position:absolute; margin-top:-2px; background: none;" alt="" src="images/arrow.png" width="54" height="28">
+                          <!--<img src="{{item.s_img}}?version={{cdatetime}}" style="cursor: pointer;" alt="" class="imgresponsive" (click)="showPhotoDetails(item)">-->
+                          <img src="http://torqkd.com/user/ajs1/createimage?image={{item.s_img}}&version={{cdatetime}}" style="cursor: pointer;" alt="" class="imgresponsive" (click)="toogleComment(item)">
+                      </div>
+                  </div>
+                  <div class="text-contain" *ngIf="item.type=='youtube' ">
+                      <div class="blogimg"  style="position: relative;">
+                          <!--<youtube-video class="embed-responsive-item" video-id="item.value"></youtube-video>-->
+                          <img src="http://torqkd.com/user/ajs1/createimage?image={{item.s_img}}" width="100%" (click)="launchVideo1(item.value)">
+                          <img src="images/youplay.png" width="20%" class="paly_video" style="cursor:pointer; width: 20%; z-index: 100; top: 40%; position: absolute; left: 40%;" (click)="launchVideo1(item.value)">
+
+
+                      </div>
+
+
+                  </div>
+
+                  <div class="text-contain" *ngIf=" item.type=='route' ">
+
+                      <div class="rowone">
+                          <div class="sport-area">
+                              {{item.routes.sport_name}} <br>
+                              <img src="{{item.routes.sport_image}}" style="max-width: 46px;" alt="">
+                          </div>
+                          <h2>{{item.routes.route_name}}</h2>
+                      </div>
+                      <div class="rowtwo">
+                          <ion-grid>
+                              <ion-row>
+                                  <ion-col width-33>
+                                      <span>DATE</span><br>
+                                      {{item.routes.date}}
+                                  </ion-col>
+                                  <ion-col width-33>
+                                      <span>TIME</span><br>
+                                      {{item.routes.duration}}
+                                  </ion-col>
+                                  <ion-col width-33>
+                                      <span>DISTANCE</span><br>
+                                      {{item.routes.distance}} miles
+                                  </ion-col>
+                              </ion-row>
+                          </ion-grid>
+
+                      </div>
+                      <div class="clear"></div>
+                      <!--<div style="height: 400px;width: 100%;" class="map-canvas-profile{{item.id}}"  id="map22{{item.id}}" >
+
+                      </div>-->
+
+                      <div>
+                          <img src="http://torqkd.com/user/ajs1/createimage?image={{item.routes.image_path}}" (click)="showRouteDetails(item)">
+                      </div>
+
+
+
+                  </div>
+
+                  <div class="text-contain" *ngIf=" item.type=='mp4' ">
+
+                      <div class="blogimg"   style="position: relative;" id="youtubeBody{{item.id}}">
+                          <!--<youtube-video class="embed-responsive-item" video-id="item.value"></youtube-video>-->
+                          <img src="http://torqkd.com/user/ajs1/createimage?image={{item.s_img}}" width="100%" (click)="playStatusVdo(item.value,item.s_img)">
+                          <img (click)="playStatusVdo(item.value,item.s_img)" src="images/youplay.png" width="20%" class="paly_video" style="cursor:pointer; width: 20%; z-index: 100; top: 40%; position: absolute; left: 40%;">
+                      </div>
+                  </div>
+
+                  <div class="bottom-like-contain">
+                      <div class="linknew-box">
+                          <ul>
+                              <li class="commend-div">
+                                  <a href="javascript:void(0);">
+                                      <img src="images/n1.png" (click)="toogleComment(item)" alt="" height="20" width="20">
+                                  </a>
+                              </li>
+                              <li><a href="javascript:void(0);">
+                                  <img ng-src="images/n2.png" *ngIf="item.is_like==0" alt="" width="20" height="20" (click)="updatelike(item.id)" src="images/n2.png">
+                                  <img *ngIf="item.is_like==1" class="fbactive" alt="" width="20" height="20"  (click)="updatelike(item.id)" src="images/n2-1.png">
+                              </a></li>
+                              <li><a href="javascript:void(0);" (click)="showSocilaShareList(item)"><img src="images/n3.png" alt="" width="20" style="margin-top:2px;"></a></li>
+                          </ul>
+                          <div class="clear"></div>
+                      </div>
+                      <div class="like-con2">
+                            <span *ngIf="loggedinuser == item.user_id" style="width:auto; display:inline; padding:0 4px; width:44px; float:none;">
+                                <a href="javascript:void(0)" style="text-decoration:none; outline:none; float:none;" (click)="changesharewithhtml(item)">
+                                    <img src="images/share1_icon_active.png" style="width:18px; margin-top:-2px;" *ngIf="item.share_with==1">
+                                    <img src="images/share2_icon_active.png" style="width:15px; margin-top:0px;"  *ngIf="item.share_with==2">
+                                    <img src="images/share3_icon_active.png" style="width:18px; margin-top:0px;" *ngIf="item.share_with==3">
+                                    <img src="images/share4_icon_active.png" style="width:12px; margin-top:0px;" *ngIf="item.share_with==4">
+                                    <img src="images/ad2new.png" style="padding-bottom:4px;">
+                                </a>
+                            </span>
+                          <span style="width:auto; display:inline; padding:0 4px; float:none;" *ngIf="loggedinuser != item.user_id">
+                                <a href="javascript:void(0)" style="text-decoration:none; outline:none; float:none;">
+                                    <img src="images/share1_icon_active.png" style="width:18px; margin-top:-2px;" *ngIf="item.share_with==1">
+                                    <img src="images/share2_icon_active.png" style="width:15px; margin-top:0px;"  *ngIf="item.share_with==2">
+                                    <img src="images/share3_icon_active.png" style="width:18px; margin-top:0px;" *ngIf="item.share_with==3">
+                                    <img src="images/share4_icon_active.png" style="width:12px; margin-top:0px;" *ngIf="item.share_with==4">
+                                </a>
+                            </span>
+                          <label style=" float:none;">{{item.like_no}} LIKE -  {{item.comment_no}}</label>
+                          <a href="javascript:void(0);" (click)="toogleComment(item)" style=" float:none;"> &nbsp; Comment</a>
+                      </div>
+                      <div class="commend-box-pro hide" style="padding-left: 0px; padding-right: 0px; display: block;">
+                          <div class="commendboxpro">
+                              <div class="profile-img2" style="width: 38px; margin: 0 5px 0 0;">
+                                  <img src="images/imgcomment.jpg">
+                              </div>
+                              <div class="popup-text-box1">
+                                  <div class="commentemo">
+                                      <div class="commentemoinnertextarea" contenteditable="true"></div>
+                                      <a href="javascript:void(0)">
+                                          <img src="images/emo.png" width="22" height="22" class="emocss" style="background:none; width:22px;">
+                                      </a>
+                                      <a class="mob-post2" href="javascript:void(0);" style="margin-top:8px; margin-right:0px;">POST</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+
+
+
+
+              <span class="empty"></span>
+              <div class="viewMore">
+                  <a href="javascript:void(0);" (click)="getstatus()" class="">View More</a>
+              </div>
+          </div>
+
+
+
+
+      </div>
+
+
+
+      <div class="clear"></div>
+
+      <div class="albums-div albums-div_background">
+          <a href="javascript:void(0);" [navPush]="photopage">
+              <img alt="" src="images/hs1-0-02.jpg" class="expgallery">
+              <h2 data-original-title="">ALBUMS</h2>
+          </a>
+      </div>
+
+      <div class="albums-div" style="position: relative;">
+          <!--<video controls="controls" preload="metadata" autoplay="autoplay" muted="muted" webkit-playsinline="webkit-playsinline" class="videoPlayer"><source src="http://torqkd.com/uploads/video/converted/defaultmaintv.mp4" type="video/mp4"/></video>-->
+          <img (click)="playMainTorkqTv()" src="http://torqkd.com/uploads/video/thumb/defaultmaintv.jpg" width="100%">
+          <img (click)="playMainTorkqTv()" src="images/youplay.png" width="20%" class="paly_video" style="cursor:pointer; width: 20%; z-index: 100; top: 40%; position: absolute; left: 40%;">
+          <h3><a href="javascript:void(0);" [navPush]="torqkdtvpage">TORKQ TV</a></h3>
+      </div>
+
+
+      <div style="border: solid 8px #fff; width: 100%; margin: 10px auto;">
+          <div class="iframe_h2">Events</div>
+          <div id="event-map-canvas"></div>
+      </div>
+
+      <div class="stats-slider-bottom">
+          <ion-slides [options]="mySlideOptions2">
+              <ion-slide *ngFor="let item of banner1data; let i = index" class="Stats-slider-bottom-contain1">
+                  <a hre="javascript:void(0);"><img  (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+              </ion-slide>
+              <!--<ion-slide class="Stats-slider-bottom-contain1">
+                  <a hre="javascript:void(0);"><img src="images/createimage.jpg"></a>
+              </ion-slide>
+              <ion-slide class="Stats-slider-bottom-contain1">
+                  <a hre="javascript:void(0);"><img src="images/3.jpg"></a>
+              </ion-slide>-->
+          </ion-slides>
+          <ion-slides [options]="mySlideOptions3">
+              <ion-slide *ngFor="let item of banner2data; let i = index" class="Stats-slider-bottom-contain2">
+                  <a hre="javascript:void(0);"><img (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+              </ion-slide>
+          </ion-slides>
+      </div>
+
+
+
+
+
+      <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+  </div>
+
+</ion-content>

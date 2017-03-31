@@ -1,0 +1,155 @@
+<ion-header class="login-header ">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div style="position:relative;" class="experience-wrapper experince-page">
+
+    <div class="spSlider">
+      <ion-slides [options]="mySlideOptions">
+        <ion-slide *ngFor="let spitem of sportslist; let i = index">
+
+          <div style="background-color: #dfe2e2; background-repeat: no-repeat; background-size: 100%; width: 100%; height: 100%;" [style.background-image]="getsanitizerstyle(spitem.additional_image)">&nbsp;</div>
+          <div class="h2text">{{spitem.sport_name}}</div>
+          <span>
+                        <div class="text-div">{{spitem.tag}}</div>
+                        <div class="more"><a href="javascript:void(0)">MORE »</a> </div>
+                        <div class="clear"></div>
+                    </span>
+
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <div class="video-contain expgallery" style="text-align:center;">
+      <a href="" (click)="openDefault()"> <img alt="#" src="images/howitworks_3.jpg" style="width:100%;"> </a>
+    </div>
+
+
+    <div id="tabs">
+      <div class="btntablist">
+        <button class="btntab" [navPush]="experiencepage">Social</button>
+        <button class="btntab" [navPush]="expeventlistpage">Events</button>
+        <button class="btntab active">Groups</button>
+        <button class="btntab" [navPush]="expstatlistpage">stats</button>
+      </div>
+      <div id="mainView">
+
+        <div class="groupTab">
+          <input type="button" value="SUGGESTED GROUPS" (click)="getsugGroups()">
+          <input type="button" value="LOCAL GROUPS" (click)="getlocGroups()">
+        </div>
+
+        <div class="groups-body" *ngFor="let item of groupList; let i = index">
+          <div class="left-img1">
+            <img src="{{item.image}}">
+            <div style="clear: both;"></div>
+          </div>
+          <div class="righttext1">
+            <h1 class="h1text">{{item.name}}</h1>
+            <div class="sttext">
+              <strong><span> {{item.time}} </span><br>{{(item.type==1)?"Public":"Private"}} Group / {{item.member}} member</strong>
+            </div>
+            <div style="clear: both;"></div>
+            <div class="destext1">
+              <div style="clear: both;"></div>
+              <p>{{item.description}}</p>
+            </div>
+            <a class="viewgrp" href="javascript:void (0)" [navPush]="groupdetailspage" [navParams]="{id:item.id}">View Group</a>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+
+        <span class="empty" *ngIf="!groupcount">No results found.</span>
+
+      </div>
+
+
+
+
+    </div>
+
+
+
+    <div class="clear"></div>
+
+    <div class="albums-div albums-div_background">
+      <a href="javascript:void(0);" [navPush]="photopage">
+        <img alt="" src="images/hs1-0-02.jpg" class="expgallery">
+        <h2 data-original-title="">ALBUMS</h2>
+      </a>
+    </div>
+
+    <div class="albums-div">
+      <!--<video controls="controls" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline" class="videoPlayer"><source src="http://torqkd.com/uploads/video/converted/defaultmaintv.mp4" type="video/mp4"/></video>-->
+      <img (click)="playMainTorkqTv()" src="http://torqkd.com/uploads/video/thumb/defaultmaintv.jpg" width="100%">
+      <img (click)="playMainTorkqTv()" src="images/youplay.png" width="20%" class="paly_video" style="cursor:pointer; width: 20%; z-index: 100; top: 40%; position: absolute; left: 40%;">
+      <h3><a href="javascript:void(0);" [navPush]="torqkdtvpage">TORKQ TV</a></h3>
+    </div>
+
+
+    <div style="border: solid 8px #fff; width: 100%; margin: 10px auto;">
+      <div class="iframe_h2">Events</div>
+      <div id="event-map-canvas"></div>
+    </div>
+
+    <div class="stats-slider-bottom">
+      <ion-slides [options]="mySlideOptions2">
+        <ion-slide *ngFor="let item of banner1data; let i = index" class="Stats-slider-bottom-contain1">
+          <a hre="javascript:void(0);"><img  (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+        </ion-slide>
+        <!--<ion-slide class="Stats-slider-bottom-contain1">
+            <a hre="javascript:void(0);"><img src="images/createimage.jpg"></a>
+        </ion-slide>
+        <ion-slide class="Stats-slider-bottom-contain1">
+            <a hre="javascript:void(0);"><img src="images/3.jpg"></a>
+        </ion-slide>-->
+      </ion-slides>
+      <ion-slides [options]="mySlideOptions3">
+        <ion-slide *ngFor="let item of banner2data; let i = index" class="Stats-slider-bottom-contain2">
+          <a hre="javascript:void(0);"><img (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+
+
+
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+  </div>
+
+</ion-content>

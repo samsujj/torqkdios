@@ -1,0 +1,195 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+
+<ion-content padding class="commentwrapper" >
+
+  <div class="commentarea">
+    <div class="blog1">
+      <div class="left-img">
+        <img width="50" height="50" alt="" src="{{items.user_image}}">
+        <div class="mobile-name-view">
+          <strong>{{items.user_name}}</strong>
+          <a style="color: #333333 !important;" *ngIf="items.tagpeople.length"> - with </a>
+          <a  *ngIf="items.tagpeople.length" href="javascript:void(0);" style="font-weight: bold; color: #333333 !important;">{{items.tagpeople1}}</a>
+          <a style="color: #333333 !important;" *ngIf="items.tagpeople.length > 1"> and </a>
+          <a *ngIf="items.tagpeople.length == 2" href="javascript:void(0)" style="font-weight: bold; color: #333333 !important;">{{items.tagpeople2}}</a>
+          <a *ngIf="items.tagpeople.length > 2" href="javascript:void(0)" style="font-weight: bold; color: #333333 !important;" (click)="showtagPeople1(items)">{{items.tagpeople.length-1}} others</a>
+          <br>
+          <span>{{items.timespan}}</span>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="text-contain1" *ngIf="items.msg" innerHTML="{{items.msg}}"></div>
+
+      <div class="text-contain" *ngIf=" items.type=='image' ">
+        <div class="blogimg">
+          <img style="position:absolute; margin-top:-2px; background: none;" alt="" src="images/arrow.png" width="54" height="28">
+          <img src="http://torqkd.com/user/ajs1/createimage?image={{items.s_img}}&version={{cdatetime}}" style="cursor: pointer;" alt="" class="imgresponsive" (click)="showPhotoDetails(items)">
+        </div>
+      </div>
+
+      <div class="text-contain" *ngIf="items.type=='youtube' ">
+        <div class="blogimg"  style="position: relative;">
+          <img src="http://torqkd.com/user/ajs1/createimage?image={{items.s_img}}" width="100%" (click)="launchVideo1(items.value)">
+          <img src="images/youplay.png" width="20%" class="paly_video" style="cursor:pointer; width: 20%; z-index: 100; top: 40%; position: absolute; left: 40%;" (click)="launchVideo1(items.value)">
+        </div>
+
+
+      </div>
+
+      <div class="text-contain" *ngIf=" items.type=='route' ">
+
+        <div class="rowone">
+          <div class="sport-area">
+            {{items.routes.sport_name}} <br>
+            <img src="{{items.routes.sport_image}}" style="max-width: 46px;" alt="">
+          </div>
+          <h2>{{items.routes.route_name}}</h2>
+        </div>
+        <div class="rowtwo">
+          <ion-grid>
+            <ion-row>
+              <ion-col width-33>
+                <span>DATE</span><br>
+                {{items.routes.date}}
+              </ion-col>
+              <ion-col width-33>
+                <span>TIME</span><br>
+                {{items.routes.duration}}
+              </ion-col>
+              <ion-col width-33>
+                <span>DISTANCE</span><br>
+                {{items.routes.distance}} miles
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </div>
+        <div class="clear"></div>
+        <div>
+          <img src="http://torqkd.com/user/ajs1/createimage?image={{items.routes.image_path}}" (click)="showRouteDetails(items)">
+        </div>
+
+
+
+      </div>
+
+      <div class="text-contain" *ngIf=" items.type=='mp4' ">
+
+        <div class="blogimg"   style="position: relative;" id="youtubeBody{{items.id}}">
+          <img src="http://torqkd.com/user/ajs1/createimage?image={{items.s_img}}" width="100%" (click)="playStatusVdo(items.value,items.s_img)">
+          <img (click)="playStatusVdo(items.value,items.s_img)" src="images/youplay.png" width="20%" class="paly_video" ng-click="showYoutubevdo(items.id,items.value)" style="cursor:pointer; width: 20%; z-index: 100; top: 40%; position: absolute; left: 40%;">
+        </div>
+      </div>
+
+
+
+      <div class="bottom-like-contain">
+        <div class="linknew-box">
+          <ul>
+            <li class="commend-div">
+              <a href="javascript:void(0);">
+                <img src="images/n1.png" alt="" height="20" width="20">
+              </a>
+            </li>
+            <li><a href="javascript:void(0);">
+              <img ng-src="images/n2.png" *ngIf="items.is_like==0" alt="" width="20" height="20" (click)="updatelike(items)" src="images/n2.png">
+              <img *ngIf="items.is_like==1" class="fbactive" alt="" width="20" height="20"  (click)="updatelike(items)" src="images/n2-1.png">
+            </a></li>
+            <li><a href="javascript:void(0);" (click)="showSocilaShareList(items)"><img src="images/n3.png" alt="" width="20" style="margin-top:2px;"></a></li>
+          </ul>
+          <div class="clear"></div>
+        </div>
+        <div class="like-con2">
+                            <span *ngIf="loggedinuser == items.user_id" style="width:auto; display:inline; padding:0 4px; width:44px; float:none;">
+                                <a href="javascript:void(0)" style="text-decoration:none; outline:none; float:none;" (click)="changesharewithhtml(items)">
+                                    <img src="images/share1_icon_active.png" style="width:18px; margin-top:-2px;" *ngIf="items.share_with==1">
+                                    <img src="images/share2_icon_active.png" style="width:15px; margin-top:0px;"  *ngIf="items.share_with==2">
+                                    <img src="images/share3_icon_active.png" style="width:18px; margin-top:0px;" *ngIf="items.share_with==3">
+                                    <img src="images/share4_icon_active.png" style="width:12px; margin-top:0px;" *ngIf="items.share_with==4">
+                                    <img src="images/ad2new.png" style="padding-bottom:4px;">
+                                </a>
+                            </span>
+          <span style="width:auto; display:inline; padding:0 4px; float:none;" *ngIf="loggedinuser != items.user_id">
+                                <a href="javascript:void(0)" style="text-decoration:none; outline:none; float:none;">
+                                    <img src="images/share1_icon_active.png" style="width:18px; margin-top:-2px;" *ngIf="items.share_with==1">
+                                    <img src="images/share2_icon_active.png" style="width:15px; margin-top:0px;"  *ngIf="items.share_with==2">
+                                    <img src="images/share3_icon_active.png" style="width:18px; margin-top:0px;" *ngIf="items.share_with==3">
+                                    <img src="images/share4_icon_active.png" style="width:12px; margin-top:0px;" *ngIf="items.share_with==4">
+                                </a>
+                            </span>
+          <label style=" float:none;">{{items.like_no}} LIKE -  {{items.comment_no}}</label>
+          <a href="javascript:void(0);" style=" float:none;"> &nbsp; Comment{{(items.comment_no > 1)?'s':''}}</a>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+    <div class="commend-box-pro-inner" *ngFor="let item of items.comment; let i = index">
+      <div class="commend-box">
+        <div class="com-img">
+          <img src="{{item.user_image}}" alt="">
+        </div>
+        <div class="combodyu">
+          <div class="date-link">
+            <a href="javascript:void(0)">{{item.time}}</a>
+            <img class="closeCBtn" src="images/deletebutton1.png" width="11" height="11" *ngIf="item.user_id == items.c_user" (click)="delcomment(item)">
+          </div>
+          <div class="nprofilename2">
+            <strong>
+              <a href="#" class="name_a" style="font-weight:bold;">{{item.user_name}}</a>
+            </strong>
+          </div>
+          <div class="clearfix"></div>
+          <div class="combodyuinnertext" [innerHTML]="getsanitizedcontent(item.body)">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div class="commentfooter">
+    <div class="commendboxpro">
+      <div class="profile-img2" style="width: 38px; margin: 0 5px 0 0;">
+        <img src="{{items.c_user_image}}">
+      </div>
+      <div class="popup-text-box1">
+        <div class="commentemo">
+          <div class="commentemoinnertextarea" id="commentemoinnertextarea" contenteditable="true"></div>
+          <a href="javascript:void(0)" (click)="showemojidiv()">
+            <img src="images/emo.png" width="22" height="22" class="emocss" style="background:none; width:22px;">
+          </a>
+          <a class="mob-post2" href="javascript:void(0);" style="margin-top:16px; margin-right:0px;" (click)="addComment()">POST</a>
+        </div>
+      </div>
+    </div>
+    <div style="display: none; background-color: #ffffff; padding: 5px; max-height: 300px; overflow: auto;" id="emojisdiv">
+      <div class="emojisdiv">
+        <a *ngFor="let emoitem of emojisArr; let j = index" href="javascript:void(0)" class="emoticon emoticon-{{emoitem}}" (click)="emoinsert(emoitem)" title="::{{emoitem}}::" ></a>
+      </div>
+    </div>
+  </div>
+</ion-footer>
+
+
+
+
+

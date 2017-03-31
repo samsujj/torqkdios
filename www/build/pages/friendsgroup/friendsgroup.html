@@ -1,0 +1,142 @@
+<ion-header class="login-header">
+    <ion-navbar class="login-top" hideBackButton>
+            <div class="login-wrapper">
+                <div class="mobile-top-con">
+                    <div class="mobile-menu show">
+                        <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+                        <ion-icon name="menu"></ion-icon>
+                        </button>
+                        <button class="navmenul hide" menuToggle="left" hidden="true">
+                        <ion-icon name="menu"></ion-icon>
+                        </button>
+                    </div>
+                    <div class="logo">
+                        <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+                    </div>
+                    <div class="logout">
+                        <a [navPush]="updateprofilepage"> <img src="images/gear2.png"></a>
+                    </div>
+                </div>
+            </div>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="commonheader" *ngIf="isInternet == 0 && isOfflineData == 1">ROUTE WILL BE SYNCED ONCE YOU HAVE SERVICE</div>
+
+
+    <div class="experience-wrapper friends-profile">
+        <div class="top-banner-contain" *ngIf="getuserdetails">
+            <div class="usercontain2">
+                <div class="user-contain2-img">
+                    <img alt="" src="http://torqkd.com/user/ajs1/getiamgeencode?image={{getuserdetails.user_image}}&version={{cdatetime}}">
+                </div>
+                <div class="usericonimage">
+                    <div *ngFor="let item of getuserdetails.user_sports; let i = index" style="float: left; margin-bottom:4px; margin-right: 4px; height: 25px; width: 25px; background-size: cover;" [style.background-image]="getsanitizerstyle(item.imag_name)"></div>
+                    <a href="javascript:void(0)" [navPush]="mysportspage" [navParams]="{userid:getuserdetails.id}" class="pliocn" style=" color:#f7931e; text-decoration:none; font-weight:bold; font-size: 20px; display: block;">+</a>
+                </div>
+            </div>
+
+            <div class="userbanner2">
+                <img src="http://torqkd.com/user/ajs1/getiamgeencode?image={{getuserdetails.user_backimage}}&version={{cdatetime}}">
+            </div>
+
+
+            <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="tabs">
+            <div class="btntablist">
+                <button class="btntab" [navPush]="friendsprofilepage" [navParams]="{userid:userid}">Social</button>
+                <button class="btntab" [navPush]="friendseventpage" [navParams]="{userid:userid}">Events</button>
+                <button class="btntab active">Groups</button>
+                <button class="btntab" [navPush]="friendsstatpage" [navParams]="{userid:userid}">stats</button>
+            </div>
+            <div id="mainView">
+
+                <div class="groupTab">
+                    <input type="button" value="COMMUNITY GROUPS" (click)="getsugGroups()">
+                    <input type="button" value="FRIENDS GROUPS" (click)="getlocGroups()">
+                </div>
+
+                <div class="groups-body" *ngFor="let item of groupList; let i = index">
+                    <div class="left-img1">
+                        <img src="{{item.image}}">
+                        <div style="clear: both;"></div>
+                    </div>
+                    <div class="righttext1">
+                        <h1 class="h1text">{{item.name}}</h1>
+                        <div class="sttext">
+                            <strong><span> {{item.time}} </span><br>{{(item.type==1)?"Public":"Private"}} Group / {{item.member}} member</strong>
+                        </div>
+                        <div style="clear: both;"></div>
+                        <div class="destext1">
+                            <div style="clear: both;"></div>
+                            <p>{{item.description}}</p>
+                        </div>
+                        <a class="viewgrp" href="javascript:void (0)" [navPush]="groupdetailspage" [navParams]="{id:item.id}">View Group</a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+
+                <span class="empty" *ngIf="!groupcount">No results found.</span>
+
+            </div>
+
+
+
+
+        </div>
+
+        <div class="stats-slider-bottom">
+            <ion-slides [options]="mySlideOptions2">
+                <ion-slide *ngFor="let item of banner1data; let i = index" class="Stats-slider-bottom-contain1">
+                    <a hre="javascript:void(0);"><img  (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+                </ion-slide>
+            </ion-slides>
+            <ion-slides [options]="mySlideOptions3">
+                <ion-slide *ngFor="let item of banner2data; let i = index" class="Stats-slider-bottom-contain2">
+                    <a hre="javascript:void(0);"><img (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+                </ion-slide>
+            </ion-slides>
+        </div>
+</div>
+
+    <div class="footer-menu1">
+        <span>©TORKQ</span>
+        <span>|</span>
+        <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+        <span>|</span>
+        <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+
+
+
+
+
+</ion-content>
+
+<!--
+
+<ion-footer>
+
+<div class="footer-menu1 ng-scope">
+    <span>©TORKQ</span>
+    <span>|</span>
+    <span>
+<a href="javascript:void(0);" ng-click="showtermsploicy('terms')">TERMS </a>
+</span>
+    <span>|</span>
+    <span>
+<a href="javascript:void(0);" ng-click="showtermsploicy('policy')">PRIVACY</a>
+</span>
+</div>
+</ion-footer>-->

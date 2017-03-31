@@ -1,0 +1,102 @@
+<ion-header class="login-header">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="commonheader" *ngIf="isInternet == 0 && isOfflineData == 1">ROUTE WILL BE SYNCED ONCE YOU HAVE SERVICE</div>
+
+  <div style="position:relative;" class="experience-wrapper friends-page">
+    <h4>Community</h4>
+    <div class="left-text">Below are individuals that participate in the Torkq community. To view the sports they follow, place your mouse on their image. Click "connect" to initate a friendship request.  </div>
+
+    <div class="right-text">
+      <img style="float: left;" src="{{userImage}}">
+      <p><strong>Pending Friendship</strong><br>Orange border indicates a pending friendship request</p>
+      <div class="clear"></div>
+    </div>
+
+    <div class="search-new">
+      <div class="select-div">
+        <label>Search By Name :</label> <ion-searchbar (ionInput)="getItems($event)" class="inputsearch frndsearchnew"></ion-searchbar>
+        <div class="clear"></div>
+      </div>
+
+      <!--<div class="select-div">
+        <label> Search By Sports :    </label>
+
+        <select id="select-search" (change)="changeasd($event)">
+          <option value="">SELECT ONE</option>
+        </select>
+        <div class="clear"></div>
+      </div>-->
+
+
+      <div class="select-div">
+        <label> Search By Sports :    </label>
+        <ion-item class="frndspsearchnew">
+          <ion-select class="frndselectnew" placeholder="SELECT ONE" (ionChange)="cngSp($event)">
+            <ion-option value="0">All</ion-option>
+            <ion-option *ngFor="let item of allSports; let i = index" value="{{item.id}}" disabled="{{isDisabled(item)}}">{{item.sport_name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+
+    <div class="bottom-img">
+      <div class="img-con">
+        <div style="cursor: pointer;" *ngFor="let item of itemlist; let i = index" [ngClass]="(item.frnd_type == 1 || item.frnd_type == 2)?'fr_request frlist-user':'frlist-user'" (click)="godetails(item)">
+          <div class="imgdiv" style=" overflow:hidden;">
+            <img src="{{item.user_image}}">
+          </div>
+          <div class="friend_detail">
+            <a href="javascript:void(0);">
+              <span>{{item.user_name_mod}}</span><br>
+              {{item.user_address_mod}}
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+  </div>
+
+
+
+</ion-content>

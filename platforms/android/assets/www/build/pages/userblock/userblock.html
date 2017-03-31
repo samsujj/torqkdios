@@ -1,0 +1,51 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+
+<ion-content padding class="commentwrapper block-page" >
+  <div class="block-page-wrapper">
+    <div class="settingswrapper">
+      <h4>Blocking</h4>
+      <div class="settingstext">Once you block someone, that person can no longer see things you post on your timeline, tag you, invite you to events or groups, start a conversation with you, or add you as a friend. Note: Does not include groups or events you both participate in.</div>
+      <div class="settingstablewrapper">
+        <div class="blockuserdiv" style="width: 300px;">
+          <span>Block users</span>
+          <input placeholder="Add name or email" (keyup)="getsearchkey($event.target.value)" type="text">
+          <input (click)="searchus()" value="SEARCH" type="button">
+          <div style="clear:both"></div>
+        </div>
+
+        <div class="blockuserdiv" style="width: 90%; margin-top: 20px;">
+          <ion-list>
+            <ion-item *ngFor="let item of blocklist; let i = index">
+              <div style="width: auto;" class="item-span">
+                <h2 style="float: left;">{{item.name}}</h2>
+                <a href="javascript:void(0)" style="font-weight: normal; float: right;" (click)="unblockppl(item)">Unblock</a>
+                </div>
+            </ion-item>
+          </ion-list>
+
+
+        </div>
+
+        <div class="unblocksettings" *ngIf="noofblock == 0" style="">You haven't added anyone to your block list.</div>
+
+      </div>
+
+    </div>
+
+
+    <div class="clear"></div>
+  </div>
+
+</ion-content>
+
+
+

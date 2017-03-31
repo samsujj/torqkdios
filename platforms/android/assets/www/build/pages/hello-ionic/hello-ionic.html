@@ -1,0 +1,83 @@
+<!--
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Hello Ionic</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="getting-started">
+
+  <h3>Welcome to your first Ionic app!</h3>
+
+  <p>
+    This starter project is our way of helping you get a functional app running in record time.
+  </p>
+  <p>
+    Follow along on the tutorial section of the Ionic docs!
+  </p>
+  <p>
+    <button primary menuToggle>Toggle Menffu</button>
+  </p>
+
+</ion-content>
+-->
+
+<ion-content  style="background-color: #ffaf36;height:800px">
+</ion-content>
+<ion-content class="has-header hide">
+
+
+  <ion-grid class="homepage_wrapper">
+
+    <ion-row class="logoblock">
+      <img src="images/logo_main.png">
+    </ion-row>
+
+    <ion-row class="video-contain">
+      <img src="images/howitworks_3.jpg" >
+    </ion-row>
+
+    <ion-row class="introbtn">
+      <button class="exp" [navPush]="profilePage" >The Experience</button>
+    </ion-row>
+
+    <ion-row class="introbtn">
+      <button>Join</button>
+    </ion-row>
+
+    <ion-row class="introbtn">
+      <button [navPush]="loginPage" >Login</button>
+    </ion-row>
+
+
+
+
+    <ion-row class="text-contain">
+      Torkq brings the consciousness of outdoor sports to a new, progressive social media realm. Torkq is a collective of runners, jumpers, climbers, riders, hikers, surfers and all who dare to smack the terrain from land, sky, powder and H2O. Now go get it!! Time to connect, track and explore.
+    </ion-row>
+
+
+
+  </ion-grid>
+
+
+
+</ion-content>
+<ion-footer>
+
+  <div class="footer-menu1">
+    <span>©TORKQ</span>
+    <span>|</span>
+    <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+    <span>|</span>
+    <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+  </div>
+</ion-footer>

@@ -1,0 +1,165 @@
+<ion-header class="login-header">
+    <ion-navbar class="login-top" hideBackButton>
+            <div class="login-wrapper">
+                <div class="mobile-top-con">
+                    <div class="mobile-menu show">
+                        <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+                        <ion-icon name="menu"></ion-icon>
+                        </button>
+                        <button class="navmenul hide" menuToggle="left" hidden="true">
+                        <ion-icon name="menu"></ion-icon>
+                        </button>
+                    </div>
+                    <div class="logo">
+                        <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+                    </div>
+                    <div class="logout">
+                        <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+                    </div>
+                </div>
+            </div>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="commonheader" *ngIf="isInternet == 0 && isOfflineData == 1">ROUTE WILL BE SYNCED ONCE YOU HAVE SERVICE</div>
+
+
+    <div class="experience-wrapper friends-profile">
+        <div class="top-banner-contain" *ngIf="getuserdetails">
+            <div class="usercontain2">
+                <div class="user-contain2-img">
+                    <img alt="" src="http://torqkd.com/user/ajs1/getiamgeencode?image={{getuserdetails.user_image}}&version={{cdatetime}}">
+                </div>
+                <div class="usericonimage">
+                    <div *ngFor="let item of getuserdetails.user_sports; let i = index" style="float: left; margin-bottom:4px; margin-right: 4px; height: 25px; width: 25px; background-size: cover;" [style.background-image]="getsanitizerstyle(item.imag_name)"></div>
+                    <a href="javascript:void(0)" [navPush]="mysportspage" [navParams]="{userid:getuserdetails.id}" class="pliocn" style=" color:#f7931e; text-decoration:none; font-weight:bold; font-size: 20px; display: block;">+</a>
+                </div>
+            </div>
+
+            <div class="userbanner2">
+                <img src="http://torqkd.com/user/ajs1/getiamgeencode?image={{getuserdetails.user_backimage}}&version={{cdatetime}}">
+            </div>
+
+
+            <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="tabs">
+            <div class="btntablist">
+                <button class="btntab" [navPush]="friendsprofilepage" [navParams]="{userid:userid}">Social</button>
+                <button class="btntab" [navPush]="friendsgrouprouppage" [navParams]="{userid:userid}">Events</button>
+                <button class="btntab" [navPush]="friendseventpage" [navParams]="{userid:userid}">Groups</button>
+                <button class="btntab active">stats</button>
+            </div>
+            <div id="mainView">
+
+                <table width="100%" *ngFor="let item of statdata2; let i = index" class="stat-tab">
+
+                    <tr>
+
+                        <td class="first-td" style="padding-bottom:10px;" width="20%">
+
+                            <h4 style="color:#f79213">{{item.sport_name}}</h4>
+
+                            <img src="http://torqkd.com/uploads/sports_image/thumb/{{item.imag_name}}" alt=""  style="margin-top:10px;  width:52px;"/></td>
+
+                        <td>{{item.activity_no}}<br />
+                            <span>Activities</span></td>
+
+                        <td >{{item.total_dis}}<br />
+                            <span>Distance</span></td>
+
+                        <td >{{item.total_time}}<br/>
+
+                            <span style="text-align:left">Time</span></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td  valign="top" align="left" width="100%"  colspan="5">
+
+                            <base-chart  class="chart"
+                                         [datasets]="getLineChartData(item)"
+                                         [labels]="getLineChartLabels(item)"
+                                         [options]="lineChartOptions"
+                                         [colors]="lineChartColors"
+                                         [legend]="lineChartLegend"
+                                         [chartType]="lineChartType"></base-chart>
+
+                            <div class="stat-table2" style="padding:10px 0; "><a href="javascript:void(0);" class="stat-view-btn" (click)="viewstatdet(item)">View Details</a></div>
+                        </td>
+
+                    <tr>
+
+                        <td  valign="bottom" colspan="5" style="padding:0; border-top: solid 1px #555555; padding:15px 0 0 0; margin-bottom:10px;">
+
+                    </tr>
+
+                </table>
+
+                <span class="empty" *ngIf="!statcount">No results found.</span>
+
+
+
+
+
+            </div>
+
+
+
+
+        </div>
+
+        <div class="stats-slider-bottom">
+            <ion-slides [options]="mySlideOptions2">
+                <ion-slide *ngFor="let item of banner1data; let i = index" class="Stats-slider-bottom-contain1">
+                    <a hre="javascript:void(0);"><img  (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+                </ion-slide>
+            </ion-slides>
+            <ion-slides [options]="mySlideOptions3">
+                <ion-slide *ngFor="let item of banner2data; let i = index" class="Stats-slider-bottom-contain2">
+                    <a hre="javascript:void(0);"><img (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+                </ion-slide>
+            </ion-slides>
+        </div>
+</div>
+
+    <div class="footer-menu1 ng-scope">
+        <span>©TORKQ</span>
+        <span>|</span>
+        <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+        <span>|</span>
+        <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+
+
+
+
+
+</ion-content>
+
+<!--
+
+<ion-footer>
+
+<div class="footer-menu1 ng-scope">
+    <span>©TORKQ</span>
+    <span>|</span>
+    <span>
+<a href="javascript:void(0);" ng-click="showtermsploicy('terms')">TERMS </a>
+</span>
+    <span>|</span>
+    <span>
+<a href="javascript:void(0);" ng-click="showtermsploicy('policy')">PRIVACY</a>
+</span>
+</div>
+</ion-footer>-->

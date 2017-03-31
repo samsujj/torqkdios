@@ -1,0 +1,62 @@
+<ion-content  style="background-color: #ffaf36;height:800px">
+    </ion-content>
+<ion-content class="has-header homec hide">
+
+
+    <ion-grid class="homepage_wrapper">
+
+        <ion-row class="logoblock">
+            <img src="images/logo_main.png">
+        </ion-row>
+
+        <ion-row class="video-contain">
+            <img src="images/howitworks_3.jpg" (click)="openvideoplayer()" >
+        </ion-row>
+
+        <ion-row class="introbtn">
+            <button class="exp" [navPush]="experiencepage" >The Experience</button>
+        </ion-row>
+
+        <ion-row class="introbtn">
+            <button [navPush]="signuppage">Join</button>
+        </ion-row>
+
+        <ion-row class="introbtn">
+            <button [navPush]="loginPage" >Login</button>
+        </ion-row>
+
+
+
+
+        <ion-row class="text-contain">
+            Torkq brings the consciousness of outdoor sports to a new, progressive social media realm. Torkq is a collective of runners, jumpers, climbers, riders, hikers, surfers and all who dare to smack the terrain from land, sky, powder and H2O. Now go get it!! Time to connect, track and explore.
+        </ion-row>
+
+
+
+    </ion-grid>
+
+
+
+
+</ion-content>
+<ion-footer>
+
+    <div class="footer-menu1">
+        <span>©TORKQ</span>
+        <span>|</span>
+        <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+        <span>|</span>
+        <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+
+<!--
+    <button (click)="opendatase()">SQLite</button>
+    <button (click)="getFromdb()">get</button>
+-->
+</ion-footer>

@@ -1,0 +1,155 @@
+<ion-header class="login-header">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="commonheader" *ngIf="isInternet == 0 && isOfflineData == 1">ROUTE WILL BE SYNCED ONCE YOU HAVE SERVICE</div>
+  <div class="experience-wrapper sports-details-page">
+
+    <div class="top-banner-contain1 expgallery" *ngIf="sportdet">
+      <ion-slides [options]="mySlideOptions1" class="gallery4">
+        <ion-slide *ngFor="let item of sportdet.bImage; let i = index" class="Stats-slider-bottom-contain211">
+          <img  src="{{item}}">
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <div class="people-div" *ngIf="sportdet">
+      <h4>Community:</h4>
+      <ul>
+        <li *ngFor="let uItem of sportdet.community_pople; let i = index" class="expgallery">
+          <img src="{{uItem.image}}" class=" sport_community" ng-click="userDet(uItem)" style="cursor: pointer;" />
+        </li>
+      </ul>
+    </div>
+
+    <div class="see-btn-spot" *ngIf="sportdet">
+      <a href="javascript:void(0)" (click)="seemorepeople()" >see more</a>
+    </div>
+
+
+    <div class="sport-text-contain"  *ngIf="sportdet">
+      <h2>RUN</h2>
+      <p> {{spdescription}}
+        <a href="javascript:void(0)" class="color3" *ngIf="isExpanded == 1" (click)="lessdesp()"><strong>  &lt;&lt; Close</strong></a>
+        <a href="javascript:void(0)" class="color3" *ngIf="isExpanded == 0" (click)="moredesp()"><strong>  More &gt;&gt;</strong></a>
+      </p>
+    </div>
+
+
+    <div id="tabs"  style="margin-bottom: 24px;">
+      <div class="btntablist">
+        <button class="btntab" [navPush]="sportspage" [navParams]="{id:sportsid}">Social</button>
+        <button class="btntab active">events</button>
+        <button class="btntab" [navPush]="sportsgrouppage" [navParams]="{id:sportsid}">groups</button>
+        <button class="btntab" [navPush]="sportsstatpage" [navParams]="{id:sportsid}">stats</button>
+      </div>
+      <div id="mainView">
+
+        <div class="event-tab" *ngFor="let item of eventlist; let i = index" >
+          <div class="left-part">
+            <h4 style="color:#f79213; font-family: 'reservation'; font-size: 10px;">{{item.sport_name}}</h4>
+            <img alt="#" src="{{item.sport_image}}">
+          </div>
+          <div class="right-part" style="margin-bottom:5px;" >
+            <h1>{{item.name}}</h1>
+            <h3>{{item.address}}</h3>
+            <div class="clear"></div>
+            <div class="date-contain">
+              <span>Date</span>
+              <br />
+              {{item.date}}
+              <br />
+              <span>Time</span>
+              <br />
+              {{item.time}}
+            </div>
+            <div class="event-menu">
+              <a class="viewgrp" href="javascript:void(0)" [navPush]="eventdetailspage" [navParams]="{id:item.id}">View Event</a>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+        <span class="empty" *ngIf="!eventcount">No results found.</span>
+
+        <div class="viewMore" *ngIf="eventoffset < totalevent">
+          <a href="javascript:void(0);" (click)="getMoreEvents()" class="">View More</a>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <a class="vertical-prev" (click)="upArrow()" *ngIf="spimagelistlength > 1" style="display: block; margin:10px auto;">&nbsp;</a>
+
+    <ion-slides #mySlider class="ch-slider" [options]="mySlideOptions5" style="clear: both;" *ngIf="spimagelistlength">
+      <ion-slide *ngFor="let item of spimagelist; let i = index" class="slides">
+        <img src="http://torqkd.com/uploads/sports_image/additional/thumb/{{item.image}}">
+        <h2>{{item.sport_name}}</h2>
+        <span>
+             <div class="more"><a href="javascript:void(0);" [navPush]="sportspage" [navParams]="{id:item.id}">MORE »</a> </div>
+             <div class="clear"></div>
+          </span>
+      </ion-slide>
+    </ion-slides>
+
+    <a class="vertical-next" (click)="downArrow()" *ngIf="spimagelistlength > 1" style="display: block; margin:10px auto;">&nbsp;</a>
+
+
+    <div style="clear: both;"></div>
+
+
+    <div class="stats-slider-bottom">
+      <ion-slides [options]="mySlideOptions2">
+        <ion-slide *ngFor="let item of banner1data; let i = index" class="Stats-slider-bottom-contain1">
+          <a hre="javascript:void(0);"><img  (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+        </ion-slide>
+      </ion-slides>
+      <ion-slides [options]="mySlideOptions3">
+        <ion-slide *ngFor="let item of banner2data; let i = index" class="Stats-slider-bottom-contain2">
+          <a hre="javascript:void(0);"><img (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+  </div>
+
+</ion-content>

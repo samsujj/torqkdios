@@ -1,0 +1,28 @@
+<!--
+  Generated template for the SocialcommentPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+<ion-content padding class="tagpeoplelistwrapper" >
+
+  <ion-list>
+    <ion-item *ngFor="let item of items; let i = index">
+      <ion-avatar item-left class="userimage">
+        <img src="{{item.image}}">
+      </ion-avatar>
+
+      <ion-label>{{item.name}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

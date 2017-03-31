@@ -1,0 +1,58 @@
+<ion-header class="login-header ">
+    <ion-navbar class="login-top" hideBackButton>
+        <div class="login-wrapper">
+            <div class="mobile-top-con">
+                <div class="mobile-menu show">
+                    <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+                        <ion-icon name="menu"></ion-icon>
+                    </button>
+                    <button class="navmenul hide" menuToggle="left" hidden="true">
+                        <ion-icon name="menu"></ion-icon>
+                    </button>
+                </div>
+                <div class="logo">
+                    <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+                </div>
+                <div class="logout">
+                    <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+                </div>
+            </div>
+        </div>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="experience-wrapper notification-wrapper">
+    <div class="settingswrapper">
+      <h4 style="padding:15px;">Notifications</h4>
+
+        <ion-list>
+
+            <ion-item *ngFor="let item of datalist3; let i = index" (click)="markasreadnot(item);" class="notifications_li" [style.background]="getsanibackcol(item)">
+                <div class="msg_photo_notifications" style="float: left; width: 30px;">
+                    <img src="{{item.user_image}}" width="30" style="border:solid 2px #efefef;"  >
+                </div>
+                <div class="msg_text_notificationswrapper" style=" word-break: break-all;" >
+                    <div class="msg_text_notifications" style="cursor: pointer;">
+                        <div  class="msg_text-wrapper" >
+                            <div class="notificationStr" [innerHTML]="getsanitizedcontent(item.str)"></div>
+                        </div>
+                    </div>
+                    <div *ngIf="item.file" class="notifications_img" [style.background-image]="getsanitizerstyle(item.file)"></div>
+                    <div style="margin-top: 0; font-size: 12px;">
+                        <label style="font-size:10px; color:#8c8888; font-weight:normal;">{{item.time_str1}}</label>
+                    </div>
+                </div>
+            </ion-item>
+
+        </ion-list>
+
+
+    </div>
+
+    <div class="clear"></div>
+  </div>
+
+</ion-content>

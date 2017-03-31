@@ -1,0 +1,32 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+<ion-content padding class="daily-poll-res">
+
+  <div class="popupbox2 popupbox3_mobile">
+
+    <div class="album-wrpper" *ngIf="isLoad">
+      <h4 class="ng-binding">Question : {{itemdet.ques}}</h4>
+
+      <base-chart class="chart"
+                  [data]="getpieChartData(itemdet)"
+                  [labels]="getpieChartLabels(itemdet)"
+                  [chartType]="pieChartType" [options]="pieChartOption" [colors]="pieChartColors"></base-chart>
+
+      <div class="labels">
+        <div *ngFor="let item5 of newLabels; let i = index" class="chart-label" style="background-color: #F7931E; color: #ffffff;">{{item5}}</div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</ion-content>

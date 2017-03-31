@@ -1,0 +1,217 @@
+<ion-header class="login-header">
+    <ion-navbar class="login-top" hideBackButton>
+            <div class="login-wrapper">
+                <div class="mobile-top-con">
+                    <div class="mobile-menu show">
+                        <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+                        <ion-icon name="menu"></ion-icon>
+                        </button>
+                        <button class="navmenul hide" menuToggle="left" hidden="true">
+                        <ion-icon name="menu"></ion-icon>
+                        </button>
+                    </div>
+                    <div class="logo">
+                        <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+                    </div>
+                    <div class="logout">
+                        <a [navPush]="updateprofilepage"> <img src="images/gear2.png"></a>
+                    </div>
+                </div>
+            </div>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="getting-started contentwrapper has-header hide has-subheader">
+    <div class="commonheader" *ngIf="isInternet == 0 && isOfflineData == 1">ROUTE WILL BE SYNCED ONCE YOU HAVE SERVICE</div>
+
+
+    <div class="experience-wrapper">
+        <div class="movile-tab-body">
+            <ul>
+                <li><a href="javascript:void(0)">GPS</a></li>
+                <li class="ng-hide"><a href="javascript:void(0)">CAMERA</a></li>
+                <!--<li class="ng-hide"><input type="button" value="CAMERA" class="browsebtn">
+                </li>-->
+            </ul>
+        </div>
+        <div class="stats-slider">
+            <h4>Stats</h4>
+            <ion-slides [options]="mySlideOptions">
+                <ion-slide class="Stats-slider-contain" *ngFor="let item of statdata; let i = index">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#DFE2E2 !important;">
+                            <tbody>
+                            <tr>
+                                <th colspan="4" class="ng-binding">{{item.sport_name}}</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="strongtext ng-binding">{{item.total_dis}}</div><div class="spantext">Distance</div>
+                                </td>
+                                <td>
+                                    <div class="strongtext ng-binding">{{item.total_time}}</div><div class="spantext">Time</div>
+                                </td>
+                                <td>
+                                    <div class="strongtext ng-binding">{{item.activity_no}}</div><div class="spantext">Activities</div>
+                                </td>
+                                <td>
+                                    <div class="strongtext ng-binding">{{item.event_no}}</div><div class="spantext">Events</div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                </ion-slide>
+            </ion-slides>
+        </div>
+        <div class="status-menu">
+            <div class="text-box" id="text-box">
+                <img id="loading_indicator" ngClass="{{addhideclass(getExactRunning)}}" src="images/ajax_loading.gif" width="16" height="11">
+                <div class="highlightTextarea" style="float: none; vertical-align: text-bottom; width: 100%; height: 58px ! important;">
+                    <div class="highlightTextarea-container" style="background: rgb(255, 255, 255) none repeat scroll 0% 0%; padding: 0px; top: 0px; left: 0px; width: 88%; height: 58px;">
+                        <div class="highlightTextarea-highlighter" style="font-size: 15px; font-family: Arial,Helvetica,sans-serif; font-style: normal; font-weight: 400; font-variant: normal; font-stretch: normal; vertical-align: text-bottom; word-spacing: 0px; text-align: start; letter-spacing: 0px; text-rendering: optimizelegibility; width: 88px; height: 58px; top: 0px; left: 0px;">
+
+                        </div>
+                    </div>
+                    <div class="statusuparea" id="statusuparea" contenteditable="true" (focus)="isStatusInput = true" placeholder="STATUS UPDATE" (keypress)="texthighlight($event)" (keydown)="texthighlight($event)" (keyup)="texthighlight($event); changestatustext($event.target.innerText);" style="position: absolute; left: 0; top: 0;"></div>
+                </div>
+
+            </div>
+            <div class="menu1">
+                <a href="javascript:void(0);" (click)="openvideodiv()" style="color: #fff;">+<br>VIDEO</a>
+            </div>
+            <div class="menu2">
+                <a href="javascript:void(0);" (click)="openphotodiv()"  ng-click="addPhoto()" style="color: #fff;">+<br>Photo</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="extracted_url"></div>
+        <div class="status-input" id="statusinput">
+            <div ngClass="{{addhideclass(isStatusInput)}}">
+                <a href="javascript:void(0);" (click)="showtagPeople()"><img src="images/adduser_new2.png" width="25" height="17" style="display:inline; width: 25px; margin:5px 0 0 14px;"></a>
+            </div>
+
+            <div *ngIf="isPhoto" style="padding-bottom: 15px;" class=" browsephoto">
+                <input type="button" class="browsebtn" value="Click To Browse" (click)="addPhoto()">
+            </div>
+
+            <div  *ngIf="photoval" style="position: relative;">
+                <img *ngIf="rotating" src="images/loading_list.gif" style="position: absolute;top:50%; left: 56px;">
+                <img *ngIf="filepath"  [src]="filepath" />
+            </div>
+
+            <div *ngIf="isVideo" class="videobrowse">
+                <form name="signUpForm" id="signUpForm" class="form-horizontal ng-pristine ng-valid">
+                    <input type="text" placeholder="Type to search YouTube" (keyup)="getytsearchkey($event.target.value)" class="searchbox"><br>
+                    <input type="button" value="search" class="searchbtn" (click)="ytvideoseacrh()">
+                </form>
+                <div class="btnor">OR</div>
+                <input class="browsebtn" type="button" value="Click To Browse" (click)="addVideo()">
+            </div>
+            <div *ngIf="videoval">
+                <video width="100%" controls *ngIf="videopath">
+                    <source [src]="videopath" type="video/mp4">
+                </video>
+            </div>
+            <div *ngIf="youtubeval" class="youtubeVideo2">
+                <div style="margin-bottom:10px; position: relative;" (click)="launchVideo1(statusvalue)">
+                    <img src="https://i.ytimg.com/vi/{{statusvalue}}/mqdefault.jpg" width="100%">
+                    <img src="images/youtube-playbtn.png" class="paly_video" style="cursor:pointer;">
+                </div>
+            </div>
+            <div ngClass="{{addhideclass(isStatusInput)}}">
+              <div>
+                    <select id="share_with" (change)="changesharewith($event.target.value)">
+                        <option value="1">Community</option>
+                        <option value="2">Friends</option>
+                        <option value="3">Friends Of Friends</option>
+                        <option value="4">Private Me Only</option>
+                    </select>
+
+                  <input class="lrotbtn" *ngIf="photoval" (click)="imgRotate(1)" style="background: transparent url('images/rtal.png') no-repeat scroll 0% 0% ! important; height: 32px; width: 112px;" type="button">
+                  <input class="rrotbtn" *ngIf="photoval" (click)="imgRotate(2)" style="background: transparent url('images/rtar.png') no-repeat scroll 0% 0% ! important; height: 32px; width: 112px;" type="button">
+                    <button class="postbtn1" (click)="statuscancel()">cancel</button>
+                    <button class="postbtn2" (click)="statusupdate()">post</button>
+                    <div class="clear"></div>
+              </div>
+           </div>
+        </div>
+        <div class="clear"></div>
+        <div id="tabs">
+            <div class="btntablist">
+                <button class="btntab" [navPush]="profilepage">Social</button>
+                <button class="btntab active">Events</button>
+                <button class="btntab" [navPush]="profilegrouppage">Groups</button>
+                <button class="btntab" [navPush]="profilestatpage">stats</button>
+            </div>
+            <div id="mainView">
+
+                <div class="event-tab" *ngFor="let item of eventlist; let i = index" >
+                    <div class="left-part">
+                        <h4 style="color:#f79213; font-family: 'reservation'; font-size: 10px;">{{item.sport_name}}</h4>
+                        <img alt="#" src="{{item.sport_image}}">
+                    </div>
+                    <div class="right-part" style="margin-bottom:5px;" >
+                        <h1>{{item.name}}</h1>
+                        <h3>{{item.address}}</h3>
+                        <div class="clear"></div>
+                        <div class="date-contain">
+                            <span>Date</span>
+                            <br />
+                            {{item.date}}
+                            <br />
+                            <span>Time</span>
+                            <br />
+                            {{item.time}}
+                        </div>
+                        <div class="event-menu">
+                            <a class="viewgrp" href="javascript:void(0)" [navPush]="eventdetailspage" [navParams]="{id:item.id}">View Event</a>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <span class="empty" *ngIf="!eventcount">No results found.</span>
+
+                <div class="viewMore" *ngIf="eventoffset < totalevent">
+                    <a href="javascript:void(0);" (click)="getMoreEvents()" class="">View More</a>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="stats-slider-bottom">
+            <ion-slides [options]="mySlideOptions2">
+                <ion-slide *ngFor="let item of banner1data; let i = index" class="Stats-slider-bottom-contain1">
+                    <a hre="javascript:void(0);"><img  (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+                </ion-slide>
+            </ion-slides>
+            <ion-slides [options]="mySlideOptions3">
+                <ion-slide *ngFor="let item of banner2data; let i = index" class="Stats-slider-bottom-contain2">
+                    <a hre="javascript:void(0);"><img (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+                </ion-slide>
+            </ion-slides>
+        </div>
+</div>
+
+    <div class="footer-menu1">
+        <span>©TORKQ</span>
+        <span>|</span>
+        <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy1('terms')">TERMS </a>
+        </span>
+        <span>|</span>
+        <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy1('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+
+
+
+
+
+</ion-content>
+

@@ -1,0 +1,24 @@
+<ion-header class="commentheader">
+
+  <ion-title class="tagpeopletitle">User List</ion-title>
+
+</ion-header>
+
+
+<ion-content padding class="tagpeoplelistwrapper" >
+
+    <ion-list>
+  <ion-item *ngFor="let item of userList; let i = index">
+      <ion-checkbox (ionChange)="handleChange($event,item.id)"></ion-checkbox>
+      <ion-avatar item-left class="userimage">
+          <img src="{{item.user_image}}">
+      </ion-avatar>
+
+      <ion-label>{{item.user_name}}</ion-label>
+  </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-footer class="tagPeopleFooter">
+  <button (click)="goback()">Submit</button>
+</ion-footer>

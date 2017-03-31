@@ -1,0 +1,20 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+
+<ion-content padding class="topic-move-list" >
+  <ion-title>Select Forum</ion-title>
+  <ion-list radio-group (ionChange)="changeRadio($event)">
+    <ion-item *ngFor="let item of forumlist; let i = index" class="radio-item">
+      <ion-label class="radio-label">{{item.name}}</ion-label>
+      <ion-radio value="{{item.id}}"></ion-radio>
+    </ion-item>
+  </ion-list>
+</ion-content>

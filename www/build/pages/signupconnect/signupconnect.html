@@ -1,0 +1,139 @@
+<ion-content padding>
+  <div class="connect-body ng-scope">
+
+    <div class="register_wrapper">
+
+      <div class="logo">
+        <a [navPush]="homepage">
+          <img alt="#" src="images/logo_main.png">
+        </a>
+      </div>
+
+      <div class="menupart3"></div>
+
+      <div class="activities_contain">
+        <h1><img alt="#" src="images/ctop.jpg" id="connectH"></h1>
+        <p style="font-size:12px;" data-original-title="">Click on the profile pictures to connect with other outdoor sports enthusiasts.</p>
+        <div class="top-text">
+          <h4 style="color:#f8931f; margin: 15px auto; font-family: reservation; font-size: 13px; font-weight: normal; font-style: normal; text-align: left;">
+            <span id="friend-count" style="color:#f8931f;" class="ng-binding">0</span>
+            Friendship requested
+          </h4>
+        </div>
+
+
+        <div class="connect-img">
+
+          <div *ngFor="let item of filtereduserlist; let i = index" (click)="selectUser(item.id)" ngClass="{{selusercls(item.id)}}">
+            <div class="connect_imgdiv">
+              <a href="javascript:void(0)">
+                <img alt="" src="{{item.user_image}}">
+              </a>
+            </div>
+            <div class="connect_textdiv">
+              <a href="javascript:void(0)">
+                <span>{{item.user_name}}</span><br>
+
+                {{item.user_address_lim}}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear"></div>
+
+        <!--<div class="skip" style="letter-spacing: 1px;">
+          <a href="javascript:void(0)" style="color: rgb(248, 147, 31) ! important;" ng-show="((userList | filter:search).length) &gt; limit" ng-click="loadmore()" class="">Load More</a>
+        </div>-->
+
+        <input (click)="showadvsearchfun()" value="Advanced Search" class="activities-submit" type="button">
+        <input class="activities-submit" (click)="next_c()" value="next step" type="button">
+
+        <div class="search-new connectslide" *ngIf="showadvsearch==1">
+
+          <div style="float: none; width:100%; margin-bottom:20px;">
+
+            <input placeholder="SEARCH BY NAME" style=" color: #717171 !important;  background: #fff!important; border: 2px solid #97989a  !important; border-radius: 4px !important; height: 42px !important; width: 100% !important; float:none; padding:0 0px; font-size:13px!important;" type="text"  (keyup)="searchbyname($event.target.value)">
+
+            <div class="clear"></div>
+
+          </div>
+
+          <div style="float: none; width:100%; margin-bottom:20px;">
+
+            <select id="select-search-country"  style=" color: #717171 !important;  background: #fff!important; border: 2px solid #97989a  !important; border-radius: 4px !important; height: 42px !important; width: 100% !important; float:none; padding:0 0px; font-size:13px!important;" (change)="changecountry($event.target.value)">
+              <option value="">SEARCH BY COUNTRY</option>
+              <option *ngFor="let item of countrylist; let i = index" value="{{item.id}}">{{item.name}}</option>
+            </select>
+            <div class="clear"></div>
+          </div>
+
+          <div style="float: none; width:100%; margin-bottom:20px;">
+            <select id="select-search-state select-search" style=" color: #717171 !important;  background: #fff!important; border: 2px solid #97989a  !important; border-radius: 4px !important; height: 42px !important; width: 100% !important; float:none; padding:0 0px; font-size:13px!important;" (change)="changestate($event.target.value)">
+
+              <option value="" selected="selected">SEARCH BY STATE / PROVINCE</option>
+              <option *ngFor="let item of statelist; let i = index" value="{{item.id}}">{{item.name}}</option></select>
+            <div class="clear"></div>
+          </div>
+
+          <div style="float: none; width:auto; margin-bottom:5px; background: #fff; border: 2px solid #97989a; border-radius: 4px !important; color: #717171 !important; float: none; font-size: 13px !important; height: 42px !important; padding: 0 5px; cursor: pointer; line-height: 42px; " (click)="showsportarea = 1">SELECT SPORTS</div>
+
+          <div style="float: none; width:100%; margin-bottom:20px; margin-top: 5px;" *ngIf="showsportarea">
+            <div class="sports-table" style="background: #fff none repeat scroll 0 0; border: 2px solid #97989a; border-radius: 4px !important; padding: 10px;">
+
+              <div *ngFor="let spitem of sportlist; let i = index">
+                <h3 style=" padding-bottom: 5px!important; color: #f8931f;">{{spitem.name}}</h3>
+                <div style=" padding-bottom: 20px;">
+                  <div *ngFor="let m of spitem.ch; let i = index" style="float: left; width: 30%;">
+                    <input class="sportscheck" name="sportscheck[]" type="checkbox">
+                    <strong style="font-size: 13px!important;">{{m.name}}</strong>
+                </div>
+                  <div class="clear"></div>
+                </div>
+
+                <div class="clear"></div>
+              </div>
+
+            </div>
+
+
+
+            <div class="clear"></div>
+
+          </div>
+
+
+
+          <div style="float: none; width:100%; margin-bottom:10px;">
+
+            <input class="activities-submit" value="RESET" (click)="showadvsearchfun()" type="button">
+
+          </div>
+
+
+
+          <div class="clear"></div>
+
+
+
+        </div>
+
+        <div class="skip connectskip">
+          <a href="javascript:void(0);" (click)="skip()">SKIP »</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-menu2">
+      <span>&copy;TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+  </div>
+</ion-content>

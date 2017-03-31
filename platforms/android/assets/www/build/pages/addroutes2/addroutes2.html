@@ -1,0 +1,100 @@
+<ion-header class="login-header ">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div style="position:relative;" class="experience-wrapper add-route-page2">
+
+    <div class="createevent-body">
+      <div class="header_msg"> GPS YOUR ROUTE </div>
+
+      <div style="width: 100%;  position: relative; height:300px;" class="mapwrapper">
+        <div id="map-canvas" class="map-canvas">
+
+
+        </div>
+
+      </div>
+
+      <div class="bott-div">
+
+        <div class="distance">
+          <h1>Distance:</h1>
+          <span id="dis">{{distance_text}}</span>
+          <h2>MILES</h2>
+
+        </div>
+        <div class="timer">
+          <h1>Timer:</h1>
+          <span id="sw_h">{{formattimer(hour)}}</span>:
+          <span id="sw_m">{{formattimer(min)}}</span>:
+          <span id="sw_s">{{formattimer(sec)}}</span>
+          <h2>HH:MM:SS</h2>
+        </div>
+
+        <div class="avg">
+          <h1>AVG PACE:</h1>
+          <span id="sw_h12">{{formattimer(avg_hour)}}:{{formattimer(avg_min)}}:{{formattimer(avg_sec)}}</span>
+
+          <h2>PER MILE</h2>
+        </div>
+
+      </div>
+
+      <div style="clear:both;"></div>
+      <div style="width:277px; padding-left:2%; margin:15px auto; " *ngIf="isMapLoad">
+        <div class="bott-arrow" ng-show="isSinglePoint == 0">
+          <input type="button" value="Start" id="sw_start" (click)="start()" *ngIf="!isStart" style="width:60px; height:60px;" />
+          <input style="display:none;" type="button" value="Pause" id="sw_pause" (click)="pause()" *ngIf="isStart"  style="width:60px; height:60px;"/>
+          <input style="display:none;" type="button" value="Stop"  id="sw_stop" (click)="pause()" *ngIf="isStart"  style="width:60px; height:60px;"/>
+        </div>
+
+        <input type="button" value="+ Route" (click)="addRoutes()" class="routebtn">
+
+
+        <div style="clear:both;"></div>
+      </div>
+
+
+
+
+
+    </div>
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+  </div>
+
+</ion-content>

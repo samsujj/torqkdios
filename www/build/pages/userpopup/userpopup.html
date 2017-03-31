@@ -1,0 +1,30 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+
+<ion-content padding class="userpopup">
+  <div class="frndPopup">
+    <ul>
+      <li style="width:98px; float: left;  display:block;">
+        <img alt="#" style="max-height:110px; max-width:98px;" src="{{item.user_image}}">
+      </li>
+      <li style="margin-left:5px; margin-top:0; width:162px; float: right; display:block;">
+        <span style="display: block; outline: 0 none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; margin-bottom: 7px;" class="uname22455342" tabindex="-1">{{item.user_name}}</span>
+        <div class="clear"></div>
+        <img width="25" *ngFor="let spitem of item.sports | slice:0:5; let i = index" alt="#" src="{{spitem.imag_name}}">
+        <a href="javascript:void(0);" class="sdfsd" *ngIf="item.frnd_type == 4"  (click)="goprofile(item)"> View Profile</a>
+        <a href="javascript:void(0);" class="sdfsd" *ngIf="item.frnd_type == 1" (click)="cancelreq()"> Cancel Requst</a>
+        <a href="javascript:void(0);" class="sdfsd" *ngIf="item.frnd_type == 2" (click)="acceptreq()"> Accept</a>
+        <a href="javascript:void(0);" class="sdfsd" *ngIf="item.frnd_type == 0" (click)="frndconnect()"> Connect+</a>
+        <div class="clear"></div>
+      </li>
+    </ul>
+  </div>
+</ion-content>

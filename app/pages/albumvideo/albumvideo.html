@@ -1,0 +1,98 @@
+<ion-header class="login-header">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="commonheader" *ngIf="isInternet == 0 && isOfflineData == 1">ROUTE WILL BE SYNCED ONCE YOU HAVE SERVICE</div>
+  <div style="position:relative;" class="experience-wrapper photo-page">
+
+
+
+    <div class="photosheading">
+      Photos & Videos
+      <div class="Photoadd" *ngIf="loggedinuser > 0">
+        <input class="browsebtn" value="+" type="button" (click)="addVideo()" style="padding:0; height:100%">
+      </div>
+    </div>
+    <div class="status-input" ngClass="{{addhideclass(isStatusInput)}}" >
+      <textarea (keyup)="changestatustext($event.target.value)" placeholder="STATUS UPDATE" style="box-shadow:none; display:block; width:99%; margin-top:8px; font-size:18px; border:solid 1px #ccc; resize:none; padding:1%;" ></textarea>
+        <video width="100%" controls *ngIf="videopath">
+          <source [src]="videopath" type="video/mp4">
+        </video>
+
+      <div>
+        <div>
+          <select id="share_with" (change)="changesharewith($event.target.value)">
+            <option value="1">Community</option>
+            <option value="2">Friends</option>
+            <option value="3">Friends Of Friends</option>
+            <option value="4">Private Me Only</option>
+          </select>
+
+          <input type="button" value="cancel" class="postbtn1" (click)="postcancel()" >
+
+          <input type="button" value="POST" (click)="postStatus()"  class="postbtn2">
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="clear: both;"></div>
+    <div class="link-option"><a href="javascript:void(0);" [navPush]="profilepage"> Back to Profile</a></div>
+    <div class="albumPhotos">
+      <img src="{{userImage}}">
+    </div>
+
+    <div class="album-tab">
+      <div id="tabs">
+        <ul>
+          <li [navPush]="albumpage">photo</li>
+          <li class="active">video</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="photoalbumwrapper">
+      <div class="photolist" *ngFor="let item of videolist; let i = index" [style.background-image]="getsanitizerstyle(item.img_src)" (click)="showPhotoDetails(item)"><img style="width: 20%; left: 40%; position: absolute; top: 40%; cursor:pointer;" src="images/youplay.png"></div>
+    </div>
+
+
+    <div class="clear"></div>
+
+    <div class="viewMore" *ngIf="isInternet == 1 && showviewmore == 1">
+      <a href="javascript:void(0);" (click)="getvideos()" class="">View More</a>
+    </div>
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+  </div>
+</ion-content>

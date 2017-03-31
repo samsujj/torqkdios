@@ -1,0 +1,28 @@
+<!--<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+
+
+<ion-content class="contentwrapper" padding>
+  <div class="video-container" style="padding-top: 0;">
+    <video width="100%" autoplay="true" poster="{{poster}}" loop="" controls="">
+      <source src="{{videourl}}" type="video/mp4">
+    </video>
+  </div>
+</ion-content>
+-->
+
+
+<ion-content class="full-video-page" padding fullscreen>
+  <a href="javascript:void(0)" class="close-video" (click)="goback()"><img src="images/close.png" /></a>
+  <video controls="controls" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline" class="videoPlayer">
+    <source src="{{videourl}}" type="video/mp4" />
+  </video>
+</ion-content>

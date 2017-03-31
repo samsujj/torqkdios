@@ -1,0 +1,41 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+
+<ion-content padding class="commentwrapper sports-user-list" >
+
+  <div class="people-div2">
+    <h4 style="font-weight:normal;">Community:</h4>
+    <ul style="padding:10px 0 20px 0; margin:0; overflow:hidden; height:auto; border:none;">
+      <li class="u_list ng-scope" *ngFor="let item of userlist; let i = index">
+        <ul>
+          <li style="width:98px; float: left;  display:block;" class="mobpimg">
+            <img src="{{item.user_image}}" style="max-height:100%; max-width:98%;" alt="#" class="mobpimg">
+          </li>
+          <li class="holist2">
+            <h2><a href="javascript:void(0)" [navPush]="friendsprofilepage" [navParams]="{userid:item.user_id}">{{item.user_name}}</a></h2>
+            <div class="clear"></div>
+            <img *ngFor="let m of item.sport" src="{{m.sp_image}}" alt="#" width="25">
+            <div class="plno" *ngIf="item.sport_no > 0">+{{item.sport_no}}</div>
+            <div class="clear" *ngIf="item.sport_no > 0"></div>
+            <a href="javascript:void(0)" class="view-btn1" style="color:#f79213;" [navPush]="friendsprofilepage" [navParams]="{userid:item.user_id}"> View Profile</a>
+          <div class="clear"></div>
+        </li>
+        <div class="clear"></div>
+      </ul>
+    </li>
+    </ul>
+  </div>
+
+
+</ion-content>
+
+
+

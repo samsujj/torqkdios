@@ -1,0 +1,128 @@
+<ion-header class="login-header ">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"> <img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="experience-wrapper view-route-page">
+
+
+    <div class="routes-body-contain">
+      <div style="width:100%; padding:2%; background:#ebebeb;">
+        <div style="width:100%;">
+          <h4 class="routestext">Routes</h4>
+          <div class="mb-btn"><a href="javascript:void(0)" [navPush]="addroutespage">+</a></div>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div style="width: 100%; ">
+          <div class="ptext">
+            <p style="color:#4f4f51;font-size: 13px;margin: 0px; line-height:22px;font-family: 'helvetica', 'arial';font-weight:normal;text-transform:none;letter-spacing:normal;">Below are listed the routes  recorded through either the online system or the Torkq mobile app. Click on the map for a larger view of the route recorded.</p>
+          </div>
+          <div class="albumPhotos">
+            <img src="{{userImage}}">
+          </div>
+        </div>
+        <div class="clear"></div>
+
+
+        <div class="routes-wrapper">
+          <div class="routes-row" style="margin: 10px 0; position:relative;" *ngFor="let item of routesdata; let i = index">
+
+            <div class="rowone">
+              <div class="sport-area">
+                {{item.sport_name}} <br>
+                <img src="{{item.sport_image}}" style="max-width: 46px;" alt="">
+              </div>
+              <h2>{{item.route_name}}</h2>
+            </div>
+            <div class="rowtwo">
+              <ion-grid>
+                <ion-row>
+                  <ion-col width-33>
+                    <span>DATE</span><br>
+                    {{item.date}}
+                  </ion-col>
+                  <ion-col width-33>
+                    <span>TIME</span><br>
+                    {{item.duration}}
+                  </ion-col>
+                  <ion-col width-33>
+                    <span>DISTANCE</span><br>
+                    {{item.distance}} miles
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+            </div>
+
+
+            <div class="clear"></div>
+            <!--<div id="viewroutemap{{item.id}}"  class="rowthree" style="width: 100%; height: 330px;">
+            </div>-->
+
+            <div>
+              <img src="http://torqkd.com/user/ajs1/createimage?image={{item.image_path}}" (click)="showRouteDetails(item)">
+            </div>
+
+            <div class="sdiv" style="display:block; margin-right: 11px; text-align: right; padding-top:10px;">
+              <a href="javascript:void(0);" (click)="fbShare(item)"><img src="images/newsicon1.png" alt="#" width="25"></a>
+              <a href="javascript:void(0);" (click)="twShare(item)"><img src="images/newsicon2.png" alt="#" width="25"></a>
+              <a href="javascript:void(0);" (click)="prShare(item)"><img src="images/newsicon3.png" alt="#" width="25"></a>
+              <a href="javascript:void(0)" (click)="delRoute(item)"><img src="images/deletebutton1.png" alt="#" width="25"></a>
+              <!--<a style="color: #616564; font-family: 'veneerregular'; font-size: 22px; padding:0px 0; text-decoration: none; " href="javascript:void(0)" (click)="delRoute(item)">✖</a>-->
+            </div>
+
+
+          </div>
+
+
+          <div class="empty" *ngIf="noofroutes==0">No results found.</div>
+          <div class="viewMore" *ngIf="totatcount > routesoffset && noofroutes"><a href="javascript:void(0);" (click)="getRoutes()">View More</a></div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+
+    <div id="mapconmain" style=" width:170px; height:204px;"></div>
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+  </div>
+
+</ion-content>

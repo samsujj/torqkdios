@@ -1,0 +1,99 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+
+<ion-content padding class="photo-det-content">
+  <div style="position:relative;" class="experience-wrapper photo-detail-page">
+    <div class="img-part">
+      <div class="video-container" style="padding-top: 0;position: relative;" *ngIf="itemdet.type == 'mp4'">
+        <!--<video width="100%" autoplay="true" poster="{{poster}}" loop="" controls="">
+          <source src="{{videourl}}" type="video/mp4">
+        </video>-->
+        <img src="{{itemdet.img_src}}" width="100%" (click)="playStatusVdo(itemdet.value,itemdet.s_img)">
+        <img (click)="playStatusVdo(itemdet.value,itemdet.s_img)" src="images/youplay.png" width="20%" class="paly_video" style="cursor:pointer; width: 20%; z-index: 100; top: 40%; position: absolute; left: 40%;">
+      </div>
+      <div class="video-container" style="padding-top: 0;position: relative;" *ngIf="itemdet.type != 'mp4'">
+        <!--<iframe width="100%" height="{{pheight}}"  [src]="ytvdourl" frameborder="0" allowfullscreen></iframe>-->
+        <img src="{{itemdet.img_src}}" width="100%" (click)="launchVideo1(itemdet.value)">
+        <img (click)="launchVideo1(itemdet.value)" src="images/youplay.png" width="20%" class="paly_video" style="cursor:pointer; width: 20%; z-index: 100; top: 40%; position: absolute; left: 40%;">
+      </div>
+    </div>
+  </div>
+  <div class="photo-det-footer">
+    <div class="comment_top">
+      <div class="left-part">
+        <div class="profile-img">
+          <img style=" max-width:50px; max-height:50px;" alt="" src="{{itemdet.user_image}}" />
+        </div>
+        <div class="name-text">{{itemdet.user_name}}</div>
+      </div>
+      <div class="right-part">
+        <div class="text-contain">{{itemdet.timeSpan}}</div>
+        <div class="cmnt_share">
+          <a href="javascript:void(0);">Comment{{(itemdet.commentNo >1)?'s':''}}  [{{itemdet.commentNo}}]</a> -
+          <a href="javascript:void(0);" (click)="updatelike(itemdet.id,itemdet.ttype)">{{(itemdet.likeStatus)?'Unlike':'Like'}} [{{itemdet.likeNo}}] </a>
+          <b style="font-weight:bold;display:inline-block; ">•</b>
+          <a style="display: inline-block; position: relative;" href="javascript:void(0);" (click)="showSocilaShareList(itemdet)">Share</a>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+
+  <div class="commend-box-pro-inner" *ngFor="let item55 of itemdet.commentList; let i = index" [style]="getsanitizerstyle(i)">
+    <div class="commend-box">
+      <div class="com-img">
+        <img src="{{item55.user_image}}" alt="">
+      </div>
+      <div class="combodyu">
+        <div class="date-link">
+          <a href="javascript:void(0);">{{item55.time}}</a>
+          <img class="closeCBtn" src="images/deletebutton1.png" width="11" height="11" *ngIf="item55.user_id == itemdet.cUserId" (click)="delcomment(item55)">
+        </div>
+        <div class="nprofilename2">
+          <strong>
+            <a href="javascript:void(0);" class="name_a" style="font-weight:bold;">{{item55.user_name}}</a>
+          </strong>
+        </div>
+        <div class="clearfix"></div>
+        <div class="combodyuinnertext" [innerHTML]="getsanitizedcontent(item55.body)">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+
+</ion-content>
+<ion-footer *ngIf="itemdet.cUserId">
+
+  <div class="commentfooter">
+    <div class="commendboxpro">
+      <div class="profile-img2" style="width: 38px; margin: 0 5px 0 0;">
+        <img src="{{itemdet.cUserImage}}">
+      </div>
+      <div class="popup-text-box1">
+        <div class="commentemo">
+          <div class="commentemoinnertextarea" id="commentemoinnertextarea" contenteditable="true"></div>
+          <a href="javascript:void(0)" (click)="showemojidiv()">
+            <img src="images/emo.png" width="22" height="22" class="emocss" style="background:none; width:22px;">
+          </a>
+          <a class="mob-post2" href="javascript:void(0);" style="margin-top:16px; margin-right:0px;" (click)="addComment()">POST</a>
+        </div>
+      </div>
+    </div>
+    <div style="display: none; background-color: #ffffff; padding: 5px; max-height: 300px; overflow: auto;" id="emojisdiv">
+      <div class="emojisdiv">
+        <a *ngFor="let emoitem of emojisArr; let j = index" href="javascript:void(0)" class="emoticon emoticon-{{emoitem}}" (click)="emoinsert(emoitem)" title="::{{emoitem}}::" ></a>
+      </div>
+    </div>
+  </div>
+
+</ion-footer>

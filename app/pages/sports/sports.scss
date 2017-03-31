@@ -1,0 +1,85 @@
+@mixin size2($width) {
+  $max-heiht : ((((($width*98)/100)-10)*297)/480);
+  height: $max-heiht;
+}
+
+
+
+//.sports-details-page .ch-slider .slides { @include size2(320px); }
+.sports-details-page .ch-slider { @include size2(320px); }
+
+
+@media screen and (max-width:1024px) {
+  .sports-details-page .ch-slider  { @include size2(1024px); }
+}
+
+@media screen and (max-width:800px) {
+  .sports-details-page .ch-slider  { @include size2(800px); }
+}
+
+@media screen and (max-width:768px) {
+  .sports-details-page .ch-slider  { @include size2(768px); }
+}
+
+@media screen and (max-width:720px) {
+  .sports-details-page .ch-slider  { @include size2(720px); }
+}
+
+@media screen and (max-width:604px) {
+  .sports-details-page .ch-slider  { @include size2(604px); }
+}
+
+@media screen and (max-width:600px) {
+  .sports-details-page .ch-slider  { @include size2(600px); }
+}
+
+@media screen and (max-width:504px) {
+  .sports-details-page .ch-slider  { @include size2(504px); }
+}
+
+@media screen and (max-width:480px) {
+  .sports-details-page .ch-slider  { @include size2(480px); }
+}
+
+@media screen and (max-width:432px) {
+  .sports-details-page .ch-slider .slides { @include size2(432px); }
+}
+
+@media screen and (max-width:414px) {
+  .sports-details-page .ch-slider  { @include size2(414px); }
+}
+
+@media screen and (max-width:412px) {
+  .sports-details-page .ch-slider  { @include size2(412px); }
+}
+
+@media screen and (max-width:400px) {
+  .sports-details-page .ch-slider  { @include size2(400px); }
+}
+
+@media screen and (max-width:390px) {
+  .sports-details-page .ch-slider  { @include size2(390px); }
+}
+
+@media screen and (max-width:384px) {
+  .sports-details-page .ch-slider  { @include size2(384px); }
+}
+
+@media screen and (max-width:375px) {
+  .sports-details-page .ch-slider  { @include size2(375px); }
+}
+
+@media screen and (max-width:360px) {
+  .sports-details-page .ch-slider  { @include size2(360px); }
+}
+
+@media screen and (max-width:346px) {
+  .sports-details-page .ch-slider  { @include size2(346px); }
+}
+
+@media screen and (max-width:320px) {
+  .sports-details-page .ch-slider  { @include size2(320px); }
+}
+
+
+

@@ -1,0 +1,28 @@
+{
+  "name": "cordova-plugin-native-videoplayer",
+  "version": "0.0.2",
+  "description": "Play video with native support for android.",
+  "cordova": {
+    "id": "cordova-plugin-native-videoplayer",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.2.0"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Dawson Loudon"
+    }
+  ],
+  "license": "MIT"
+}

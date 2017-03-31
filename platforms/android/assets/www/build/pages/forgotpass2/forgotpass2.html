@@ -1,0 +1,56 @@
+<ion-content padding>
+
+  <div class="login-body forgot-pass-page">
+    <div class="login-top">
+      <div class="login-wrapper">
+        <div class="logo">
+          <a href="javascript:void(0)" [navPush]="homepage">
+            <img src="images/logo_main.png" alt="#">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="login-box">
+      <h3 style="margin-top:0px;   color: rgb(247, 147, 29); font-family: veneerregular; font-size: 30px; font-weight: normal; margin-bottom: 20px; margin-left: 20px !important; text-align: left;">RESET PASSWORD</h3>
+      <p style=" margin: 0 auto; padding: 0 0 20px; width: 84%; font-family:Arial, Helvetica, sans-serif;  font-size:14px;">Check your email then enter your code to reset your password.</p>
+
+
+      <form novalidate [formGroup]="forgotPassForm" (ngSubmit)="formsubmit(forgotPassForm.value)" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-sm-10" style="width:100%; padding:0;">
+            <input [formControl]="forgotPassForm.controls['email']" type="text" placeholder="ENTER THE CODE" class="form-control UserLogIn_email">
+            <div *ngIf ="forgotPassForm.controls['email'].touched">
+              <div *ngIf ="!forgotPassForm.controls['email'].valid" class = "alert alert-danger">
+                <label class="control-label has-error validationMessage">Active code cannot be blank.</label>
+              </div>
+              <div *ngIf ="emailexist" class = "alert alert-danger">
+                <label class="control-label has-error validationMessage">Your code is invalid.</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="loginbtn" type="submit" style="width:100px; margin:10px 0 0 24px;">Submit</button>
+      </form>
+    </div>
+
+
+
+    <div class="footer-menu2">
+      <span>&copy;TORKQ</span>
+      <span>|</span>
+      <span>
+        <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+      </span>
+      <span>|</span>
+      <span>
+        <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+      </span>
+    </div>
+
+
+
+
+
+  </div>
+</ion-content>

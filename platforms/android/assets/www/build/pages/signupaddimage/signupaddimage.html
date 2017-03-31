@@ -1,0 +1,84 @@
+<ion-content padding>
+  <div class="addimage-body">
+    <div class="register_wrapper">
+      <div class="logo"> <a [navPush]="homepage"> <img alt="#" src="images/logo_main.png"> </a> </div>
+      <div class="menupart5"></div>
+      <div class="activities_contain">
+        <h2><img alt="#" src="images/your-profile.jpg" id="addImageH"></h2>
+
+        <p style="font-size: 12px;" data-original-title="">Select photos for your profile and profile background.</p>
+
+        <h4>Add Profile Photo</h4>
+
+        <div class="imglist-div1" *ngIf="filepath">
+          <div class="imglist" style="line-height: 0;">
+
+            <img src="{{filepath}}" alt="">
+
+          </div>
+          <div class="img-btn-div" style="clear:both; overflow:hidden; position:inherit; bottom:0;">
+            <input value="+" class="upload-btn1" (click)="addPhoto(1)" type="button">
+            <img src="images/help.png" alt="#" class="help-icon" style="margin-top:-3px;">
+            <div class="clear"></div>
+          </div>
+
+          <input *ngIf="isupload == 1" class="skipfinished" style="margin-top: 20px;" value="Crop" type="button" (click)="cropnow()">
+          <input *ngIf="isupload == 1" class="skipfinished" style="margin-top: 20px;" value="Delete" type="button" (click)="imagedel(1)">
+
+        </div>
+        <div class="clear"></div>
+
+        <h4>Add Background Photo</h4>
+
+
+        <div class="imglist-div2" *ngIf="filepath1">
+          <div class="imglist2" style="line-height: 0;">
+
+            <img name="" src="{{filepath1}}" alt="">
+
+          </div>
+
+          <div class="img-btn-div" style="clear:both; overflow:hidden; position:inherit; bottom:0;">
+            <input value="+" class="upload-btn2" (click)="addPhoto(2)" type="button">
+            <img src="images/help.png" alt="#" class="help-icon" style="margin-top:-3px;">
+            <div class="clear"></div>
+          </div>
+
+          <div class="progress ng-hide" ng-show="files1[0].progress &gt;= 0">
+            <div style="width:%; background:#F69830;" ng-bind="files1[0].progresstext" class="ng-binding"></div>
+          </div>
+          <div class="clear"></div>
+          <input *ngIf="isupload1 == 1" class="skipfinished" style="margin-top: 20px;" value="Crop" type="button" (click)="cropnow1()">
+          <input *ngIf="isupload1 == 1" class="skipfinished" style="margin-top: 20px;" value="Delete" type="button" (click)="imagedel(2)">
+        </div>
+
+
+
+        <div class="skipfinished" style="margin-top: 20px;">
+          <a href="javascript:void(0);" (click)="signUpfinish()">FINISH AND GET STARTED</a>
+        </div>
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+
+    <div class="footer-menu2">
+      <span>&copy;TORKQ</span>
+      <span>|</span>
+      <span>
+        <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+      </span>
+      <span>|</span>
+      <span>
+        <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+      </span>
+    </div>
+
+  </div>
+</ion-content>

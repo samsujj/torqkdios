@@ -1,0 +1,36 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+
+<ion-content padding class="commentwrapper block-page block-list-page" >
+  <div class="block-page-wrapper">
+    <div class="settingswrapper">
+      <h4>User List</h4>
+
+      <ion-list>
+        <ion-item *ngFor="let item of items; let i = index">
+          <ion-avatar item-left>
+            <img src="{{item.image}}">
+          </ion-avatar>
+          <h2>{{item.name}}</h2>
+          <input type="button" value="BLOCK" (click)="blockpeople(item)">
+        </ion-item>
+      </ion-list>
+
+    </div>
+
+
+    <div class="clear"></div>
+  </div>
+
+</ion-content>
+
+
+

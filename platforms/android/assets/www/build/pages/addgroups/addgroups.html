@@ -1,0 +1,157 @@
+<ion-header class="login-header ">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+  <div style="position:relative;" class="experience-wrapper add-group-page">
+
+    <div class="createevent-body">
+      <form novalidate [formGroup]="addGroupForm" (ngSubmit)="formsubmit(addGroupForm.value)">
+
+        <div class="left-part">
+          <h2>Create a Group</h2>
+          <p style="padding-bottom:20px;">Create a group and invite your friends to join by filling out the form below. </p>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0; margin-bottom: 20px !important;">
+              <span style="float: right; display:block; width: 10px; color:#fb992c; margin-top:15px;">*</span>
+              <input [formControl]="addGroupForm.controls['name']" type="text" placeholder="GROUP NAME">
+              <div *ngIf ="addGroupForm.controls['name'].touched">
+                <div *ngIf ="!addGroupForm.controls['name'].valid" class = "alert alert-danger">
+                  <strong>Name is required</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0; margin-bottom: 20px !important;">
+              <span style="float: right; display:block; width: 10px; color:#fb992c; margin-top:15px;">*</span>
+              <textarea [formControl]="addGroupForm.controls['description']" placeholder="DESCRIPTION"></textarea>
+              <div *ngIf ="addGroupForm.controls['description'].touched">
+                <div *ngIf ="!addGroupForm.controls['description'].valid" class = "alert alert-danger">
+                  <strong>Description  is required</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="display: inline-block;">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <label style="display: block; float: left; padding: 2px 0 0; width: 100px;" class="rediolabel">
+                <input type="radio" value="1" [formControl]="addGroupForm.controls['type']" style="width:20px; float:left; margin-top:3px;">
+                <span style="display:block; width:60px; float:left;">Public</span>
+                <div style="clear:both;"></div>
+              </label>
+              <label style="display: block; float: left; padding: 2px 0 0; width: 100px;" class="rediolabel">
+                <input type="radio" value="2" [formControl]="addGroupForm.controls['type']" style="width:20px; float:left; margin-top:3px;">
+                <span style="display:block; width:60px; float:left;">Private</span>
+                <div style="clear:both;"></div>
+              </label>
+              <div *ngIf ="addGroupForm.controls['type'].touched">
+                <div *ngIf ="!addGroupForm.controls['type'].valid" class = "alert alert-danger">
+                  <strong>Type  is required</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <h3>Group Photo </h3>
+          <div class="uploadbox" style="position:relative;">
+            <div id="blah" style="width: 170px; height:170px;">
+              <img *ngIf="filepath"  [src]="filepath" />
+            </div>
+            <input ng-show="isMobileApp" value="+" class="upload-btn" (click)="addPhoto()" type="button">
+          </div>
+
+          <h3>INVITE GROUP MEMBERS </h3>
+
+          <div class="select-box-menu">
+            <div (click)="selectall()">Select All</div>
+            <div (click)="selectnone()">Select None</div>
+
+          </div>
+
+
+          <div class="select-box-contain" style="padding-bottom:20px;">
+            <ion-list>
+              <ion-item *ngFor="let item of userlist; let i = index">
+                <ion-checkbox (ionChange)="handleChange($event,item.id)" checked="{{item.checkval}}"></ion-checkbox>
+                <ion-avatar item-left class="userimage">
+                  <img src="{{item.user_image}}">
+                </ion-avatar>
+
+                <ion-label>{{item.user_name}}</ion-label>
+              </ion-item>
+            </ion-list>
+
+
+            <div class="clear"></div>
+
+          </div>
+          <div class="clear"></div>
+
+        </div>
+
+        <div class="right-part">
+          <h1> Sport</h1>
+          <div class="sports-table">
+            <div *ngFor="let n of sportlist; let i = index">
+              <h3> {{n.name}}</h3>
+              <ul>
+                <li *ngFor="let m of n.ch; let i = index">
+                  <a href="javascript:void(0);" style="margin-bottom: 0px;" (click)="selsports(m.id)" ngClass="{{zxczx(m.id)}}"><img  alt="#" src="http://torqkd.com/uploads/sports_image/thumb/{{m.image}}" ></a>
+                  <strong> {{m.name}}</strong>
+                </li>
+              </ul>
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+        <button type="submit" class="groupSubBtn">Submit</button>
+
+      </form>
+
+
+    </div>
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+  </div>
+
+
+</ion-content>

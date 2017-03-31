@@ -1,0 +1,69 @@
+<ion-header class="login-header">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="commonheader" *ngIf="isInternet == 0 && isOfflineData == 1">ROUTE WILL BE SYNCED ONCE YOU HAVE SERVICE</div>
+
+  <div class="experience-wrapper daily-poll-page">
+    <div class="popupbox2 popupbox2_mobile" *ngIf="totalitem > 0">
+      <div style="background-size: cover;" class="album-body" [style.background-image]="getsanitizerstyle(currentitem.background_img)">
+        <div class="album-wrpper">
+          <h2 class="ng-binding">{{currentitem.poll_ques}}</h2>
+
+          <ion-list radio-group (ionChange)="changeRadio($event)">
+            <ion-item *ngFor="let item of currentitem.ans_arr; let i = index" class="radio-item">
+              <ion-label class="radio-label">{{item.poll_answer}}</ion-label>
+              <ion-radio value="{{item.ans_id}}" [checked] = "item.ans_id == currentitem.sel_ans"></ion-radio>
+            </ion-item>
+          </ion-list>
+
+
+          <div class="vote-btn">
+            <a style="display: block;" id="votenext" href="javascript:void(0);" *ngIf="loggedinuser == 0" (click)="nextpoll()">NEXT</a>
+            <a style="display: block;" id="vote" href="javascript:void(0);"  *ngIf="loggedinuser > 0" (click)="votepoll()">VOTE</a>
+          </div>
+          <a style="line-height: 40px; text-align: center; font-size:12px; color:#111; display:block; width: 100px; margin:0px auto; " href="javascript:void(0)" (click)="viewResult()">View Results</a>
+        </div>
+      </div>
+    </div>
+
+    <span class="empty" *ngIf="totalitem == 0">No results found.</span>
+
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+
+  </div>
+
+</ion-content>

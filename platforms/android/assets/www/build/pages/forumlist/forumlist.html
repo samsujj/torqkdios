@@ -1,0 +1,107 @@
+<ion-header class="login-header ">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"> <img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="experience-wrapper forum-page">
+    <div class="forumpress-table">
+      <h2><a style="font-size:30px;" href="javascript:void(0);">Discussion Forums</a></h2>
+      <div class="clear"></div>
+      <div style="margin-top: 15px;" class="top-heading" *ngIf="loggedinuser">Welcome {{userdetails.fname}} {{userdetails.lname}}</div>
+      <div style="margin-top: 15px;" class="top-heading" *ngIf="!loggedinuser">Guest</div>
+
+      <div class="rowone" *ngIf="loggedinuser">
+
+        <div class="left-img1">
+          <img width="100px" alt="#" src="{{userdetails.user_image}}" style="width: 60px; height: 60px;">
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+      <h2>
+        <span style="font-size:20px; letter-spacing:0px; padding:12px 0 0 0;">
+          <a href="javascript:void(0)" style="font-size: 30px;" [navPush]="forumpage">Forum</a>
+          <label>»</label>
+        </span>
+        <span style="font-size:20px; letter-spacing:0px; padding:12px 0 0 0;">
+          <a href="javascript:void(0)" style="font-size: 30px;">{{sportname}}</a>
+        </span>
+      </h2>
+
+      <div class="clear"></div>
+      <div *ngFor="let item of forumlist; let i = index" style="display: table">
+        <div class="top-row">
+          <div class="div1 forum-list-div1" style="border:none; padding:0 2%; height:auto;">
+            <a style="color: #f7941e;" href="javascript:void(0);">{{item.sport_name}}</a>
+          </div>
+          <div class="div3 forum-list-div3" style="border:none;  padding:0 2%; height:auto;">POST</div>
+          <div class="div4 forum-list-div4" style="border:none;  padding:0 2%; height:auto;">LATEST POST</div>
+          <div class="clear"></div>
+        </div>
+
+        <div class="table-row2" *ngFor="let item2 of item.forumL; let j = index">
+          <div class="div1 forum-list-div1">
+            <div>
+              <div style="padding-bottom: 8px; font-weight: bold;">
+                <a style=" color:#000;" href="javascript:void(0)" [navPush]="forumdetailspage" [navParams]="{id:item2.id}">{{item2.name}}</a>
+              </div>
+              <div innerHTML="{{item2.description}}"></div>
+            </div>
+          </div>
+          <div class="div3 forum-list-div3">
+            <div style="display:block; line-height: 100px;">{{item2.no_post}}</div>
+          </div>
+          <div class="div4 forum-list-div4" style="border-right:none;">
+            <div style="color: #f7941e  !important; font-size: 15px!important;" *ngIf="!item2.lpost">No topics yet</div>
+            <div *ngIf="item2.lpost">
+              <a href="javascript:void(0)" style="font-size:15px;" [navPush]="topicdetailspage" [navParams]="{id:item2.lpostArr.id}">{{item2.lpostArr.title}}</a>
+              <div style="color: #f7941e  !important; padding-top: 8px;">
+                <strong style="color: #333 !important">{{item2.lpostArr.time}} - </strong>
+                {{item2.lpostArr.user_name}}
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+  </div>
+
+</ion-content>

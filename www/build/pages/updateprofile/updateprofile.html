@@ -1,0 +1,262 @@
+<ion-header class="login-header">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <img src="images/gear2.png">
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="commonheader" *ngIf="isInternet == 0 && isOfflineData == 1">ROUTE WILL BE SYNCED ONCE YOU HAVE SERVICE</div>
+
+  <div class="experience-wrapper update-profile-page">
+    <div class="createevent-body">
+
+      <form novalidate [formGroup]="signUpForm" (ngSubmit)="formsubmit(signUpForm.value)">
+        <div class="left-part">
+          <h2>UPDATE YOUR PROFILE</h2>
+          <input ng-model="form.id" value="0" class="ng-pristine ng-untouched ng-valid" type="hidden">
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <label>FIRST NAME</label>
+              <input [formControl]="signUpForm.controls['fname']" type="text" placeholder="FIRST NAME" class="form-control register_input">
+              <div *ngIf ="signUpForm.controls['fname'].touched">
+                <div *ngIf ="!signUpForm.controls['fname'].valid">
+                  <label class="control-label has-error validationMessage">First Name cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <label>LAST NAME</label>
+              <input [formControl]="signUpForm.controls['lname']" type="text" placeholder="LAST NAME" class="form-control register_input">
+              <div *ngIf ="signUpForm.controls['lname'].touched">
+                <div *ngIf ="!signUpForm.controls['lname'].valid">
+                  <label class="control-label has-error validationMessage">Last Name cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <label>EMAIL</label>
+              <input [formControl]="signUpForm.controls['email']" type="email" placeholder="YOUR EMAIL" class="form-control register_input">
+              <div *ngIf ="signUpForm.controls['email'].touched">
+                <div *ngIf ="!signUpForm.controls['email'].valid">
+                  <label class="control-label has-error validationMessage">Email cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<!--          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <label>PASSWORD</label>
+              <input [formControl]="signUpForm.controls['password']" type="password" placeholder="PASSWORD" class="form-control register_input">
+              <div *ngIf ="signUpForm.controls['password'].touched">
+                <div *ngIf ="!signUpForm.controls['password'].valid">
+                  <label class="control-label has-error validationMessage">Password cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <label>CONFIRM PASSWORD</label>
+              <input [formControl]="signUpForm.controls['password2']" type="password" placeholder="PASSWORD" class="form-control register_input">
+              <div *ngIf ="signUpForm.hasError('mismatchedPasswords')" class = "alert alert-danger">
+                <label class="control-label has-error validationMessage">Passwords do not match!</label>
+              </div>
+            </div>
+          </div>-->
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <label>LOCATION</label>
+              <input [formControl]="signUpForm.controls['location']" type="text" placeholder="LOCATION" class="form-control register_input">
+              <div *ngIf ="signUpForm.controls['location'].touched">
+                <div *ngIf ="!signUpForm.controls['location'].valid">
+                  <label class="control-label has-error validationMessage">Location cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <label>CITY</label>
+              <input [formControl]="signUpForm.controls['city']" type="text" placeholder="CITY" class="form-control register_input">
+              <div *ngIf ="signUpForm.controls['city'].touched">
+                <div *ngIf ="!signUpForm.controls['city'].valid">
+                  <label class="control-label has-error validationMessage">City cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <label>COUNTRY</label>
+              <select class="register_select form-control" [formControl]="signUpForm.controls['country']" (change)="changecountry($event.target.value)">
+                <option value="" class="">SELECT YOUR COUNTRY</option>
+                <option *ngFor="let item of countrylist; let i = index" value="{{item.id}}">{{item.name}}</option>
+              </select>
+              <div *ngIf ="signUpForm.controls['country'].touched">
+                <div *ngIf ="!signUpForm.controls['country'].valid">
+                  <label class="control-label has-error validationMessage">Country cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10 ng-hide" *ngIf="stateLoad" style="text-align: center;">
+              <img src="images/loading_list.gif">
+            </div>
+            <div class="col-sm-10" *ngIf="!stateLoad" style="width:100%; padding:0;">
+              <label>STATE</label>
+              <select class="register_select form-control" [formControl]="signUpForm.controls['state']">
+                <option value="" class="">SELECT YOUR STATE</option>
+                <option *ngFor="let item of statelist; let i = index" value="{{item.id}}">{{item.name}}</option>
+              </select>
+
+              <div *ngIf ="signUpForm.controls['state'].touched">
+                <div *ngIf ="!signUpForm.controls['state'].valid">
+                  <label class="control-label has-error validationMessage">State cannot be blank.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cropcontain">
+            <div class="imglist">
+              <img src="{{filepath}}" class="newaddimg">
+            </div>
+            <div>
+              <input value="+" class="upload-btn1" (click)="addPhoto(1)" type="button">
+              <img src="images/help.png" alt="#" class="help-icon">
+              <div class="clear"></div>
+            </div>
+
+            <input *ngIf="profimg_name != 'default.jpg' && profimg_name != 'default_f.jpg'" class="imgBtnCls" value="Crop" type="button" (click)="cropnow()">
+            <input *ngIf="profimg_name != 'default.jpg' && profimg_name != 'default_f.jpg'" class="imgBtnCls" value="Delete" type="button" (click)="imagedel(1)">
+
+
+
+
+
+          </div>
+
+          <div class="cropcontain">
+            <div class="imglist">
+              <img src="{{filepath1}}" class="newaddimg">
+            </div>
+            <div>
+              <input value="+" class="upload-btn1" (click)="addPhoto(2)" type="button">
+              <img src="images/help.png" alt="#" class="help-icon">
+              <div class="clear"></div>
+            </div>
+            <input *ngIf="backimg_name != 'default.jpg' && backimg_name != 'default_f.jpg'" class="imgBtnCls" value="Crop" type="button" (click)="cropnow1()">
+            <input *ngIf="backimg_name != 'default.jpg' && backimg_name != 'default_f.jpg'" class="imgBtnCls" value="Delete" type="button" (click)="imagedel(2)">
+          </div>
+        </div>
+
+        <div class="editprofilemain">
+          <div style="display: block;margin-top:15px; position: relative;">
+            <span class="editsettingbtn" style="background: none; float: left; width:100%;  margin: 10px 0;">Privacy
+              <a href="javascript:void(0)" style="text-decoration:none; outline:none;" (click)="changeprivacy()">
+                <span style="font-size: 16px; letter-spacing: 0px;" class="" *ngIf="privacy == 1">
+                  <img src="images/share1_icon_active.png" style="width:18px; margin-top:-2px;">
+                  <span style="margin-left: 3px;">Public</span>
+                </span>
+                <span style="font-size: 16px; letter-spacing: 0px;" class="" *ngIf="privacy == 2">
+                  <img src="images/share2_icon_active.png" style="width:18px; margin-top:-2px;">
+                  <span style="margin-left: 3px;">Friends</span>
+                </span>
+                <span style="font-size: 16px; letter-spacing: 0px;" class="" *ngIf="privacy == 3">
+                  <img src="images/share3_icon_active.png" style="width:18px; margin-top:-2px;">
+                  <span style="margin-left: 3px;">Friends Of Friends</span>
+                </span>
+                <span style="font-size: 16px; letter-spacing: 0px;" class=""  *ngIf="privacy == 4">
+                  <img src="images/share4_icon_active.png" style="width:18px; margin-top:-2px;">
+                  <span style="margin-left: 3px;">Private Me Only</span>
+                </span>
+                <span><img src="images/ad2new.png" style="padding-left:4px;"></span>
+              </a>
+            </span>
+            <span class="editsettingbtn" style="background: none; float: left; width:100%; margin: 10px 0; color: #f7931d;">Blocking
+              <a style="font-size:16px!important; letter-spacing: 0; text-transform:uppercase;  border:none; font-weight:normal!important;" (click)="goblockpage()">
+                <img src="images/gear.png" style="margin-top:-6px;">
+              </a>
+            </span>
+          </div>
+          <div style="clear: both;"></div>
+        </div>
+
+        <div class="right-part">
+          <h1>Select Sport</h1>
+          <div class="sports-table">
+            <div *ngFor="let n of sportlist; let i = index">
+              <h3> {{n.name}}</h3>
+              <ul>
+                <li *ngFor="let m of n.ch; let i = index">
+                  <a href="javascript:void(0);" style="margin-bottom: 0px;" (click)="selsportsfunct(m.id)" ngClass="{{selsportscls(m.id)}}">
+                    <img  alt="#" src="http://torqkd.com/uploads/sports_image/thumb/{{m.image}}" style="max-width: none;">
+                  </a>
+                  <strong> {{m.name}}</strong>
+                </li>
+              </ul>
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+        <button type="submit" class="updatebtn">UPDATE PROFILE</button>
+
+        <a [navPush]="profilepage" class="backbtn">BACK</a>
+      </form>
+
+    </div>
+
+
+    <div style="clear: both;"></div>
+    <div class="footer-menu1">
+      <span>&copy;TORKQ</span>
+      <span>|</span>
+      <span>
+                <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+            </span>
+      <span>|</span>
+      <span>
+                <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+            </span>
+    </div>
+  </div>
+
+<!--  <ion-item *ngIf="filepath != null">
+    <img (load)="imageLoaded()" src="images/logo_main.png" #imageSrc>
+  </ion-item>
+
+  <button (click)="cropnow()">hu</button>-->
+
+</ion-content>

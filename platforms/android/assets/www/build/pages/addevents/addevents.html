@@ -1,0 +1,293 @@
+<ion-header class="login-header ">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div style="position:relative;" class="experience-wrapper add-event-page">
+
+    <div class="createevent-body">
+
+      <div class="left-part">
+
+        <h2 class="ng-binding">Create Event</h2>
+        <form novalidate [formGroup]="addEventForm" (ngSubmit)="formsubmit(addEventForm.value)">
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0; margin-bottom:20px;">      <span style="float: right; display:block; width: 10px; color:#ff0000; margin-top:15px; font-size:16px; ">*</span>
+              <input [formControl]="addEventForm.controls['name']" type="text" placeholder="EVENT NAME" class="form-control input1">
+              <div *ngIf ="addEventForm.controls['name'].touched">
+                <div *ngIf ="!addEventForm.controls['name'].valid" class = "alert alert-danger">
+                  <strong>Name is required</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <textarea [formControl]="addEventForm.controls['description']" placeholder="DESCRIPTION" class="form-control input2"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10" style="width:100%; padding:0;">
+              <select class="form-control input10" [formControl]="addEventForm.controls['group_id']">
+                <option value="" class="">GROUP EVENT?</option>
+                <option *ngFor="let item of grouplist; let i = index" value="{{item.id}}">{{item.name}}</option>
+              </select>
+
+
+            </div>
+          </div>
+
+          <div class="clear"></div>
+          <div class="text-part">
+            If you would like to attch your event to a group to which you belong, select the group in the dropwn down above. Note that all other admins of that group can modify the event.<br>
+            <br>
+            As a site admin, you see all group events, users will only be able to choose groups they are admins of.
+          </div>
+
+          <h3>When</h3>
+
+          <div class="form-part">
+            <div class="when-form">
+              <!--<span>Date:</span>-->
+              <div class="form-group">
+                <div class="col-sm-10 event-date" style="width:100%; padding:0;">
+                  <ion-item>
+                    <ion-label>START DATE</ion-label>
+                    <ion-datetime displayFormat="MM/DD/YYYY" [formControl]="addEventForm.controls['from_date']" class="form-control input-form" max="{{max}}"></ion-datetime>
+                    </ion-item>
+                    <div *ngIf ="addEventForm.controls['from_date'].touched">
+                      <div *ngIf ="!addEventForm.controls['from_date'].valid" class = "alert alert-danger">
+                        <strong>Start date is required</strong>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <!--<span>To:</span>-->
+              <div class="form-group">
+                <div class="col-sm-10 event-date" style="width:100%; padding:0;">
+                  <ion-item>
+                    <ion-label>END DATE</ion-label>
+                    <ion-datetime displayFormat="MM/DD/YYYY" [formControl]="addEventForm.controls['to_date']" class="form-control input-form" max="{{max}}"></ion-datetime>
+                    </ion-item>
+                  <div *ngIf ="addEventForm.controls['to_date'].touched">
+                    <div *ngIf ="!addEventForm.controls['to_date'].valid" class = "alert alert-danger">
+                      <strong>End date is required</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clear"></div>
+              <!--<span *ngIf="allday == 0">Time:</span>-->
+              <div *ngIf="allday == 0" class="form-group">
+                <div class="col-sm-10 event-date" style="width:100%; padding:0;">
+                  <ion-item>
+                    <ion-label>START TIME</ion-label>
+                    <ion-datetime displayFormat="hh:mm A" [formControl]="addEventForm.controls['start_time']" class="form-control input-form"></ion-datetime>
+                  </ion-item>
+
+                </div>
+              </div>
+
+              <!--<span  *ngIf="allday == 0">To:</span>-->
+              <div *ngIf="allday == 0" class="form-group">
+                <div class="col-sm-10 event-date" style="width:100%; padding:0;">
+
+                  <ion-item>
+                    <ion-label>END TIME</ion-label>
+                    <ion-datetime displayFormat="hh:mm A" [formControl]="addEventForm.controls['end_time']" class="form-control input-form"></ion-datetime>
+                  </ion-item>
+
+                </div>
+              </div>
+
+              <div class="clear"></div>
+
+              <ion-item style="border: none !important; height : 22px !important;" class="add-event-chk">
+                <ion-label>All day</ion-label>
+                <ion-checkbox [formControl]="addEventForm.controls['all_day']" (ionChange)="handleChange($event)"></ion-checkbox>
+              </ion-item>
+
+            </div>
+          </div>
+
+          <h3>Where </h3>
+
+          <div class="when-form2">
+
+            <div class="form-group">
+              <div class="col-sm-10" style="width:100%; padding:0; margin-bottom:20px;">
+                <span style="float: right; display:block; width: 10px; color:#ff0000; margin-top:15px; font-size:16px; ">*</span>
+                <input [formControl]="addEventForm.controls['location']" type="text" placeholder="LOCATION NAME" class="form-control input1">
+                <div *ngIf ="addEventForm.controls['location'].touched">
+                  <div *ngIf ="!addEventForm.controls['location'].valid" class = "alert alert-danger">
+                    <strong>Location is required</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clear"></div>
+            <p style="width:95%; padding-bottom:10px; font-style: italic;">Create a location or start typing to search a previously created location.</p>
+
+            <div class="form-group">
+              <div class="col-sm-10" style="width:100%; padding:0; margin-bottom:20px;">      <span style="float: right; display:block; width: 10px; color:#ff0000; margin-top:15px; font-size:16px; ">*</span>
+                <input [formControl]="addEventForm.controls['address']" type="text" placeholder="ADDRESS" class="form-control input1">
+                <div *ngIf ="addEventForm.controls['address'].touched">
+                  <div *ngIf ="!addEventForm.controls['address'].valid" class = "alert alert-danger">
+                    <strong>Address is required</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="form-group">
+              <div class="col-sm-10" style="width:100%; padding:0; margin-bottom:20px;">      <span style="float: right; display:block; width: 10px; color:#ff0000; margin-top:15px; font-size:16px; ">*</span>
+                <input [formControl]="addEventForm.controls['city']" type="text" placeholder="CITY" class="form-control input1">
+                <div *ngIf ="addEventForm.controls['city'].touched">
+                  <div *ngIf ="!addEventForm.controls['city'].valid" class = "alert alert-danger">
+                    <strong>City is required</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="clear"></div>
+
+            <div class="form-group">
+              <div class="col-sm-10" style="width:100%; padding:0; margin-bottom:20px;">
+                <input [formControl]="addEventForm.controls['zip']" type="text" placeholder="ZIP" class="form-control input1">
+              </div>
+            </div>
+
+
+
+            <div class="form-group">
+              <div class="col-sm-10" style="width:100%; padding:0; margin-bottom:20px;">      <span style="float: right; display:block; width: 10px; color:#ff0000; margin-top:15px; font-size:16px; ">*</span>
+
+
+                <select class="form-control input10" [formControl]="addEventForm.controls['country']" (change)="changecountry($event.target.value)">
+                  <option value="" class="">SELECT YOUR COUNTRY</option>
+                  <option *ngFor="let item of countrylist; let i = index" value="{{item.id}}">{{item.name}}</option>
+                </select>
+                <div *ngIf ="addEventForm.controls['country'].touched">
+                  <div *ngIf ="!addEventForm.controls['country'].valid">
+                    <label class="control-label has-error validationMessage">Country cannot be blank.</label>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <div class="col-sm-10" style="width:100%; padding:0; margin-bottom:20px;">      <span style="float: right; display:block; width: 10px; color:#ff0000; margin-top:15px; font-size:16px; ">*</span>
+
+                <select class="form-control input10" [formControl]="addEventForm.controls['state']">
+                  <option value="" class="">SELECT YOUR STATE</option>
+                  <option *ngFor="let item of statelist; let i = index" value="{{item.id}}">{{item.name}}</option>
+                </select>
+
+                <div *ngIf ="addEventForm.controls['state'].touched">
+                  <div *ngIf ="!addEventForm.controls['state'].valid">
+                    <label class="control-label has-error validationMessage">State cannot be blank.</label>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+
+
+            <div class="form-group">
+              <div class="col-sm-10" style="width:100%; padding:0;">
+                <input [formControl]="addEventForm.controls['register_url']" type="text" placeholder="REGISTRATION URL" class="form-control input1">
+              </div>
+            </div>
+
+          </div>
+
+          <!--<h3>Event Photo </h3>
+          <div class="uploadbox" style="position:relative;">
+            <div id="blah"> <img ng-show="eventImage" src="" class="ng-hide"></div>
+            <input value="+" class="upload-btn ng-pristine ng-untouched ng-valid" ngf-drop="" ngf-select="" ng-model="files" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'image/*'" ngf-drop-available="dropAvailable" ngf-capture="camera" type="button">
+            <a rel="tooltip" title="Please Upload An Image Bigger Than 600X300" style=" margin-left:25px;"><img src="images/help.png"></a>
+
+
+          </div>-->
+
+
+
+          <div class="right-part">
+            <h1> Sport</h1>
+            <div class="sports-table">
+              <div *ngFor="let n of sportlist; let i = index">
+                <h3> {{n.name}}</h3>
+                <ul>
+                  <li *ngFor="let m of n.ch; let i = index">
+                    <a href="javascript:void(0);" style="margin-bottom: 0px;" (click)="selsports(m.id)" ngClass="{{zxczx(m.id)}}"><img  alt="#" src="http://torqkd.com/uploads/sports_image/thumb/{{m.image}}" ></a>
+                    <strong> {{m.name}}</strong>
+                  </li>
+                </ul>
+                <div class="clear"></div>
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+
+          <button class="event-btn" type="submit"></button>
+
+        </form>
+      </div>
+
+
+
+
+
+
+    </div>
+
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+  </div>
+
+</ion-content>

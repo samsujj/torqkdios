@@ -1,0 +1,185 @@
+<ion-header class="login-header ">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div style="position:relative;" class="experience-wrapper experince-page">
+
+    <div class="spSlider">
+      <ion-slides [options]="mySlideOptions">
+        <ion-slide *ngFor="let spitem of sportslist; let i = index">
+
+          <div style="background-color: #dfe2e2; background-repeat: no-repeat; background-size: 100%; width: 100%; height: 100%;" [style.background-image]="getsanitizerstyle(spitem.additional_image)">&nbsp;</div>
+          <div class="h2text">{{spitem.sport_name}}</div>
+          <span>
+                        <div class="text-div">{{spitem.tag}}</div>
+                        <div class="more"><a href="javascript:void(0)">MORE »</a> </div>
+                        <div class="clear"></div>
+                    </span>
+
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <div class="video-contain expgallery" style="text-align:center;">
+      <a href="" (click)="openDefault()"> <img alt="#" src="images/howitworks_3.jpg" style="width:100%;"> </a>
+    </div>
+
+
+    <div id="tabs">
+      <div class="btntablist">
+        <button class="btntab" [navPush]="experiencepage">Social</button>
+        <button class="btntab" [navPush]="expeventlistpage">Events</button>
+        <button class="btntab" [navPush]="expgrouplistpage">Groups</button>
+        <button class="btntab active">stats</button>
+      </div>
+      <div id="mainView">
+
+        <table width="100%" *ngFor="let item of statdata2; let i = index" class="stat-tab">
+
+          <tr>
+
+            <td class="first-td" style="padding:5px 0 10px;" width="20%">
+
+              <h4 style="color:#f79213">{{item.sport_name}}</h4>
+
+              <img src="http://torqkd.com/uploads/sports_image/thumb/{{item.imag_name}}" alt=""  style="margin-top:10px;  width:52px;"/></td>
+
+            <td>{{item.activity_no}}<br />
+              <span>Activities</span></td>
+
+            <td >{{item.total_dis}}<br />
+              <span>Distance</span></td>
+
+            <td >{{item.total_time}}<br/>
+
+              <span style="text-align:left">Time</span></td>
+
+          </tr>
+
+          <tr>
+
+            <td  valign="top" align="left" width="100%"  colspan="5">
+
+             <!-- <base-chart  class="chart"
+                           [datasets]="getLineChartData(item)"
+                           [labels]="getLineChartLabels(item)"
+                           [options]="lineChartOptions"
+                           [colors]="lineChartColors"
+                           [legend]="lineChartLegend"
+                           [chartType]="lineChartType"></base-chart>-->
+              <base-chart  class="chart"
+                           [datasets]="item.chartData"
+                           [labels]="item.mon"
+                           [options]="lineChartOptions"
+                           [colors]="lineChartColors"
+                           [legend]="lineChartLegend"
+                           [chartType]="lineChartType"></base-chart>
+
+              <div class="stat-table2" style="padding:10px 0; "  (click)="viewstatdet(item)"><a href="javascript:void(0);" class="stat-view-btn">View Details</a></div>
+            </td>
+
+          <tr>
+
+            <td  valign="bottom" colspan="5" style="padding:0; border-top: solid 1px #555555; padding:15px 0 0 0; margin-bottom:10px;">
+
+          </tr>
+
+        </table>
+
+        <span class="empty" *ngIf="!statcount">No results found.</span>
+
+
+
+
+
+      </div>
+
+
+
+
+    </div>
+
+
+
+    <div class="clear"></div>
+
+    <div class="albums-div albums-div_background">
+      <a href="javascript:void(0);" [navPush]="photopage">
+        <img alt="" src="images/hs1-0-02.jpg" class="expgallery">
+        <h2 data-original-title="">ALBUMS</h2>
+      </a>
+    </div>
+
+    <div class="albums-div">
+      <!--<video controls="controls" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline" class="videoPlayer"><source src="http://torqkd.com/uploads/video/converted/defaultmaintv.mp4" type="video/mp4"/></video>-->
+      <img (click)="playMainTorkqTv()" src="http://torqkd.com/uploads/video/thumb/defaultmaintv.jpg" width="100%">
+      <img (click)="playMainTorkqTv()" src="images/youplay.png" width="20%" class="paly_video" style="cursor:pointer; width: 20%; z-index: 100; top: 40%; position: absolute; left: 40%;">
+      <h3><a href="javascript:void(0);" [navPush]="torqkdtvpage">TORKQ TV</a></h3>
+    </div>
+
+
+    <div style="border: solid 8px #fff; width: 100%; margin: 10px auto;">
+      <div class="iframe_h2">Events</div>
+      <div id="event-map-canvas"></div>
+    </div>
+
+    <div class="stats-slider-bottom">
+      <ion-slides [options]="mySlideOptions2">
+        <ion-slide *ngFor="let item of banner1data; let i = index" class="Stats-slider-bottom-contain1">
+          <a hre="javascript:void(0);"><img  (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+        </ion-slide>
+        <!--<ion-slide class="Stats-slider-bottom-contain1">
+            <a hre="javascript:void(0);"><img src="images/createimage.jpg"></a>
+        </ion-slide>
+        <ion-slide class="Stats-slider-bottom-contain1">
+            <a hre="javascript:void(0);"><img src="images/3.jpg"></a>
+        </ion-slide>-->
+      </ion-slides>
+      <ion-slides [options]="mySlideOptions3">
+        <ion-slide *ngFor="let item of banner2data; let i = index" class="Stats-slider-bottom-contain2">
+          <a hre="javascript:void(0);"><img (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+
+
+
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+  </div>
+
+</ion-content>

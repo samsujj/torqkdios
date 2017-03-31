@@ -1,0 +1,283 @@
+<ion-header class="login-header ">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="experience-wrapper forum-page topic-details-page">
+    <div class="forumpress-table">
+      <h2><a style="font-size:30px;" href="javascript:void(0);">Discussion Forums</a></h2>
+      <div class="clear"></div>
+      <div style="margin-top: 15px;" class="top-heading" *ngIf="loggedinuser">Welcome {{userdetails.fname}} {{userdetails.lname}}</div>
+      <div style="margin-top: 15px;" class="top-heading" *ngIf="!loggedinuser">Guest</div>
+
+      <div class="rowone" *ngIf="loggedinuser">
+
+        <div class="left-img1">
+          <img width="100px" alt="#" src="{{userdetails.user_image}}" style="width: 60px; height: 60px;">
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+      <h2>
+        <span style="font-size:20px; letter-spacing:0px; padding:12px 0 0 0;">
+          <a href="javascript:void(0)" style="font-size: 20px;" [navPush]="forumpage">Forum</a>
+          <label>»</label>
+        </span>
+        <span style="font-size:20px; letter-spacing:0px; padding:12px 0 0 0;">
+          <a href="javascript:void(0)" style="font-size: 20px;"  [navPush]="forumlistpage"  [navParams]="{id: forumcategoryid,title: forumcategoryname}">{{forumcategoryname}}</a>
+          <label>»</label>
+        </span>
+        <span style="font-size:20px; letter-spacing:0px; padding:12px 0 0 0;">
+          <a href="javascript:void(0)" style="font-size: 20px;"  [navPush]="forumdetailspage"  [navParams]="{id: forumid}">{{forumname}}</a>
+          <label>»</label>
+        </span>
+        <span style="font-size:20px; letter-spacing:0px; padding:12px 0 0 0;">
+          <a href="javascript:void(0)" style="font-size: 20px;">{{topicname}}</a>
+        </span>
+      </h2>
+
+      <div class="clear"></div>
+
+      <div class="top-heading">
+        <span style="display:inline-block;">Topic: {{topicname}}</span>
+      </div>
+
+      <div class="new-contain-row" *ngIf="isLoad" style="background: #ECEFF5">
+        <div class="left-img-block">
+          <img alt="#" src="{{topicdet.user_image}}" width="50">
+        </div>
+        <div class="right-text-block" style="font-family:Arial, Helvetica, sans-serif; ">
+          <strong style="font-family:Arial, Helvetica, sans-serif; font-size:16px;">{{topicdet.user_name}}</strong>
+          <div class="clear"></div>
+          <h5 style="font-size: 16px; color: #000; padding: 10px 0; font-weight:bold;">{{topicdet.title}}</h5>
+          <div style="font-weight:normal; font-size:16px; color:#111; line-height: 1.42857;" innerHTML="{{topicdet.description}}"></div>
+          <br>
+          <span style="font-size:16px;">{{topicdet.time}} </span>
+          <span style="font-size:16px;"><a href="javascript:void(0);" style="color:#333;" (click)="topicLike(topicdet)">{{(topicdet.likeStatus)?'Unlike':'Like'}}</a><span> ({{topicdet.likeNo}})</span></span>
+          <span class="flink2">
+            <a href="javascript:void(0);" style="color: #F7941E; display: inline-block; float: right; font-weight: bold; font-size:14px;" (click)="deletetopic1(topicdet.id)">DELETE&nbsp;POST</a>
+            <span style="float:right; font-size:13px;">&nbsp;|&nbsp;</span>
+            <a href="javascript:void(0);" style="color: #F7941E; display: inline-block; float: right; font-weight: bold; font-size:14px;" [navPush]="topicupdatepage"  [navParams]="{id: topicdet.id}">EDIT&nbsp;POST</a>
+          </span>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+
+
+      <div *ngFor="let item of topicreply; let i = index"  class="new-contain-row">
+
+        <div class="left-img-block"><img  alt="#" src="{{item.user_image}}" width="50" /></div>
+
+        <div class="right-text-block" style=" font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#333; line-height:18px;">
+
+          <strong style="font-family: Arial,Helvetica,sans-serif; font-size: 16px;">{{item.user_name}}</strong>
+
+          <div class="clear" style="margin-top: 8px;"></div>
+
+          <div [innerHTML]="getsanitizedcontent(item.description)"></div>
+
+          <div class="clear" style="margin-top: 8px;"></div>
+
+          <span style="font-size:16px;">{{item.time}}</span>
+
+          <span style="font-size:16px; color:#000;"><a href="javascript:void(0);" style="color:#333;" (click)="topicLike(item)">{{(item.likeStatus)?'Unlike':'Like'}}</a><span style="font-size:16px;"> ({{item.likeNo}})</span></span>
+
+          <span class="flink2" style="font-size:16px;" *ngIf="loggedinuser == item.user_id">
+
+                <a href="javascript:void(0);" style="color: #F7941E;display: inline-block; float: right;padding-right: 0; font-weight: bold; font-size:14px;" (click)="deletetopic2(item)">DELETE&nbsp;POST</a>
+
+                <span style="float:right;">&nbsp;|&nbsp;</span>
+
+              <!--  <a href="javascript:void(0);" style="color: #F7941E; display: inline-block; float: right;   font-weight: bold; font-size:14px; ">EDIT&nbsp;POST</a> -->
+
+                <div class="clear"></div>
+
+            </span>
+
+          <div class="clear"></div>
+
+        </div>
+
+
+
+        <div class="clear"></div>
+
+        <div class="containblock2">
+          <div *ngFor="let item1 of item.topic_reply1; let j = index" style="margin-bottom:15px; font-size:16px; font-family:Arial, Helvetica, sans-serif; color:#333; line-height:18px; border-bottom:solid 1px #f3f3f3; padding-bottom:15px; ">
+
+            <div class="left-img-block"><img  alt="#" src="{{item1.user_image}}" width="50" /></div>
+
+            <div class="right-text-block">
+
+              <strong style="font-family: Arial,Helvetica,sans-serif;
+
+    font-size: 14px;">{{item1.user_name}}</strong>
+
+              <div class="clear" style="margin-top: 8px;"></div>
+
+              <div [innerHTML]="getsanitizedcontent(item1.description)"></div>
+
+              <div class="clear" style="margin-top: 8px;"></div>
+
+              <span style="font-size:16px; color:#a7a9aa;">{{item1.time}}</span>
+
+              <span><a href="javascript:void(0);" ng-click="likeTopic(item1)" style="font-size:16px; color:#333;" (click)="topicLike(item1)">{{(item1.likeStatus == 1)?'Unlike':'Like'}}</a><span style="font-size:16px; color:#a7a9aa;">({{item1.likeNo}})</span></span>
+
+              <span  class="flink2" *ngIf="loggedinuser == item1.user_id">
+
+                <a href="javascript:void(0)" style="color: #F7941E;display: inline-block; float: right;padding-right: 0; font-weight: bold;  font-size:14px; " (click)="deletetopic3(item,item1)">DELETE&nbsp;POST</a>
+
+                <span style="float:right;">&nbsp;|&nbsp;</span>
+
+<!--                <a href="javascript:void(0);" style="color: #F7941E; display: inline-block; float: right;   font-weight: bold; font-size:14px; ">EDIT&nbsp;POST</a> -->
+
+                <div class="clear"></div>
+
+            </span>
+
+              <div class="clear"></div>
+
+            </div>
+
+
+
+            <div class="clear"></div>
+
+          </div>
+
+
+          <form  name="signUpForm" class="form-horizontal ng-pristine ng-valid" novalidate="" angular-validator="">
+
+            <div class="form-group">
+
+              <div class="col-sm-10" style="width:100%; padding:0;">
+
+                <div style="float: left; width: 80% !important; position:relative;  background: #fff none repeat scroll 0 0; border: 2px solid #97989a !important; border-radius: 5px;  margin: 3px 2% 0 ; ">
+
+                  <div id="topicreplydiv{{item.id}}" style="background:none!important; border:none!important; border-radius:0 !important; font-family: Arial, Helvetica, sans-serif; font-size: 16px; padding: 6px !important; width: 90% ; height: auto; min-height: 54px; overflow: hidden; " placeholder="Write reply here" contenteditable="true"></div>
+
+                  <a href="javascript:void(0)" (click)="showemojidiv1(item.id)">
+                    <img src="images/emo.png" style="position:absolute; right:2px; top:2px; width:20px">
+                  </a>
+
+
+
+
+                  <div class="clear"></div>
+
+                </div>
+
+              </div>
+
+              <div class="clear"></div>
+
+              <div>
+
+                <div id="emojisdiv{{item.id}}" style="display: none;">
+
+                  <div class="emojisdiv">
+                    <a *ngFor="let emoitem of emojisArr; let j = index" href="javascript:void(0)" class="emoticon emoticon-{{emoitem}}" (click)="emoinsert1(emoitem,item.id)" title="::{{emoitem}}::" ></a>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <button class="btn5" (click)="replysubmit1(item.id,item)">Submit</button>
+
+          </form>
+
+
+
+        </div>
+
+
+
+
+
+        <div class="clear"></div>
+
+      </div>
+
+
+
+      <div class="new-contain-row">
+        <input value="New Reply" class="btn5" type="button" ngClass="{{addshowclass(isreply)}}" (click)="isreply = !isreply">
+        <form name="ReplyForm" class="form-horizontal" ngClass="{{addhideclass(isreply)}}">
+          <div class="form-group">
+            <div class="col-sm-10">
+              <div style="float: left; width: 80% !important; position:relative;  background: #fff none repeat scroll 0 0; border: 2px solid #97989a !important; border-radius: 5px;  margin: 3px 2% 0 ; ">
+                <div id="topicreplydiv" style="background:none!important; border:none!important; border-radius:0 !important; font-family: Arial, Helvetica, sans-serif; font-size: 16px; padding: 6px !important; width: 90% ; height: auto; min-height: 54px; overflow: hidden; " placeholder="Write reply here" contenteditable="true"></div>
+                <a href="javascript:void(0)" (click)="showemojidiv()">
+                  <img src="images/emo.png" width="22" height="22" class="emocss" style="background:none; width:22px; right: 2px; top: 2px;">
+                </a>
+                <div class="clear"></div>
+              </div>
+            </div>
+            <div style="clear: both;"></div>
+            <label class="control-label validationMessage" style="color: rgb(248, 147, 31) ! important; font-family: arial ! important; font-size: 12px ! important; font-weight: normal; margin: 0px ! important; overflow: hidden; text-align: left ! important; width: 100% ! important;" ngClass="{{addhideclass(isreplyvalid)}}">Reply cannot be blank.</label>
+            <div>
+              <div style="clear:both;"></div>
+              <div id="emojisdiv" style="display:none;">
+                <div class="emojisdiv">
+                  <a *ngFor="let emoitem of emojisArr; let j = index" href="javascript:void(0)" class="emoticon emoticon-{{emoitem}}" (click)="emoinsert(emoitem)" title="::{{emoitem}}::" ></a>
+                </div>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <button class="btn5" (click)="replysubmit()">Submit</button>
+        </form>
+
+
+
+        <div class="clear"></div>
+
+      </div>
+
+      <div class="clear"></div>
+
+    </div>
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+  </div>
+
+</ion-content>

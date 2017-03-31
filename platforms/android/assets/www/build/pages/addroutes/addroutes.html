@@ -1,0 +1,81 @@
+<ion-header class="login-header ">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div style="position:relative;" class="experience-wrapper add-route-page">
+
+    <div class="createevent-body" style="width:100%;">
+      <div class="header_msg"> GPS YOUR ROUTE </div>
+
+      <div id="sports_div" (click)="issportshow = !issportshow">
+        <span ngClass="{{((!issportshow)?'arrowImg':'arrowTog')}}">Sports<span class="sportsName">{{sportsName}}</span></span>
+      </div>
+
+
+      <ul class="sp_list" ngClass="{{addhideclass(issportshow)}}">
+        <li *ngFor="let n of splist;">
+          <div>{{n.name}}</div>
+          <ul>
+            <li *ngFor="let m of n.ch; let i = index" (click)="selsports(m)">
+              <strong> {{m.name}}</strong>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+
+
+      <div id="loc_h_div" (click)="islocationshow = !islocationshow">
+        <span ngClass="{{((!islocationshow)?'arrowImg':'arrowTog')}}">Location</span>
+      </div>
+      <div class="loc_div" ngClass="{{addhideclass(islocationshow)}}">
+        <input placeholder="ROUTE NAME" (keyup)="changelocname($event.target.value)" type="text">
+      </div>
+
+
+      <div class="foo-div2"><input value="Begin" class="stbtn" (click)="gotostep2()" type="button"></div>
+
+
+
+
+
+    </div>
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+  </div>
+
+</ion-content>

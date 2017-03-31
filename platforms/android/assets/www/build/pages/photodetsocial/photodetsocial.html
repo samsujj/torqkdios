@@ -1,0 +1,39 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+
+<ion-content padding class="photo-det-content">
+  <div style="position:relative;" class="experience-wrapper photo-detail-page">
+    <div class="img-part">
+      <img src="{{itemdet.s_img}}">
+    </div>
+  </div>
+  <div class="photo-det-footer">
+    <div class="comment_top">
+      <div class="left-part">
+        <div class="profile-img">
+          <img style=" max-width:50px; max-height:50px;" alt="" src="{{itemdet.user_image}}">
+        </div>
+        <div class="name-text">{{itemdet.user_name}}</div>
+      </div>
+      <div class="right-part">
+        <div class="text-contain">{{itemdet.timespan}}</div>
+        <div style="font-size:16px; text-align:left; padding-top:8px; padding-left: 4px; color: #000;" >{{itemdet.msg}}</div>
+        <div class="cmnt_share">
+          <a href="javascript:void(0);" (click)="showComment(itemdet)">Comment{{(itemdet.comment_no >1)?'s':''}}  [{{itemdet.comment_no}}]</a> -
+          <a href="javascript:void(0);" (click)="updatelike(itemdet.id)">{{(itemdet.is_like > 0)?'Unlike':'Like'}} [{{itemdet.like_no}}] </a>
+          <b style="font-weight:bold;display:inline-block; ">•</b>
+          <a style="display: inline-block; position: relative;" href="javascript:void(0);" (click)="showSocilaShareList(itemdet)">Share</a>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+
+<ion-content padding class="stat-det-area" >
+  <div class="stat-det-area2">
+    <div class="stat-det-area3">
+      <div class="stat-det-header">
+        <span>Sr. No.</span>
+        <span>Distance</span>
+        <span>Time</span>
+        <span>Date</span>
+      </div>
+      <div style="clear: both;"></div>
+      <div *ngFor="let item of items; let i = index" class="stat-det-data">
+        <span>{{i+1}}</span>
+        <span>{{item.distance}}</span>
+        <span>{{item.duration}}</span>
+        <span>{{item.date}}</span>
+      </div>
+    </div>
+  </div>
+</ion-content>

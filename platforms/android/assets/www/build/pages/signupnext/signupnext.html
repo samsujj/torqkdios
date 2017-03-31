@@ -1,0 +1,64 @@
+<ion-content padding>
+  <div class="next-body">
+  <div class="register_wrapper">
+    <div class="logo"> <a [navPush]="homepage"> <img alt="#" src="images/logo_main.png"> </a> </div>
+    <div class="menupart4"></div>
+    <div class="activities_contain">
+      <h2><img alt="#" src="images/invitefrds.jpg" id="nextH"></h2>
+
+      <div class="inviteFriends">
+        <form  novalidate [formGroup]="signUpForm" (ngSubmit)="formsubmit(signUpForm.value)">
+
+          <h4>Enter Your Friends' Email Addresses</h4>
+          <div>
+            <textarea [formControl]="signUpForm.controls['senderList']" placeholder="ADD EMAIL ADDRESSES SEPARATED BY COMMAS" class="form-control" id="friend_emails"></textarea>
+            <div *ngIf ="signUpForm.controls['senderList'].touched">
+              <div *ngIf ="!signUpForm.controls['senderList'].valid" class = "alert alert-danger">
+                <label class="control-label has-error validationMessage">Please Enter Sender Email.</label>
+              </div>
+            </div>
+          </div>
+          <h5>Email Message</h5>
+          <textarea [formControl]="signUpForm.controls['mailBody']" placeholder="ADD EMAIL ADDRESSES SEPARATED BY COMMAS" class="form-control" id="email_text"></textarea>
+          <div *ngIf ="signUpForm.controls['mailBody'].touched">
+            <div *ngIf ="!signUpForm.controls['mailBody'].valid" class = "alert alert-danger">
+              <label class="control-label has-error validationMessage">Please Enter Mail Body.</label>
+            </div>
+          </div>
+          <input class="see-btn2" value="EMAIL" type="submit">
+        </form>
+
+        <h6 id="inviteDiv">INVITE FRIENDS VIA YOUR ONLINE ADDRESS BOOK</h6>
+
+        <select id="social_select" (change)="cngsocialselect($event.target.value)">
+          <option value="" class="">SELECT SERVICE</option>
+          <option value="fb">FACEBOOK</option>
+          <option value="tw">TWITTER</option>
+        </select>
+
+
+        <input class="see-btn2" value="INVITE" (click)="social_share()" name="inviter_submit" type="button">
+        <div style="clear:both;"></div>
+
+        <input class="activities-submit" (click)="next_n()" value="next step" type="button">
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="footer-menu2">
+    <span>&copy;TORKQ</span>
+    <span>|</span>
+    <span>
+      <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+    </span>
+    <span>|</span>
+    <span>
+      <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+    </span>
+  </div>
+</div>
+
+  </ion-content>

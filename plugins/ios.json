@@ -1,0 +1,105 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "com.borismus.webintent": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "com.bunkerpalace.cordova.YoutubeVideoPlayer": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "com.dawsonloudon.videoplayer": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "com.hutchind.cordova.plugins.streamingmedia": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-camera": {
+            "CAMERA_USAGE_DESCRIPTION": " ",
+            "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-crop": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-facebook4": {
+            "APP_ID": "434078603403320",
+            "APP_NAME": "Torkq",
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-image-picker": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-media-capture": {
+            "CAMERA_USAGE_DESCRIPTION": " ",
+            "MICROPHONE_USAGE_DESCRIPTION": " ",
+            "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-screen-orientation": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-videoplayer": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-mauron85-background-geolocation": {
+            "ALWAYS_USAGE_DESCRIPTION": "This app requires background location tracking",
+            "PACKAGE_NAME": "com.redballoon.torqkd"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.gratitube"
+        }
+    }
+}

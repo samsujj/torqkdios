@@ -1,0 +1,27 @@
+<ion-header class="commentheader">
+
+  <ion-nav-bar class="btnwrapper">
+    <ion-nav-back-button class="button-clear btnback" (click)="goback()">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+</ion-header>
+
+<ion-content padding>
+  <div class="experience-wrapper fb-comment-page">
+
+    <ion-title>Say Something About This Photo</ion-title>
+
+    <ion-list>
+
+      <ion-item>
+        <ion-textarea rows="6" placeholder="Write a comment..." id="fbcom"></ion-textarea>
+      </ion-item>
+
+    </ion-list>
+
+    <button ion-button (click)="postfb()">POST</button>
+
+  </div>
+</ion-content>

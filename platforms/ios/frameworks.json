@@ -1,0 +1,14 @@
+{
+    "MediaPlayer.framework": 2,
+    "AVFoundation.framework": 4,
+    "JavaScriptCore.framework": 1,
+    "ImageIO.framework": 1,
+    "CoreLocation.framework": 3,
+    "QuartzCore.framework": 2,
+    "SystemConfiguration.framework": 2,
+    "CoreTelephony.framework": 1,
+    "Social.framework": 1,
+    "MessageUI.framework": 1,
+    "AudioToolbox.framework": 1,
+    "libsqlite3.dylib": 1
+}

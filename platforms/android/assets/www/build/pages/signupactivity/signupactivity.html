@@ -1,0 +1,39 @@
+<ion-content padding>
+
+  <div class="activities-body">
+    <div class="register_wrapper">
+      <div class="logo"> <a [navPush]="homepage"> <img alt="#" src="images/logo_main.png"> </a> </div>
+
+      <div class="menupart2"></div>
+
+      <div class="activities_contain" id="contain1">
+
+        <h2><img alt="#" src="images/selectsports.png" id="selSportsH"></h2>
+
+        <div class="sports-table">
+          <div *ngFor="let item of sportlist; let i = index">
+            <h3> {{item.name}}</h3>
+            <ul>
+              <li *ngFor="let m of item.ch; let i = index">
+                <a href="javascript:void(0);" style="margin-bottom: 0px;" (click)="selsports(m.id)" ngClass="{{zxczx(m.id)}}"><img  alt="#" src="http://torqkd.com/uploads/sports_image/thumb/{{m.image}}" ></a>
+                <strong> {{m.name}}</strong>
+              </li>
+            </ul>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+          <input class="activities-submit" (click)="next_a()" value="next step" type="button">
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-menu2">
+      <span>&copy;TORKQ</span>
+      <span>|</span>
+      <span> <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a> </span>
+      <span>|</span>
+      <span> <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a> </span>
+    </div>
+  </div>
+
+</ion-content>

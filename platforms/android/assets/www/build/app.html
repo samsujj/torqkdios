@@ -1,0 +1,30 @@
+<ion-header class="commonheader" *ngIf="isInternet == 0">
+  <div>No internet connection.</div>
+</ion-header>
+<ion-menu [content]="content">
+
+  <!--<ion-toolbar>
+    <ion-title>Pages</ion-title>
+  </ion-toolbar>-->
+
+  <ion-content class="mainc">
+    <ion-list>
+      <div *ngFor="let p of pages" style="position: relative;">
+        <button ion-item  (click)="openPage(p)" class="main-menu-item">
+          {{p.title}}
+
+          <!--<div *ngIf="p.title == 'Sports'" class="main-menu-nav"><ion-icon name="menu"></ion-icon></div>-->
+
+
+        </button>
+        <ion-list *ngIf="p.title == 'Sports' && submenuopen == 1" class="main-menu-submnu">
+          <button ion-item *ngFor="let sp of sportslist" (click)="opensportspage(sp.id)">{{sp.sport_name}}</button>
+        </ion-list>
+      </div>
+
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

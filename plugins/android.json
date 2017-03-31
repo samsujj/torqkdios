@@ -1,0 +1,105 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "com.dawsonloudon.videoplayer": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-videoplayer": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "com.bunkerpalace.cordova.YoutubeVideoPlayer": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "com.hutchind.cordova.plugins.streamingmedia": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "com.borismus.webintent": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-screen-orientation": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "plugin.google.maps": {
+            "API_KEY_FOR_ANDROID": "AIzaSyAPjWhRdHEr7IrbSwT_6JkECT5ruvrCkOw",
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-image-picker": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-facebook4": {
+            "APP_ID": "434078603403320",
+            "APP_NAME": "Torkq",
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-crop": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.gratitube"
+        },
+        "cordova-plugin-mauron85-background-geolocation": {
+            "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
+            "CONTENT_AUTHORITY": "$PACKAGE_NAME",
+            "PACKAGE_NAME": "com.gratitube"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.ionicframework.torkq502502"
+        }
+    }
+}

@@ -1,0 +1,147 @@
+<ion-header class="login-header">
+  <ion-navbar class="login-top" hideBackButton>
+    <div class="login-wrapper">
+      <div class="mobile-top-con">
+        <div class="mobile-menu show">
+          <button class="navmenur" (click)="openmenu()" menuToggle="right" hidden="false">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <button class="navmenul hide" menuToggle="left" hidden="true">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </div>
+        <div class="logo">
+          <a [navPush]="homepage"> <img src="images/logo_main.png" alt="#"></a>
+        </div>
+        <div class="logout">
+          <a [navPush]="updateprofilepage"><img src="images/gear2.png"></a>
+        </div>
+      </div>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="commonheader" *ngIf="isInternet == 0 && isOfflineData == 1">ROUTE WILL BE SYNCED ONCE YOU HAVE SERVICE</div>
+
+  <div class="experience-wrapper group-details-page">
+
+
+    <div class="top-part" *ngIf="groupdet">
+
+      <div class="top-partcon-left">
+        <div class="profile-img">
+          <img alt="{{groupdet.name}}" style="cursor: pointer;" src="{{groupdet.imgSrc}}" width="100px" height="100px">
+        </div>
+
+        <a href="javascript:void(0);" title="{{groupdet.sp_name}}">
+          <img alt="#" style=" margin:4px 4px 4px 0; overflow: hidden;" src="{{groupdet.spImgSrc}}" width="40">
+        </a>
+
+      </div>
+
+
+      <div class="top-partcon-right">
+        <h2><a href="javascript:void(0);">{{groupdet.name}}</a></h2>
+
+        <p>{{groupdet.description}}</p>
+
+      </div>
+
+      <div style="clear:both;"></div>
+
+      <div class="left1" *ngIf="loggedinuser">
+        <a *ngIf="isMember == 0" href="javascript:void(0);" (click)="joingroup()" style=""> Join</a>
+        <a *ngIf="isMember" href="javascript:void(0);" (click)="isLeaveGrp = !isLeaveGrp" class="" style=""> Joined<img src="images/icon-arrow-down.png" style="width:11px;"> </a>
+        <div *ngIf="isMember && isLeaveGrp" class="newlinkdiv ng-hide"><a href="javascript:void(0);" (click)="leavegroup()"> Leave Group</a></div>
+      </div>
+
+      <div class="right1">
+        <span class="highlight ng-binding">{{groupdet.gType}} </span>
+
+      </div>
+
+      <div style="clear:both;"></div>
+    </div>
+
+
+    <div id="tabs">
+      <div class="btntablist">
+        <button class="btntab" [navPush]="groupdetailspage" [navParams]="{id:groupid}">Social</button>
+        <button class="btntab" [navPush]="groupsettingspage" [navParams]="{id:groupid}" *ngIf="isAdmin == 1">settings</button>
+        <button class="btntab active">members</button>
+        <button class="btntab" [navPush]="groupstatpage" [navParams]="{id:groupid}">stats</button>
+      </div>
+      <div id="mainView">
+        <div *ngFor="let item of gmemberlist; let i = index">
+          <div class="groups-body" style="padding-bottom:25px;">
+            <div class="left-img" style="width:50px!important; float:left; margin-left: 0px;">
+              <a href="javascript:void(0);">
+                <img src="{{item.user_image}}" alt="{{item.user_name}}" style="margin:-4px 0 0 0; max-width:50px;max-height:50px;">
+              </a>
+
+            </div>
+
+            <div class="righttext1">
+              <h5 style="padding:0; font-size:18px;"><a style="font-size: 16px;font-weight: normal;" href="javascript:void(0);">{{item.user_name}}</a></h5>
+              <span class="activity" style="font-size:12px;">joined 2 months  ago</span>
+
+              <a *ngFor="let spitem of item.sports; let j = index" href="javascript:void(0);" style="margin: 2px;display: inline-block;" title="{{spitem.spname}}" class="ng-scope">
+                <img src="{{spitem.spimage}}" alt="#" width="25">
+              </a>
+
+              <div style="clear: both;height: 15px;width: 100%">&nbsp;</div>
+
+              <p style="font-size:14px; display: inline;" *ngIf="item.is_admin==1">Admin</p>
+              <p style="font-size:14px; display: inline; cursor:pointer;  margin-right: 25px;" *ngIf="isAdmin > 0 && item.is_admin==0" (click)="addAsAdmin(item)">Add This Member As Admin</p>
+              <div style="clear: both;">&nbsp;</div>
+              <p class="concls" style="font-size:14px; cursor:pointer;  display: inline;" *ngIf="item.sess_id > 0 && item.user_id != item.sess_id && item.frndship==0" (click)="frndconnect(item)" >CONNECT +</p>
+
+            </div>
+
+
+            <div class="clear"> </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="stats-slider-bottom">
+      <ion-slides [options]="mySlideOptions2">
+        <ion-slide *ngFor="let item of banner1data; let i = index" class="Stats-slider-bottom-contain1">
+          <a hre="javascript:void(0);"><img  (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+        </ion-slide>
+        <!--<ion-slide class="Stats-slider-bottom-contain1">
+            <a hre="javascript:void(0);"><img src="images/createimage.jpg"></a>
+        </ion-slide>
+        <ion-slide class="Stats-slider-bottom-contain1">
+            <a hre="javascript:void(0);"><img src="images/3.jpg"></a>
+        </ion-slide>-->
+      </ion-slides>
+      <ion-slides [options]="mySlideOptions3">
+        <ion-slide *ngFor="let item of banner2data; let i = index" class="Stats-slider-bottom-contain2">
+          <a hre="javascript:void(0);"><img (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+
+    <div class="clear"></div>
+    <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+    </div>
+
+  </div>
+
+</ion-content>

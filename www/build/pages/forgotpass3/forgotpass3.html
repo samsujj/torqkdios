@@ -1,0 +1,60 @@
+<ion-content padding>
+
+  <div class="login-body forgot-pass-page">
+    <div class="login-top">
+      <div class="login-wrapper">
+        <div class="logo">
+          <a href="javascript:void(0)" [navPush]="homepage">
+            <img src="images/logo_main.png" alt="#">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="login-box">
+      <h3 style="margin-top:0px;   color: rgb(247, 147, 29); font-family: veneerregular; font-size: 30px; font-weight: normal; margin-bottom: 20px; margin-left: 20px !important; text-align: left;">RESET PASSWORD</h3>
+
+
+      <form novalidate [formGroup]="forgotPassForm" (ngSubmit)="formsubmit(forgotPassForm.value)" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-sm-10" style="width:100%; padding:0;">
+            <input [formControl]="forgotPassForm.controls['password']" type="password" placeholder="PASSWORD" class="form-control UserLogIn_email">
+            <div *ngIf ="forgotPassForm.controls['password'].touched">
+              <div *ngIf ="!forgotPassForm.controls['password'].valid" class = "alert alert-danger">
+                <label class="control-label has-error validationMessage">Password cannot be blank.</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-10" style="width:100%; padding:0;">
+            <input [formControl]="forgotPassForm.controls['password2']" type="password" placeholder="CONFIRM PASSWORD" class="form-control UserLogIn_email">
+            <div *ngIf ="forgotPassForm.hasError('mismatchedPasswords')" class = "alert alert-danger">
+              <label class="control-label has-error validationMessage">Passwords do not match!</label>
+            </div>
+          </div>
+        </div>
+
+        <button class="loginbtn" type="submit" style="width:100px; margin:10px 0 0 24px;">Submit</button>
+      </form>
+    </div>
+
+
+
+    <div class="footer-menu2">
+      <span>&copy;TORKQ</span>
+      <span>|</span>
+      <span>
+        <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+      </span>
+      <span>|</span>
+      <span>
+        <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+      </span>
+    </div>
+
+
+
+
+
+  </div>
+</ion-content>

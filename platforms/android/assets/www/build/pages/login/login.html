@@ -1,0 +1,90 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header class="login-header">
+
+    <ion-navbar class="login-top hide" hideBackButton>
+        <div class="login-wrapper">
+            <div class="mobile-top-con">
+                <div class="mobile-menu show">
+                    <button class="navmenur" menuToggle="right" hidden="false">
+                        <ion-icon name="menu"></ion-icon>
+                    </button>
+                    <button class="navmenul hide" menuToggle="left" hidden="true">
+                        <ion-icon name="menu"></ion-icon>
+                    </button>
+                </div>
+                <div class="logo">
+                    <a href="#/index"> <img src="images/logo_main.png" alt="#"></a>
+                </div>
+                <div class="logout">
+                    <img src="images/gear2.png">
+                </div>
+            </div>
+        </div>
+    </ion-navbar>
+
+ <!-- <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>-->
+  <div class="login-top">
+    <div class="login-wrapper">    <div class="logo"> <a href="#/index"> <img src="images/logo_main.png" alt="#">   </a> </div></div>
+  </div>
+</ion-header>
+
+
+<ion-content padding class="login-body">
+ <div class="login-box">
+  <div *ngIf ="!verifylogin">
+    <div *ngIf ="!verifylogin" class = "alert alert-danger">
+      <strong>Incorrect Login Information..</strong>
+    </div>
+  </div>
+
+  <form novalidate [formGroup]="loginForm" (ngSubmit)="doLogin(loginForm.value)">
+    <input [formControl]="loginForm.controls['email']" type="email" placeholder="email" class="form-control UserLogIn_email">
+    <div *ngIf ="loginForm.controls['email'].touched">
+      <div *ngIf ="!loginForm.controls['email'].valid" class = "alert alert-danger">
+        <strong>Email is required</strong>
+      </div>
+    </div>
+    <div *ngIf ="!verifyemail">
+      <div *ngIf ="!verifyemail" class = "alert alert-danger">
+        <strong>Email must be valid</strong>
+      </div>
+    </div>
+    <input [formControl]="loginForm.controls['password']" type="password" placeholder="password" class="form-control UserLogIn_email">
+    <div *ngIf ="loginForm.controls['password'].touched">
+      <div *ngIf ="!loginForm.controls['password'].valid" class = "alert alert-danger">
+        <strong>Password  is required</strong>
+      </div>
+    </div>
+    <button type="submit" class="loginbtn" >Login</button>
+  </form>
+   <div class="login-bottom-div">
+     <a href="javascript:void(0)" [navPush]="signuppage" class="link1">Register for an Account</a>
+     <a href="javascript:void(0)" [navPush]="forgotpass1page" class="link2">Forgot Password?</a>
+     <div class="clear"></div>
+   </div>
+</div>
+
+</ion-content>
+
+<ion-footer>
+
+  <div class="footer-menu1">
+      <span>©TORKQ</span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('terms')">TERMS </a>
+        </span>
+      <span>|</span>
+      <span>
+            <a href="javascript:void(0);" (click)="showtermsploicy('policy')">PRIVACY</a>
+        </span>
+  </div>
+</ion-footer>
