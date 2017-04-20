@@ -7,7 +7,7 @@ import {UserblockPage} from "../userblock/userblock";
 import {ProfilePage} from "../profile/profile";
 import {ImageCropPage} from "../imagecrop/imagecrop";
 import {ImageCrop1Page} from "../imagecrop1/imagecrop1";
-import {Storage, LocalStorage, NavController, Nav, Content, ModalController, Platform,ActionSheetController,MenuController} from "ionic-angular";
+import {Storage, LocalStorage, NavController, Nav, Content, ModalController, Platform,ActionSheetController,MenuController, ToastController} from "ionic-angular";
 import {FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, Validators,FormControl} from "@angular/forms";
 import {ControlGroup, Control} from "@angular/common";
 import {
@@ -56,7 +56,7 @@ export class UpdateprofilePage {
     private isInternet;
     public isOfflineData;
 
-  constructor(private navCtrl: NavController,public modalCtrl: ModalController,private _http: Http,public fb: FormBuilder,public actionSheetCtrl: ActionSheetController,public menu: MenuController,public platform: Platform) {
+  constructor(private navCtrl: NavController,public modalCtrl: ModalController,private _http: Http,public fb: FormBuilder,public actionSheetCtrl: ActionSheetController,public menu: MenuController,public platform: Platform ,private toastCtrl: ToastController) {
 
 
 
@@ -303,15 +303,17 @@ export class UpdateprofilePage {
     }
 
     goblockpage(){
-        let modal = this.modalCtrl.create(UserblockPage, {
+        /*let modal = this.modalCtrl.create(UserblockPage, {
         });
 
-        modal.present();
+        modal.present();*/
+
+        this.navCtrl.push(UserblockPage, {});
     }
 
     changeprivacy(){
         let actionSheet = this.actionSheetCtrl.create({
-            title: 'Privay',
+            title: 'PRIVACY',
             cssClass : 'sharewithactionsheet',
             buttons: [
                 {
@@ -714,6 +716,28 @@ export class UpdateprofilePage {
         this.navCtrl.push(ImageCrop1Page,{userid:this.loggedinuser,'page':'profile'});
     }
 
+    showhelptext(type){
+        if(type == 1){
+            let toast = this.toastCtrl.create({
+                message: 'Please Upload An Image Bigger Than 142X156 For Best Effects',
+                duration: 4000,
+                position: 'middle',
+                cssClass: 'addRoutesToast'
+            });
+            toast.present();
+        }
+        if(type == 2){
+            let toast = this.toastCtrl.create({
+                message: 'Please Upload An Image Bigger Than 1156X576 For Best Effects',
+                duration: 4000,
+                position: 'middle',
+                cssClass: 'addRoutesToast'
+            });
+            toast.present();
+        }
+
+
+    }
 
     /*****************************************************/
     checkOfflineData(){

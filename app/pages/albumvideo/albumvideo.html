@@ -33,7 +33,7 @@
         <input class="browsebtn" value="+" type="button" (click)="addVideo()" style="padding:0; height:100%">
       </div>
     </div>
-    <div class="status-input" ngClass="{{addhideclass(isStatusInput)}}" >
+    <div class="status-input new-album-status-input" ngClass="{{addhideclass(isStatusInput)}}" >
       <textarea (keyup)="changestatustext($event.target.value)" placeholder="STATUS UPDATE" style="box-shadow:none; display:block; width:99%; margin-top:8px; font-size:18px; border:solid 1px #ccc; resize:none; padding:1%;" ></textarea>
         <video width="100%" controls *ngIf="videopath">
           <source [src]="videopath" type="video/mp4">
@@ -48,9 +48,9 @@
             <option value="4">Private Me Only</option>
           </select>
 
-          <input type="button" value="cancel" class="postbtn1" (click)="postcancel()" >
+          <input type="button" value="cancel" class="postbtn1" (click)="postcancel()" style="width: 106px !important; border-radius: 0 !important; border:3px solid #fff !important;">
 
-          <input type="button" value="POST" (click)="postStatus()"  class="postbtn2">
+          <input type="button" value="POST" (click)="postStatus()"  class="postbtn2" style="width: 106px !important; border-radius: 0 !important; border:3px solid #fff !important;">
           <div class="clear"></div>
         </div>
       </div>

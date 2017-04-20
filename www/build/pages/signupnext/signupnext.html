@@ -30,11 +30,17 @@
 
         <h6 id="inviteDiv">INVITE FRIENDS VIA YOUR ONLINE ADDRESS BOOK</h6>
 
-        <select id="social_select" (change)="cngsocialselect($event.target.value)">
+        <!--<select id="social_select" (change)="cngsocialselect($event.target.value)">
           <option value="" class="">SELECT SERVICE</option>
           <option value="fb">FACEBOOK</option>
           <option value="tw">TWITTER</option>
-        </select>
+        </select>-->
+        <ion-item  class="next-sel-item">
+          <ion-select  class="next-sel-box" placeholder="SELECT SERVICE" (ionChange)="cngsocialselect($event)">
+            <ion-option value="fb">FACEBOOK</ion-option>
+            <ion-option value="tw">TWITTER</ion-option>
+          </ion-select>
+        </ion-item>
 
 
         <input class="see-btn2" value="INVITE" (click)="social_share()" name="inviter_submit" type="button">

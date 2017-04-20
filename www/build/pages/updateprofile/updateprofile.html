@@ -153,7 +153,7 @@
             </div>
             <div>
               <input value="+" class="upload-btn1" (click)="addPhoto(1)" type="button">
-              <img src="images/help.png" alt="#" class="help-icon">
+              <img src="images/help.png" alt="#" class="help-icon" (click)="showhelptext(1)">
               <div class="clear"></div>
             </div>
 
@@ -172,7 +172,7 @@
             </div>
             <div>
               <input value="+" class="upload-btn1" (click)="addPhoto(2)" type="button">
-              <img src="images/help.png" alt="#" class="help-icon">
+              <img src="images/help.png" alt="#" class="help-icon" (click)="showhelptext(2)">
               <div class="clear"></div>
             </div>
             <input *ngIf="backimg_name != 'default.jpg' && backimg_name != 'default_f.jpg'" class="imgBtnCls" value="Crop" type="button" (click)="cropnow1()">

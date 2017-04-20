@@ -208,6 +208,7 @@ export class ProfilePage {
 
     ionViewDidEnter() {
 
+
         if (Splashscreen) {
             setTimeout(() => {
                 Splashscreen.hide();
@@ -222,7 +223,6 @@ export class ProfilePage {
 
             /************************Check Internet [start]*****************************/
             this.platform.ready().then(() => {
-
                 if(Network.connection === 'none'){
                     this.isInternet = 0;
                 }else{
@@ -525,48 +525,53 @@ export class ProfilePage {
         //console.log('url'+url);
         return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+url);
     }
-    updatelike(itemid){
-       // console.log(itemid);
+    updatelike(item){
 
-        var link1 = 'http://torqkd.com/user/ajs2/likestatus/id/'+itemid+'/userid/'+this.loggedinuser;
-        //var data = $.param({email: event.email,password:event.password});
-        //var data = JSON.stringify({email: event.email,password:event.password});
+        var idx = this.statusdata.indexOf(item);
+
+
+
+        var link1 = '';
+
+        if(this.statusdata[idx].is_like == 0){
+            var link1 = 'http://torqkd.com/user/ajs2/addlikestatus/id/'+item.id+'/userid/'+this.loggedinuser;
+        }else{
+            var link1 = 'http://torqkd.com/user/ajs2/dellikestatus/id/'+item.id+'/userid/'+this.loggedinuser;
+        }
+
+        if(this.statusdata[idx].is_like == 0){
+            this.statusdata[idx].like_no = parseInt(this.statusdata[idx].like_no)+1;
+        }
+
+        if(this.statusdata[idx].is_like == 1 && this.statusdata[idx].like_no > 0){
+            this.statusdata[idx].like_no = parseInt(this.statusdata[idx].like_no)-1;
+        }
+
+        this.statusdata[idx].is_like = 1 - parseInt(this.statusdata[idx].is_like);
+
         var data1 = {userid :this.loggedinuser};
-
-
 
         this._http.post(link1,data1)
             .subscribe(data => {
-                // /this.data1.response = data.json();
-                //console.log(data);
-                if(data.json()==null){
-                    //this.verifylogin=false;
-
-                    return;
-                }
-                else{
-
-
-                    //console.log(data.json());
-                   // console.log(this.statusdata);
-                    var x;
-                    for(x in this.statusdata){
-                        if(this.statusdata[x].id==itemid){
-                            this.statusdata[x].is_like=data.json().is_like;
-                            this.statusdata[x].like_no=data.json().like_no;
-                        }
-
-                    }
-
-                    //this.statusdata[itemid]['is_like']=datavalue.is_like;
-                    //this.statusdata[itemid]['is_like']=datavalue.is_like;
-
-
-                }
+                console.log(data.json())
             }, error => {
                 console.log("Oooops!");
             });
+
+
     }
+
+    likeimg(item){
+
+        if(item.is_like == 1){
+            return 'images/n2-1.png';
+        }else{
+            return 'images/n2.png';
+        }
+
+
+    }
+
 
     toogleComment(item){
        /*     let modal = this.modalCtrl.create(SocialcommentPage, {
@@ -590,7 +595,7 @@ export class ProfilePage {
     delstatus(item){
         let confirm = this.alertCtrl.create({
             title: '',
-            message: 'Are you sure delete this post?',
+            message: 'ARE YOU SURE YOU WANT TO DELETE THIS POST?',
             buttons: [
                 {
                     text: 'OK',
@@ -964,7 +969,8 @@ export class ProfilePage {
                                     var obj = {
                                         method: "share",
                                         href: 'http://torkq.com/singlepost.php?id='+this.loggedinuser+'&image='+item.value,
-                                        display : 'popup'
+                                        display : 'popup',
+                                        share_feedWeb: true
                                     };
                                     Facebook.showDialog(obj).then((res) => {
                                         let toast = this.toastCtrl.create({
@@ -980,7 +986,8 @@ export class ProfilePage {
                                     var obj = {
                                         method: "share",
                                         href: 'http://torkq.com/singlepost.php?id='+this.loggedinuser+'&route_image='+item.routes.image_name,
-                                        display : 'popup'
+                                        display : 'popup',
+                                        share_feedWeb: true
                                     };
                                     Facebook.showDialog(obj).then((res) => {
                                         let toast = this.toastCtrl.create({
@@ -1113,8 +1120,12 @@ export class ProfilePage {
                     handler: () => {
                         var inAppBrowserRef;
                         //inAppBrowserRef = new InAppBrowser.open('http://pinterest.com/pin/create/button/?url=http://torkq.com/&media='+item.s_img+'&description=',  '_system', 'location=yes');
+                        alert(12);
 
                         let browser = new InAppBrowser('http://pinterest.com/pin/create/button/?url=http://torkq.com/&media='+item.s_img+'&description=', '_blank');
+
+
+
                     }
                 },
                 {
@@ -1128,6 +1139,8 @@ export class ProfilePage {
         });
         actionSheet.present();
     }
+
+
 
 
 

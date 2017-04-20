@@ -242,8 +242,9 @@
                                     </a>
                                 </li>
                                 <li><a href="javascript:void(0);">
-                                    <img ng-src="images/n2.png" *ngIf="item.is_like==0" alt="" width="20" height="20" (click)="updatelike(item.id)" src="images/n2.png">
-                                    <img *ngIf="item.is_like==1" class="fbactive" alt="" width="20" height="20"  (click)="updatelike(item.id)" src="images/n2-1.png">
+                                    <!--<img ng-src="images/n2.png" *ngIf="item.is_like==0" alt="" width="20" height="20" (click)="updatelike(item)" src="images/n2.png">
+                                    <img *ngIf="item.is_like==1" class="fbactive" alt="" width="20" height="20"  (click)="updatelike(item)" src="images/n2-1.png">-->
+                                    <img class="fbactive" alt="" width="20" height="20"  (click)="updatelike(item)" [src]="likeimg(item)">
                                 </a></li>
                                 <li><a href="javascript:void(0);" (click)="showSocilaShareList(item)"><img src="images/n3.png" alt="" width="20" style="margin-top:2px;"></a></li>
                             </ul>
@@ -305,7 +306,7 @@
         <div class="stats-slider-bottom">
             <ion-slides [options]="mySlideOptions2">
                 <ion-slide *ngFor="let item of banner1data; let i = index" class="Stats-slider-bottom-contain1">
-                    <a hre="javascript:void(0);"><img  (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+                    <a href="javascript:void(0);"><img  (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
                 </ion-slide>
                 <!--<ion-slide class="Stats-slider-bottom-contain1">
                     <a hre="javascript:void(0);"><img src="images/createimage.jpg"></a>
@@ -316,7 +317,7 @@
             </ion-slides>
             <ion-slides [options]="mySlideOptions3">
                 <ion-slide *ngFor="let item of banner2data; let i = index" class="Stats-slider-bottom-contain2">
-                    <a hre="javascript:void(0);"><img (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
+                    <a href="javascript:void(0);"><img (click)="launch(item.banner_url)" src="http://torqkd.com/user/ajs1/getiamgeencode?image=http://torqkd.com/uploads/advertise_image/thumb/{{item.b_image}}"></a>
                 </ion-slide>
             </ion-slides>
         </div>

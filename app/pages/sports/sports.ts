@@ -375,7 +375,7 @@ export class SportsPage {
   delstatus(item){
     let confirm = this.alertCtrl.create({
       title: '',
-      message: 'Are you sure delete this post?',
+      message: 'ARE YOU SURE YOU WANT TO DELETE THIS POST?',
       buttons: [
         {
           text: 'OK',

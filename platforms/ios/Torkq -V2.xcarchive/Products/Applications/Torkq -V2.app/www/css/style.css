@@ -517,7 +517,7 @@ ion-slides {
     height: auto; width: 90%; overflow: hidden;
 }
 .Stats-slider-bottom-contain2 img{
-    width: 100%; height:auto;
+    width: 100%; height: 100%;
 }
 
 .video-container-wrapper {
@@ -835,6 +835,7 @@ ion-label {
     border: solid 6px #fff;
     background: #fff;
     margin-top: 25px;
+    margin-bottom : 10px;
     clear: both;
     float: left;
 }
@@ -6171,6 +6172,16 @@ code.has-numbering {
     padding: 5px;
     text-shadow: none !important;
 }
+.album-wrpper .labels .chart-label {
+    border-radius: 5px !important;
+    box-shadow: 2px 2px 5px #202020 !important;
+    color: #fff;
+    font-family: "veneerregular" !important;
+    font-size: 14px !important;
+    margin: 5px;
+    padding: 5px;
+    text-shadow: none !important;
+}
 
 .forum-page {
     width: 100%;
@@ -7189,16 +7200,29 @@ code.has-numbering {
 }
 
 .add-group-page .createevent-body .upload-btn ,.add-event-page .createevent-body .upload-btn {
-    background: #242021 none repeat scroll 0 0;
+    /*background: #242021 none repeat scroll 0 0;
     border: medium none;
     border-radius: 0;
     color: #f7941e !important;
     font-size: 18px !important;
     font-weight: bold !important;
     height: 30px;
-    line-height: 30px;
+    line-height: 25px;
     text-align: center;
-    width: 30px;
+    width: 30px;*/
+
+
+    background: #242021 none repeat scroll 0 0 !important;
+    border: medium none !important;
+    color: #f7941e !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    height: 28px !important;
+    margin: 2px 0;
+    width: auto !important;
+    text-align: center;
+    border-radius: 0;
+    padding: 0 10px;
 }
 .add-group-page .createevent-body .item-checkbox{
     background: none !important;
@@ -8000,7 +8024,7 @@ code.has-numbering {
     width: 100%;
 }
 .addimage-body .imglist-div1 .upload-btn1 {
-    background: #242021 none repeat scroll 0 0;
+    /*background: #242021 none repeat scroll 0 0;
     border: medium none;
     color: #f7931e;
     cursor: pointer;
@@ -8009,7 +8033,19 @@ code.has-numbering {
     font-weight: normal;
     height: 28px;
     line-height: 28px;
-    width: 28px;
+    width: 28px;*/
+
+    background: #242021 none repeat scroll 0 0 !important;
+    border: medium none !important;
+    color: #f7941e !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    height: 28px !important;
+    margin: 2px 0;
+    width: auto !important;
+    text-align: center;
+    border-radius: 0;
+    padding: 0 10px;
 }
 .addimage-body .help-icon {
     margin: 0 0 0 10px;
@@ -8028,7 +8064,7 @@ code.has-numbering {
     width: 100%;
 }
 .addimage-body .imglist-div2 .upload-btn2 {
-    background: #242021 none repeat scroll 0 0;
+    /*background: #242021 none repeat scroll 0 0;
     border: medium none;
     color: #f7931e;
     cursor: pointer;
@@ -8037,7 +8073,20 @@ code.has-numbering {
     font-weight: normal;
     height: 28px;
     line-height: 28px;
-    width: 28px;
+    width: 28px;*/
+
+    background: #242021 none repeat scroll 0 0 !important;
+    border: medium none !important;
+    color: #f7941e !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    height: 28px !important;
+    margin: 2px 0;
+    width: auto !important;
+    text-align: center;
+    border-radius: 0;
+    padding: 0 10px;
+
 }
 .addimage-body .skipfinished {
     background: #f8931f none repeat scroll 0 0;
@@ -8189,7 +8238,10 @@ code.has-numbering {
     font-weight: bold !important;
     height: 28px !important;
     margin: 2px 0;
-    width: 28px !important;
+    width: auto !important;
+    text-align: center;
+    border-radius: 0;
+    padding: 0 10px;
 }
 
 .update-profile-page .imgBtnCls {
@@ -8516,6 +8568,8 @@ code.has-numbering {
     color: #333333;
     font-family: veneerregular;
     text-align:center;
+    padding: 9px 0 6px;
+    font-size : 25px;
 }
 
 
@@ -9630,33 +9684,36 @@ code.has-numbering {
 
 
 .signuprotatebutl1{ background: rgba(0, 0, 0, 0) url("../images/rtal.png") no-repeat scroll 0 0 !important;
-    border: 1px solid #fff !important;
     box-shadow: 0 0 2px #888 !important;
     float: left !important;
     font-weight: normal !important;
     height: 34px !important;
     margin: 8px 0 0 10px !important;
     padding: 0 !important;
-    width: 114px !important;}
+    width: 114px !important;
+
+
+}
 
 
 .signuprotatebutl2{background: rgba(0, 0, 0, 0) url("../images/rtar.png") no-repeat scroll 0 0 !important;
-    border: 1px solid #fff !important;
     box-shadow: 0 0 2px #888 !important;
     float: right !important;
     font-weight: normal !important;
     height: 34px !important;
     margin: 8px 10px 0 0 !important;
-    padding: 0 !important;  width: 114px !important;}
+    padding: 0 !important;  width: 114px !important;
+}
 
 
 .menuheaderc{
-    padding: 4px;
+    padding: 10px 4px 4px;
     min-height: 5.6rem;
 }
 
 .menuheaderc .mobile-top-con .mobile-menu .button-menutoggle{
     background-color: #f7931e;
+    border : none;
 }
 
 .menuheaderc .mobile-top-con .mobile-menu .button-default {
@@ -9686,6 +9743,8 @@ code.has-numbering {
     color: #333333;
     font-family: veneerregular;
     text-align:center;
+    padding: 9px 0 6px;
+    font-size : 25px;
 }
 
 
@@ -9737,8 +9796,9 @@ code.has-numbering {
     border-top: none;
     background-color: #ff0000;
 }
-.route-details-page,.userpopup-page,.photodet-page,.videodet-page,.socialcomment-page{
+.route-details-page,.userpopup-page,.photodet-page,.videodet-page,.socialcomment-page, .userblock-list-page, .userblock-page{
     padding-top: 15px;
+    background: #DFE2E2;
 }
 .route-details-page .experience-wrapper,.userpopup-page .experience-wrapper,.photodet-page .experience-wrapper,.videodet-page .experience-wrapper,.socialcomment-page .experience-wrapper{
     margin-top: 20px;
@@ -9755,13 +9815,14 @@ code.has-numbering {
 }
 .button {
     border-radius: 0;
-    box-shadow:0 0 12px #888;
+    /*box-shadow:0 0 12px #888;*/
     border:3px solid #fff;
 }
-.lrotbtn , .rrotbtn {
+.lrotbtn , .rrotbtn , .signuprotatebutl1, .signuprotatebutl2{
     border-radius: 0;
-    box-shadow:0 0 12px #888;
+    box-shadow:0 0 2px #888;
     border:none;
+    margin-bottom: 8px;
 }
 
 .photoSheet .action-sheet-wrapper{
@@ -9778,12 +9839,12 @@ code.has-numbering {
     color: #424242;
     /*border-bottom: 1px solid #9a9a9c;*/
     font-size: 20px;
-
+display:none;
 
 }
 .photoSheet .action-sheet-wrapper .action-sheet-button{
     color: #424242;
-    /*border-bottom: 1px solid #9a9a9c;*/
+    border-bottom: none !important;
     margin-bottom: 0 !important;
 }
 .photoSheet .action-sheet-group .action-sheet-button span{
@@ -9795,5 +9856,156 @@ code.has-numbering {
 .photoSheet .action-sheet-cancel{
     display: none;
 }
+
+
+.picker-wrapper{
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    border: 5px solid #f7941e !important;
+    font-family: "veneerregular";
+}
+
+.picker-wrapper .picker-toolbar{
+    border-bottom: none;
+}
+
+.picker-wrapper .picker-toolbar .picker-toolbar-button .button-inner{
+    color: #f7941e;
+    font-family: "veneerregular";
+    font-size: 20px;
+}
+
+.picker-wrapper .picker-columns .picker-above-highlight , .picker-wrapper .picker-columns .picker-below-highlight{
+    left: 5%;
+    width: 90%;
+}
+
+.event-dropdown{
+    padding: 12px 8px 13px 3px;
+    max-width: 100%;
+    font-size: 20px;
+}
+
+.signup-date .item-inner{
+    padding-right: 0;
+}
+
+.signup-dropdown{
+    max-width: 100% !important;
+    height: auto !important;
+    font-size: 20px !important;
+    padding-left: 2% !important;
+    background: none !important;
+    font-weight: bold !important;
+}
+
+.signup-dropdown .select-text{
+    display: inline-block;
+    width: auto;
+    float: left;
+}
+
+.signup-dropdown .select-icon{
+    float: left;
+}
+
+.blockuserdiv ion-avatar{
+    margin: 5px 10px 5px 0;
+}
+.blockuserdiv ion-avatar img{
+    border-radius: 0;
+}
+
+.blockuserdiv ion-label{
+    text-align: left;
+    padding: 5px 0;
+}
+
+.blockuserdiv ion-label h2{
+    width: auto;
+    display: inline-block;
+    line-height: 40px;
+}
+
+.newmainc{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.newmainc ion-list{
+    margin: 0;
+}
+
+.new-status-input{
+    margin-top: 0;
+    max-width:253px;
+}
+
+.alert-radio-group, .alert-checkbox-group{
+    border-top: none !important;
+}
+
+.connect-sel-item{
+    color: #717171 !important;
+    background: #fff!important;
+    border: 2px solid #97989a !important;
+    border-radius: 4px !important;
+    height: 42px !important;
+    width: 100% !important;
+    float: none;
+    padding: 0 0px;
+    font-size: 13px!important;
+}
+
+.connect-sel-box{
+    padding: 0;
+    max-width: 90%;
+}
+
+
+.next-sel-item{
+    background: #fff none repeat scroll 0 0;
+    border: 2px solid #888 !important;
+    border-radius: 5px !important;
+    height: 35px !important;
+    margin: 0 0 20px;
+    width: 96% !important;
+    padding-left: 5px;
+    min-height: 35px;
+    font-size: 12px;
+}
+
+.next-sel-box{
+    padding: 0;
+    max-width: 90%;
+}
+
+.new-album-status-input{
+    margin-top: 0;
+    width:100%;
+    max-width: 250px;
+}
+
+.twcomheader{
+    color: #404042;
+    margin: 15px 0;
+    font-family: "veneerregular";
+    font-size: 30px;
+    font-weight: normal;
+    padding: 0 10px;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.1;
+}
+
+/*
+.swiper-slide{
+    display: none;
+}
+
+.swiper-slide-active{
+    display: block;
+}*/
 
 /***********************Code By Samsuj [end]**********************************/

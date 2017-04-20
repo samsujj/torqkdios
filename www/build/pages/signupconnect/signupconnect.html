@@ -61,18 +61,34 @@
 
           <div style="float: none; width:100%; margin-bottom:20px;">
 
-            <select id="select-search-country"  style=" color: #717171 !important;  background: #fff!important; border: 2px solid #97989a  !important; border-radius: 4px !important; height: 42px !important; width: 100% !important; float:none; padding:0 0px; font-size:13px!important;" (change)="changecountry($event.target.value)">
+            <!--<select id="select-search-country"  style=" color: #717171 !important;  background: #fff!important; border: 2px solid #97989a  !important; border-radius: 4px !important; height: 42px !important; width: 100% !important; float:none; padding:0 0px; font-size:13px!important;" (change)="changecountry($event.target.value)">
               <option value="">SEARCH BY COUNTRY</option>
               <option *ngFor="let item of countrylist; let i = index" value="{{item.id}}">{{item.name}}</option>
-            </select>
+            </select>-->
+
+            <ion-item class="connect-sel-item">
+              <ion-select class="connect-sel-box"  placeholder="SEARCH BY COUNTRY" (ionChange)="changecountry($event)">
+                <ion-option value="">Any</ion-option>
+                <ion-option *ngFor="let item of countrylist; let i = index" value="{{item.id}}" >{{item.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+
             <div class="clear"></div>
           </div>
 
           <div style="float: none; width:100%; margin-bottom:20px;">
-            <select id="select-search-state select-search" style=" color: #717171 !important;  background: #fff!important; border: 2px solid #97989a  !important; border-radius: 4px !important; height: 42px !important; width: 100% !important; float:none; padding:0 0px; font-size:13px!important;" (change)="changestate($event.target.value)">
+            <!--<select id="select-search-state select-search" style=" color: #717171 !important;  background: #fff!important; border: 2px solid #97989a  !important; border-radius: 4px !important; height: 42px !important; width: 100% !important; float:none; padding:0 0px; font-size:13px!important;" (change)="changestate($event.target.value)">
 
               <option value="" selected="selected">SEARCH BY STATE / PROVINCE</option>
-              <option *ngFor="let item of statelist; let i = index" value="{{item.id}}">{{item.name}}</option></select>
+              <option *ngFor="let item of statelist; let i = index" value="{{item.id}}">{{item.name}}</option></select>-->
+
+            <ion-item class="connect-sel-item">
+              <ion-select class="connect-sel-box"  placeholder="SEARCH BY STATE / PROVINCE" (ionChange)="changestate($event)">
+                <ion-option value="">Any</ion-option>
+                <ion-option *ngFor="let item of statelist; let i = index" value="{{item.id}}" >{{item.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+
             <div class="clear"></div>
           </div>
 

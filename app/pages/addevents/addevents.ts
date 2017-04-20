@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, Validators,FormControl} from "@angular/forms";
 import {Http, Headers} from "@angular/http";
-import {Storage, LocalStorage, NavController, Nav, Content, ModalController, Platform,NavParams,ActionSheetController,MenuController} from "ionic-angular";
+import {Storage, LocalStorage, NavController, Nav, Content, ModalController, Platform,NavParams,ActionSheetController,MenuController,ToastController} from "ionic-angular";
 import * as $ from "jquery";
 import {CommonPopupPage} from "../commonpopup/commonpopup";
 import {
@@ -33,7 +33,16 @@ export class AddeventsPage {
   private sportsid;
   private sportlist;
   private grouplist;
-  private max;
+  private start_min;
+  private start_max;
+  private end_max;
+  private end_min;
+  private starttime;
+  private endtime;
+  private starttime_min;
+  private starttime_max;
+  private endtime_max;
+  private endtime_min;
   private allday = 0;
   public countrylist = [];
   public statelist = [];
@@ -43,12 +52,22 @@ export class AddeventsPage {
   public isOfflineData;
 
 
-  constructor(public fb: FormBuilder,private navCtrl: NavController,public modalCtrl: ModalController,private _http: Http,public actionSheetCtrl: ActionSheetController,public menu: MenuController,public platform: Platform) {
+  constructor(public fb: FormBuilder,private navCtrl: NavController,public modalCtrl: ModalController,private _http: Http,public actionSheetCtrl: ActionSheetController,public menu: MenuController,public platform: Platform,private toastCtrl: ToastController) {
 
     var d = new Date();
     var n:number = d.getFullYear();
 
-    this.max = n+3;
+    this.starttime = "09:00";
+    this.endtime = "09:00";
+
+    this.start_min = n-1;
+    this.start_max = n+10;
+    this.end_min = n-1;
+    this.end_max = n+10;
+
+
+
+
 
     this.imagename = '';
     this.sportsid = 0;
@@ -56,7 +75,7 @@ export class AddeventsPage {
     this.addEventForm = fb.group({
       name: ["", Validators.required],
       description: [""],
-      group_id: [""],
+      group_id: [0],
       from_date: ["", Validators.required],
       to_date: ["", Validators.required],
       location: ["", Validators.required],
@@ -181,6 +200,8 @@ export class AddeventsPage {
   }
 
   formsubmit(event){
+
+
     let x: any;
 
     for (x in this.addEventForm.controls) {
@@ -188,8 +209,14 @@ export class AddeventsPage {
     }
 
     if(this.sportsid == 0){
-      alert('Please select sport.');
-      return;
+      let toast = this.toastCtrl.create({
+        message: 'Please select sport.',
+        duration: 2000,
+        position: 'middle',
+        cssClass: 'addRoutesToast'
+      });
+      toast.present();
+      return false;
     }
 
     if (this.addEventForm.valid) {
@@ -214,9 +241,12 @@ export class AddeventsPage {
           });
 
 
-    }  }
+    }
+
+  }
 
   changecountry(countryval){
+
     this.statelist = [];
 
     if(countryval != ''){
@@ -236,6 +266,44 @@ export class AddeventsPage {
           });
     }
 
+  }
+
+  stdatesel(ev){
+    var year = ev.year.value;
+    var yeartxt = ev.year.text;
+    var monthtxt = ev.month.text;
+    var daytxt = ev.day.text;
+
+    this.end_min = yeartxt+"-"+monthtxt+"-"+daytxt;
+    this.end_max = year+5;
+  }
+
+  endatesel(ev){
+    var year = ev.year.value;
+    var yeartxt = ev.year.text;
+    var monthtxt = ev.month.text;
+    var daytxt = ev.day.text;
+
+    this.start_max = yeartxt+"-"+monthtxt+"-"+daytxt;
+    this.start_min = year-5;
+  }
+
+  sttimesel(ev){
+    var hh:number = ev.hour.value;
+    hh = hh+1;
+    var mm:number = ev.minute.value;
+    var mm2 = ((mm <10)?("0"+mm):mm);
+
+    var cval = hh+":"+mm2;
+
+    console.log(cval);
+
+    (<FormControl>this.addEventForm.controls['end_time']).updateValue(cval);
+
+  }
+
+  entimesel(ev){
+    console.log(ev);
   }
 
 

@@ -8,6 +8,7 @@ import {Splashscreen} from 'ionic-native';
 import {CommonPopupPage} from "../commonpopup/commonpopup";
 import {ExperiencePage} from "../experience/experience";
 import {SignupPage} from "../signup/signup";
+import {SignupconnectPage} from "../signupconnect/signupconnect";
 import {SignupnextPage} from "../signupnext/signupnext";
 import {SignupaddimagePage} from "../signupaddimage/signupaddimage";
 
@@ -32,6 +33,7 @@ export class HomePage {
   //private router:Router;
   public experiencepage = ExperiencePage;
   public signuppage = SignupPage;
+  public signupconnectpage = SignupconnectPage;
   public signupnextpage = SignupnextPage;
   public signupaddimagepage = SignupaddimagePage;
 

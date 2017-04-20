@@ -7,6 +7,7 @@
     "@angular/http": "2.0.0-rc.4",
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
+    "@ionic-native/social-sharing": "^3.4.4",
     "angular2-highcharts": "^0.3.1",
     "chart.js": "^2.3.0",
     "cropperjs": "^0.8.1",

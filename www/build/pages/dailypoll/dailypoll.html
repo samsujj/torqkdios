@@ -26,9 +26,9 @@
 
   <div class="experience-wrapper daily-poll-page">
     <div class="popupbox2 popupbox2_mobile" *ngIf="totalitem > 0">
-      <div style="background-size: cover;" class="album-body" [style.background-image]="getsanitizerstyle(currentitem.background_img)">
+      <div style="background-size: cover;" class="album-body" [style.background-image]="getsanitizerstyle(currentitem.background_img)" *ngIf="currentitem.sel_ans == 0">
         <div class="album-wrpper">
-          <h2 class="ng-binding">{{currentitem.poll_ques}}</h2>
+          <h2 class="ng-binding">{{currentitem.poll_ques}} {{'Id: '+ currentitem.id}}</h2>
 
           <ion-list radio-group (ionChange)="changeRadio($event)">
             <ion-item *ngFor="let item of currentitem.ans_arr; let i = index" class="radio-item">
@@ -42,9 +42,33 @@
             <a style="display: block;" id="votenext" href="javascript:void(0);" *ngIf="loggedinuser == 0" (click)="nextpoll()">NEXT</a>
             <a style="display: block;" id="vote" href="javascript:void(0);"  *ngIf="loggedinuser > 0" (click)="votepoll()">VOTE</a>
           </div>
+          <div class="vote-btn">
+            <a style="display: block;" id="votenext2" href="javascript:void(0);" (click)="backpoll()">BACK</a>
+          </div>
           <a style="line-height: 40px; text-align: center; font-size:12px; color:#111; display:block; width: 100px; margin:0px auto; " href="javascript:void(0)" (click)="viewResult()">View Results</a>
         </div>
       </div>
+
+      <div style="background-size: cover;" class="album-body" [style.background-image]="getsanitizerstyle(currentitem.background_img)" *ngIf="currentitem.sel_ans != 0">
+        <div class="album-wrpper" *ngIf="isLoad">
+          <h2 class="ng-binding">Question : {{itemdet.ques}} {{'Id: '+ currentitem.id}}</h2>
+          <base-chart class="chart"
+                      [data]="getpieChartData(itemdet)"
+                      [labels]="getpieChartLabels(itemdet)"
+                      [chartType]="pieChartType" [options]="pieChartOption" [colors]="pieChartColors"></base-chart>
+
+          <div class="labels">
+            <div *ngFor="let item5 of newLabels; let i = index" class="chart-label" style="background-color: #F7931E; color: #ffffff;">{{item5}}</div>
+          </div>
+          <div class="vote-btn">
+            <a style="display: block;" id="votenext3" href="javascript:void(0);" (click)="nextpoll()">NEXT</a>
+          </div>
+          <div class="vote-btn">
+            <a style="display: block;" id="votenext4" href="javascript:void(0);" (click)="backpoll()">BACK</a>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <span class="empty" *ngIf="totalitem == 0">No results found.</span>

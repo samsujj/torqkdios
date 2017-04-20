@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { NavController ,Content} from 'ionic-angular';
 import { Storage, LocalStorage,ModalController } from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {CommonPopupPage} from "../commonpopup/commonpopup";
@@ -18,6 +18,8 @@ import {ControlGroup, Control} from "@angular/common";
   templateUrl: 'build/pages/signupactivity/signupactivity.html',
 })
 export class SignupactivityPage {
+
+  @ViewChild(Content) content: Content;
   public homepage = HomePage;
   private sportlist;
   private sportsid;
@@ -54,6 +56,14 @@ export class SignupactivityPage {
         });
     /****************Sport List********************/
 
+  }
+
+  ionViewDidEnter(){
+    this.scrolltocust();
+  }
+
+  scrolltocust(){
+    this.content.scrollTo(0,870,500);
   }
 
   showtermsploicy(type){

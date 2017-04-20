@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { NavController,Content } from 'ionic-angular';
 import { Storage, LocalStorage,ModalController,ToastController } from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {CommonPopupPage} from "../commonpopup/commonpopup";
@@ -20,6 +20,8 @@ import {Facebook,InAppBrowser} from 'ionic-native';
   templateUrl: 'build/pages/signupnext/signupnext.html',
 })
 export class SignupnextPage {
+
+  @ViewChild(Content) content: Content;
   private signUpForm:FormGroup;
   public homepage = HomePage;
   private social_type = '';
@@ -48,11 +50,14 @@ export class SignupnextPage {
     }
     if (this.signUpForm.valid) {
 
-      var link = 'http://torqkd.com/user/ajs2/signup';
+      var link = 'http://torqkd.com/user/ajs2/sendMail';
       var data = {mailBody : ev.mailBody,senderList : ev.senderList};
 
       this._http.post(link, data)
           .subscribe(res => {
+
+            console.log(res.text());
+
             let toast = this.toastCtrl.create({
               message: 'Mail sent successfully.',
               duration: 3000,
@@ -69,20 +74,30 @@ export class SignupnextPage {
     }
   }
 
+  ionViewDidEnter(){
+    this.scrolltocust();
+  }
+
+  scrolltocust(){
+    this.content.scrollTo(0,870,500);
+  }
+
 
   cngsocialselect(social_type){
     this.social_type = social_type;
   }
 
   social_share(){
+
     if(this.social_type == 'fb'){
       Facebook.login(["email","public_profile"]).then((result) => {
-
         if(result.status == 'connected'){
           this.accessToken = result.authResponse.accessToken;
             var obj = {
-              method: 'feed',
-              link: 'http://torkq.com'
+              //method: 'feed',
+              method: "share",
+              href: 'http://torkq.com',
+              share_feedWeb: true
             };
             Facebook.showDialog(obj).then((res) => {
               let toast = this.toastCtrl.create({

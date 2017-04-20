@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { Storage, LocalStorage,ModalController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { NavController, Content } from 'ionic-angular';
+import { Storage, LocalStorage,ModalController,LoadingController } from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {CommonPopupPage} from "../commonpopup/commonpopup";
 import {SignupactivityPage} from "../signupactivity/signupactivity";
@@ -21,6 +21,9 @@ import {ControlGroup, Control} from "@angular/common";
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
 })
 export class SignupPage {
+
+  @ViewChild(Content) content: Content;
+
   private signUpForm:FormGroup;
   public homepage = HomePage;
   public verifyemail=true;
@@ -30,7 +33,15 @@ export class SignupPage {
   public stateLoad = false;
   private local:LocalStorage;
 
-  constructor(private navCtrl: NavController,public modalCtrl: ModalController,public fb: FormBuilder,private _http: Http) {
+  public emailexistmsg;
+  public passerrmsg;
+  public isSubmit;
+
+  constructor(private navCtrl: NavController,public modalCtrl: ModalController,public fb: FormBuilder,private _http: Http,public loadingCtrl: LoadingController) {
+
+    this.emailexistmsg = '';
+    this.passerrmsg = '';
+    this.isSubmit = false;
 
     this.local = new Storage(LocalStorage);
 
@@ -72,6 +83,18 @@ export class SignupPage {
 
   }
 
+  ionViewDidEnter(){
+    this.scrolltocust();
+  }
+
+  sdfssdfsd(){
+    this.navCtrl.push(SignupaddimagePage);
+  }
+
+  scrolltocust(){
+    this.content.scrollTo(0,870,500);
+  }
+
   showtermsploicy(type){
     let modal = this.modalCtrl.create(CommonPopupPage, {
       "type": type
@@ -81,6 +104,14 @@ export class SignupPage {
   }
 
   formsubmit(event){
+
+    this.emailexistmsg = '';
+    this.passerrmsg = '';
+
+    this.isSubmit = true;
+
+    this.verifyemail=true;
+
 
     let x: any;
 
@@ -95,23 +126,45 @@ export class SignupPage {
 
     if (this.signUpForm.valid) {
 
-      var link = 'http://torqkd.com/user/ajs2/signup';
+      let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+
+      loading.present();
+
+      var link = 'http://torqkd.com/user/ajs2/signupnew';
       var data = {city : event.city,country : event.country,email : event.email,email2 : event.email,fname : event.fname,gender : event.gender,lname : event.lname,password : event.password,password2 : event.password2,state : event.state};
 
       this._http.post(link, data)
           .subscribe(res => {
 
-            var sdfs:string = res.text();
-            if(sdfs == 'error'){
-              alert('Error ocurred');
+            var sdfs = res.json();
+
+            if(sdfs.status == 'error'){
+              let verror = sdfs.errors;
+
+              if('email' in verror){
+                this.emailexistmsg = verror.email[0];
+              }
+              if('password' in verror){
+                this.passerrmsg = verror.password[0];
+              }
+
+              loading.dismiss();
             }else{
+              this.isSubmit = false;
               this.local = new Storage(LocalStorage);
-              this.local.set('newUserId', sdfs);
+              this.local.set('newUserId', sdfs.id);
+
+              loading.dismiss();
+
               this.navCtrl.push(SignupactivityPage);
             }
 
           }, error => {
+
             console.log("Oooops!");
+            loading.dismiss();
           });
 
 

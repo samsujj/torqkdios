@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component,ViewChild} from '@angular/core';
+import { NavController,Content } from 'ionic-angular';
 import { Storage, LocalStorage,ModalController } from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {CommonPopupPage} from "../commonpopup/commonpopup";
@@ -19,6 +19,8 @@ import {ControlGroup, Control} from "@angular/common";
   templateUrl: 'build/pages/signupconnect/signupconnect.html',
 })
 export class SignupconnectPage {
+
+  @ViewChild(Content) content: Content;
   public homepage = HomePage;
   private filtereduserlist;
   private userlist;
@@ -82,6 +84,14 @@ export class SignupconnectPage {
 
   }
 
+  ionViewDidEnter(){
+    this.scrolltocust();
+  }
+
+  scrolltocust(){
+    this.content.scrollTo(0,870,500);
+  }
+
   showtermsploicy(type){
     let modal = this.modalCtrl.create(CommonPopupPage, {
       "type": type
@@ -91,9 +101,13 @@ export class SignupconnectPage {
   }
 
   userlistfu(){
+
+    console.log(this.userid);
+
     /****************User List********************/
     var link2 = 'http://torqkd.com/user/ajs2/userList1';
-    var data2 = {id: this.userid};
+    //var data2 = {id: this.userid};
+    var data2 = {id: 0};
 
 
 
@@ -169,7 +183,15 @@ export class SignupconnectPage {
         }
       }
     }else {
-      this.filtereduserlist = this.userlist;
+      if(this.serachbyname !=''){
+        for(let n in this.userlist){
+          if(this.userlist[n].user_name.toLowerCase().indexOf(this.serachbyname.toLowerCase()) != -1){
+            this.filtereduserlist.push(this.userlist[n]);
+          }
+        }
+      }else{
+        this.filtereduserlist = this.userlist;
+      }
     }
 
 

@@ -36,7 +36,8 @@
 
 
 
-    <div class="status-input" ngClass="{{addhideclass(isStatusInput)}}" >
+    <div class="status-input new-album-status-input" ngClass="{{addhideclass(isStatusInput)}}" >
+
       <textarea (keyup)="changestatustext($event.target.value)" placeholder="STATUS UPDATE" style="box-shadow:none; display:block; width:99%; margin-top:8px; font-size:18px; border:solid 1px #ccc; resize:none; padding:1%;" ></textarea>
       <div ng-if="filepath">
         <img ng-if="filepath" src="{{filepath}}"  style="margin:5px 0;" />
@@ -51,12 +52,12 @@
             <option value="4">Private Me Only</option>
           </select>
 
-          <input class="lrotbtn" type="button" ng-show="isRotateBtn" (click)="imgRotate(1)" style="background: url(images/rtal.png) no-repeat !important; height:32px; width:112px;">
-          <input class="rrotbtn" type="button" ng-show="isRotateBtn" (click)="imgRotate(2)" style="background: url(images/rtar.png) no-repeat !important; height:32px; width:112px;">
+          <input class="lrotbtn" type="button" ng-show="isRotateBtn" (click)="imgRotate(1)" style="background: url(images/rtal.png) no-repeat !important; height:32px; width:106px; background-size: 106px 32px !important;">
+          <input class="rrotbtn" type="button" ng-show="isRotateBtn" (click)="imgRotate(2)" style="background: url(images/rtar.png) no-repeat !important; height:32px; width:106px; background-size: 106px 32px !important;">
 
-          <input type="button" value="cancel" class="postbtn1" (click)="postcancel()" >
+          <input type="button" value="cancel" class="postbtn1" (click)="postcancel()" style="width: 106px !important; border-radius: 0 !important; border:3px solid #fff !important;">
 
-          <input type="button" value="POST" (click)="postStatus()"  class="postbtn2">
+          <input type="button" value="POST" (click)="postStatus()"  class="postbtn2" style="width: 106px !important; border-radius: 0 !important; border:3px solid #fff !important;">
           <div class="clear"></div>
         </div>
       </div>

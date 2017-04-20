@@ -17,7 +17,7 @@
       <li class="u_list ng-scope" *ngFor="let item of userlist; let i = index">
         <ul>
           <li style="width:98px; float: left;  display:block;" class="mobpimg">
-            <img src="{{item.user_image}}" style="max-height:100%; max-width:98%;" alt="#" class="mobpimg">
+            <img src="{{item.user_image}}" style="max-height:100%; max-width:100%;" alt="#" class="mobpimg">
           </li>
           <li class="holist2">
             <h2><a href="javascript:void(0)" [navPush]="friendsprofilepage" [navParams]="{userid:item.user_id}">{{item.user_name}}</a></h2>

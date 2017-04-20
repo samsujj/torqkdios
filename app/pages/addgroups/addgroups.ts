@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, Validators,FormControl} from "@angular/forms";
 import {Http, Headers} from "@angular/http";
-import {Storage, LocalStorage, NavController, Nav, Content, ModalController, Platform,NavParams,ActionSheetController,MenuController} from "ionic-angular";
+import {Storage, LocalStorage, NavController, Nav, Content, ModalController, Platform,NavParams,ActionSheetController,MenuController, ToastController} from "ionic-angular";
 import * as $ from "jquery";
 import {CommonPopupPage} from "../commonpopup/commonpopup";
 import {GroupdetailsPage} from "../groupdetails/groupdetails";
@@ -40,7 +40,7 @@ export class AddgroupsPage {
   public isOfflineData;
 
 
-  constructor(public fb: FormBuilder,private navCtrl: NavController,public modalCtrl: ModalController,private _http: Http,public actionSheetCtrl: ActionSheetController,public menu: MenuController,public platform:Platform) {
+  constructor(public fb: FormBuilder,private navCtrl: NavController,public modalCtrl: ModalController,private _http: Http,public actionSheetCtrl: ActionSheetController,public menu: MenuController,public platform:Platform,private toastCtrl: ToastController) {
 
     this.imagename = '';
     this.sportsid = 0;
@@ -341,13 +341,25 @@ export class AddgroupsPage {
     }
 
      if(this.imagename == ''){
-      alert('Please Upload Image.');
-      return;
+       let toast = this.toastCtrl.create({
+         message: 'Please Upload Image.',
+         duration: 2000,
+         position: 'middle',
+         cssClass: 'addRoutesToast'
+       });
+       toast.present();
+       return false;
     }
 
     if(this.sportsid == 0){
-      alert('Please select sport.');
-      return;
+      let toast = this.toastCtrl.create({
+        message: 'Please select sport.',
+        duration: 2000,
+        position: 'middle',
+        cssClass: 'addRoutesToast'
+      });
+      toast.present();
+      return false;
     }
 
     if (this.addGroupForm.valid) {
