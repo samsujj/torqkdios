@@ -25,12 +25,12 @@
 <ion-content padding>
   <div class="commonheader" *ngIf="isInternet == 0 && isOfflineData == 1">ROUTE WILL BE SYNCED ONCE YOU HAVE SERVICE</div>
 
-  <div style="position:relative;" class="experience-wrapper add-route-page2">
+  <div style="position:relative; height: 100%;" class="experience-wrapper add-route-page2">
 
-    <div class="createevent-body">
-      <div class="header_msg"> GPS YOUR ROUTE </div>
+    <div class="createevent-body" style="position:relative; height: 100%;">
+      <div class="header_msg" style="position: absolute; top: 0;"> GPS YOUR ROUTE </div>
 
-      <div style="width: 100%;  position: relative; height:300px;" class="mapwrapper">
+      <div style="width: 100%;  position: absolute; top:54px; bottom: 160px;" class="mapwrapper">
         <div id="map-canvas" class="map-canvas">
 
 
@@ -38,7 +38,7 @@
 
       </div>
 
-      <div class="bott-div">
+      <div class="bott-div" style="position: absolute; bottom: 62px;">
 
         <div class="distance">
           <h1>Distance:</h1>
@@ -64,8 +64,8 @@
       </div>
 
       <div style="clear:both;"></div>
-      <div style="width:277px; padding-left:2%; margin:15px auto; " *ngIf="isMapLoad">
-        <div class="bott-arrow" ng-show="isSinglePoint == 0">
+      <div style="width:277px; padding-left:2%; margin:0 auto; position: absolute; bottom: 0;" *ngIf="isMapLoad">
+        <div class="bott-arrow" style="margin: 0" ng-show="isSinglePoint == 0">
           <input type="button" value="Start" id="sw_start" (click)="start()" *ngIf="!isStart" style="width:60px; height:60px;" />
           <input style="display:none;" type="button" value="Pause" id="sw_pause" (click)="pause()" *ngIf="isStart"  style="width:60px; height:60px;"/>
           <input style="display:none;" type="button" value="Stop"  id="sw_stop" (click)="pause()" *ngIf="isStart"  style="width:60px; height:60px;"/>
@@ -77,11 +77,11 @@
         <div style="clear:both;"></div>
       </div>
 
-      <ul>
+      <!--<ul>
         <li *ngFor="let m of latlist; let i = index">
           {{m.lat}} == {{m.long}}
         </li>
-      </ul>
+      </ul>-->
 
 
 

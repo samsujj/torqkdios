@@ -81,10 +81,7 @@ export class Addroutes2Page {
 
   constructor(private navCtrl: NavController,public modalCtrl: ModalController,private _http: Http,public actionSheetCtrl: ActionSheetController,public sanitizer:DomSanitizationService,public params: NavParams,public menuCtrl: MenuController,public platform: Platform) {
 
-      this.sportsId = this.params.get('sportsId');
-      this.locationName = this.params.get('locationName');
 
-    this.distance_text = this.distance.toFixed(3);
 
 
     /*LocationAccuracy.canRequest().then((canRequest: boolean) => {
@@ -127,7 +124,13 @@ export class Addroutes2Page {
     //   BackgroundGeolocation.start();
     // })
 
+  }
 
+  ionViewDidEnter(){
+    this.sportsId = this.params.get('sportsId');
+    this.locationName = this.params.get('locationName');
+
+    this.distance_text = this.distance.toFixed(3);
 
     Geolocation.getCurrentPosition().then((resp) => {
 
@@ -137,10 +140,9 @@ export class Addroutes2Page {
       this.longitude = resp.coords.longitude;
 
       this.loadmap();
-      // resp.coords.longitude
+
     }).catch((error) => {
       console.log('Error getting location', error);
-      alert('Error getting location');
     });
 
     this.local = new Storage(LocalStorage);
@@ -156,6 +158,7 @@ export class Addroutes2Page {
       this.loggedinuser = 0;
     });
 
+
     /************************Check Internet [start]*****************************/
     this.platform.ready().then(() => {
 
@@ -163,18 +166,18 @@ export class Addroutes2Page {
         this.isInternet = 0;
       }else{
         this.isInternet = 1;
+        this.isOfflineData = 0;
+        this.checkOfflineData();
       }
-      this.isOfflineData = 0;
-      this.checkOfflineData();
 
       let disconnectSubscription = Network.onDisconnect().subscribe(() => {
         this.isInternet = 0;
-        this.checkOfflineData();
       });
 
       let connectSubscription = Network.onConnect().subscribe(() => {
         this.isInternet = 1;
 
+        this.isOfflineData = 0;
         this.checkOfflineData();
 
       });
@@ -417,6 +420,7 @@ export class Addroutes2Page {
 
           this.location_arr.push(curP);
           this.location_arr2.push(data);
+
 
           var loclength = this.location_arr.length;
 
@@ -881,8 +885,8 @@ export class Addroutes2Page {
           this.avg_hour =avg_hour;
           this.avg_min =avg_min;
           this.avg_sec =avg_sec;
-        }else{
-          this.location_arr.splice(-1,1)
+        //}else{
+          //this.location_arr.splice(-1,1)
         }
 
 

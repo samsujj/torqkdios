@@ -17,10 +17,12 @@ import { AlertController,ToastController } from 'ionic-angular';
 export class FbcommentPage {
   private item;
   private accessToken;
+  private loggedinuser;
 
   constructor(private navCtrl: NavController,private _navParams: NavParams,private _http: Http,public alertCtrl: AlertController,public toastCtrl: ToastController) {
     this.item=this._navParams.get("item");
     this.accessToken=this._navParams.get("accessToken");
+    this.loggedinuser=this._navParams.get("loggedinuser");
 
 
 
@@ -37,10 +39,16 @@ export class FbcommentPage {
     var link;
     var data;
 
-    if(this.item.type == 'mp4'){
-      link = 'http://torqkd.com/user/ajs2/postfbvideo';
-      data = {'accessToken':this.accessToken,'com':fbcom,'value':this.item.value};
-     }else if(this.item.type == 'youtube'){
+      if(this.item.type == 'image'){
+          link = 'http://torqkd.com/user/ajs2/postfbimagenew';
+          data = {'accessToken':this.accessToken,'com':fbcom,'image':this.item.value,'userid':this.loggedinuser,'type':'image'};
+      }else if(this.item.type == 'route'){
+          link = 'http://torqkd.com/user/ajs2/postfbimagenew';
+          data = {'accessToken':this.accessToken,'com':fbcom,'image':this.item.routes.image_name,'userid':this.loggedinuser,'type':'route'};
+      }else if(this.item.type == 'mp4'){
+          link = 'http://torqkd.com/user/ajs2/postfbvideo';
+          data = {'accessToken':this.accessToken,'com':fbcom,'value':this.item.value};
+      }else if(this.item.type == 'youtube'){
       link = 'http://torqkd.com/user/ajs2/postfbYtvideo';
       data = {'accessToken':this.accessToken,'com':fbcom,'value':this.item.value};
 

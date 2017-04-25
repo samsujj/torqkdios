@@ -514,7 +514,8 @@ ion-slides {
     width: 100%;    height:auto;
 }
 .Stats-slider-bottom-contain2{
-    height: auto; width: 90%; overflow: hidden;
+    /*height: auto; */
+    width: 90%; overflow: hidden;
 }
 .Stats-slider-bottom-contain2 img{
     width: 100%; height: 100%;
